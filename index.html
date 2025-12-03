@@ -13,6 +13,7 @@
     }
 
     :root {
+      /* Light Palette (Kindle Paperwhite) */
       --bg: #f4f1ea;
       --page: #faf8f3;
       --text: #2b2b2b;
@@ -20,16 +21,38 @@
       --border: #d4d0c8;
       --accent: #4a4a4a;
       --shadow: rgba(0, 0, 0, 0.06);
+      --highlight: #fff3a3;
+    }
+
+    body.palette-sepia {
+      /* Kindle Sepia (brown, not orange) */
+      --bg: #ece3d5;
+      --page: #f3ebe2;
+      --text: #5b4636;
+      --text-light: #90755b;
+      --border: #cebaa0;
+      --accent: #8a6c47;
+      --shadow: rgba(90, 60, 40, 0.09);
+      --highlight: #f4e1a1;
     }
 
     [data-theme="dark"] {
       --bg: #1a1a1a;
-      --page: #2b2b2b;
+      --page: #232323;
       --text: #d4d0c8;
       --text-light: #8a8a8a;
       --border: #3a3a3a;
       --accent: #a8a8a8;
-      --shadow: rgba(0, 0, 0, 0.3);
+      --shadow: rgba(0, 0, 0, 0.28);
+      --highlight: #5a5200;
+    }
+
+    /* Highlighted text */
+    .highlight-mark {
+      background: var(--highlight);
+      padding: 2px 1px;
+      border-radius: 3px;
+      cursor: pointer;
     }
 
     body {
@@ -42,11 +65,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    .sans {
-      font-family: 'Inter', sans-serif;
-    }
+    .sans { font-family: 'Inter', sans-serif; }
 
-    /* Kindle Header */
     header {
       position: sticky;
       top: 0;
@@ -124,7 +144,9 @@
       align-items: center;
     }
 
-    .theme-toggle {
+    .theme-toggle,
+    .font-size-btn,
+    .highlight-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text);
@@ -134,30 +156,69 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
       transition: all 0.3s;
-    }
-
-    .theme-toggle:hover {
-      background: var(--bg);
-    }
-
-    .font-size-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.4rem 0.6rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      transition: all 0.3s;
       font-weight: 600;
     }
 
-    .font-size-btn:hover {
+    .theme-toggle:hover,
+    .font-size-btn:hover,
+    .highlight-btn:hover {
       background: var(--bg);
     }
 
-    /* Progress Bar */
+    /* Tooltip wrapper for highlight */
+    .highlight-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .highlight-tooltip {
+      position: absolute;
+      top: 120%;
+      right: 0;
+      width: 240px;
+      background: var(--page);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px var(--shadow);
+      padding: 0.75rem 0.9rem;
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-light);
+      line-height: 1.5;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 200;
+    }
+
+    .highlight-tooltip::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: 14px;
+      border-width: 0 6px 6px 6px;
+      border-style: solid;
+      border-color: transparent transparent var(--border) transparent;
+    }
+
+    .highlight-tooltip::after {
+      content: "";
+      position: absolute;
+      top: -5px;
+      right: 15px;
+      border-width: 0 5px 5px 5px;
+      border-style: solid;
+      border-color: transparent transparent var(--page) transparent;
+    }
+
+    .highlight-wrapper:hover .highlight-tooltip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
     .progress-container {
       position: fixed;
       bottom: 0;
@@ -175,7 +236,6 @@
       transition: width 0.3s ease;
     }
 
-    /* Page Container */
     .page {
       max-width: 800px;
       margin: 0 auto;
@@ -184,11 +244,8 @@
       box-shadow: 0 0 30px var(--shadow);
     }
 
-    .page-content {
-      padding: 4rem 3rem;
-    }
+    .page-content { padding: 4rem 3rem; }
 
-    /* Chapter Heading */
     .chapter {
       font-family: 'Inter', sans-serif;
       font-size: 0.7rem;
@@ -199,16 +256,13 @@
       font-weight: 500;
     }
 
-    /* Section */
     section {
       padding: 5rem 0;
       border-bottom: 1px solid var(--border);
       position: relative;
     }
 
-    section:last-of-type {
-      border-bottom: none;
-    }
+    section:last-of-type { border-bottom: none; }
 
     .section-title {
       font-size: 2.5rem;
@@ -217,7 +271,6 @@
       line-height: 1.3;
     }
 
-    /* Hero */
     .hero {
       padding: 6rem 0;
       text-align: center;
@@ -272,16 +325,13 @@
       margin-top: 2rem;
     }
 
-    /* About Section */
     .about-content {
       font-size: 1.1rem;
       line-height: 1.8;
       margin-bottom: 3rem;
     }
 
-    .about-content p {
-      margin-bottom: 1.5rem;
-    }
+    .about-content p { margin-bottom: 1.5rem; }
 
     .skills-grid {
       display: grid;
@@ -307,11 +357,7 @@
       transform: translateY(-2px);
     }
 
-    /* Projects Grid */
-    .projects-grid {
-      display: grid;
-      gap: 4rem;
-    }
+    .projects-grid { display: grid; gap: 4rem; }
 
     .project-card {
       border: 1px solid var(--border);
@@ -375,11 +421,8 @@
       transition: all 0.3s;
     }
 
-    .project-link:hover {
-      text-decoration: underline;
-    }
+    .project-link:hover { text-decoration: underline; }
 
-    /* Contact */
     .contact-content {
       text-align: center;
       max-width: 600px;
@@ -393,11 +436,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .contact-illustration svg {
-      width: 100%;
-      height: 100%;
     }
 
     .contact-text {
@@ -433,7 +471,6 @@
       color: var(--page);
     }
 
-    /* Footer */
     footer {
       padding: 3rem 0;
       text-align: center;
@@ -452,7 +489,6 @@
       color: var(--text-light);
     }
 
-    /* Bookmark Ribbon */
     .bookmark {
       position: fixed;
       right: 2rem;
@@ -487,82 +523,40 @@
       transform: translateX(-5px);
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .page-content {
-        padding: 3rem 2rem;
-      }
-
-      section {
-        padding: 3rem 0;
-      }
-
-      .hero {
-        padding: 4rem 0;
-      }
-
-      .hero-title {
-        font-size: 2.5rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .about-content {
-        margin-bottom: 2rem;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      }
-
-      .bookmark {
-        display: none;
-      }
-
-      .device-status {
-        display: none;
-      }
-
-      .contact-links {
-        flex-direction: column;
-      }
-
-      .contact-button {
-        width: 100%;
+      .page-content { padding: 3rem 2rem; }
+      section { padding: 3rem 0; }
+      .hero { padding: 4rem 0; }
+      .hero-title { font-size: 2.5rem; }
+      .section-title { font-size: 2rem; }
+      .about-content { margin-bottom: 2rem; }
+      .skills-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+      .bookmark { display: none; }
+      .device-status { display: none; }
+      .contact-links { flex-direction: column; }
+      .contact-button { width: 100%; }
+      .highlight-tooltip {
+        right: auto;
+        left: 0;
       }
     }
 
     @media (max-width: 480px) {
-      body {
-        font-size: 16px;
-      }
-
-      .page-content {
-        padding: 2rem 1.5rem;
-      }
-
-      .hero-illustration {
-        width: 150px;
-        height: 150px;
-        font-size: 6rem;
-      }
-
-      .header-container {
-        padding: 1rem 1.5rem;
-      }
+      body { font-size: 16px; }
+      .page-content { padding: 2rem 1.5rem; }
+      .hero-illustration { width: 150px; height: 150px; font-size: 6rem; }
+      .header-container { padding: 1rem 1.5rem; }
     }
 
-    a {
-      color: rgb(81, 44, 44);
-      transition: all 0.3s;
-    }
+    a { color: rgb(81, 44, 44); transition: all 0.3s; }
   </style>
 </head>
+
 <body data-theme="light">
+
   <header>
     <div class="header-container">
+
       <div class="device-status">
         <span class="time">2:47 PM</span>
         <div class="battery">
@@ -572,12 +566,27 @@
           <span>75%</span>
         </div>
       </div>
+
       <a href="#" class="logo">Portfolio</a>
+
       <div class="controls">
         <button class="font-size-btn" id="fontDecrease">A-</button>
         <button class="font-size-btn" id="fontIncrease">A+</button>
-        <button class="theme-toggle" id="themeToggle">☾ Dark</button>
+
+        <!-- Highlight button + tooltip -->
+        <div class="highlight-wrapper">
+          <button class="highlight-btn" id="highlightBtn">Highlight</button>
+          <div class="highlight-tooltip">
+            <strong>How highlighting works</strong><br>
+            1. Select any text on the page.<br>
+            2. Click <em>Highlight</em> to mark it.<br>
+            3. Click a highlighted passage to remove it.
+          </div>
+        </div>
+
+        <button class="theme-toggle" id="themeToggle">Switch to Sepia</button>
       </div>
+
     </div>
   </header>
 
@@ -594,6 +603,7 @@
 
   <div class="page">
     <main class="page-content">
+
       <!-- Hero -->
       <section id="hero" class="hero">
         <div class="hero-illustration">
@@ -610,7 +620,9 @@
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
           <p>I'm a Computer Science student at Cornell University with a passion for using technology to expand access, equity, and opportunity. My work often sits at the intersection of tech, education, and social impact - whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like Girls Who Code.</p>
+
           <p>I'm especially interested in how thoughtful design and human-centered computing can make technology more equitable. Previously, I've led initiatives focused on accessible tech education, spoken on panels about diversity in STEM, and developed digital resources to help level the playing field for students across Washington State.</p>
+
           <p>When I'm not writing code, you'll find me <a href="#">reading</a> (this website, in fact, is inspired by my first favorite piece of technology, a Kindle Paperwhite), <a href="#">exploring new coffee shops</a>, or spending time with friends and family.</p>
         </div>
 
@@ -629,7 +641,8 @@
       <!-- Projects -->
       <section id="projects">
         <p class="chapter">Chapter Two</p>
-        <h2 class="section-title">Selected Projects</h2>
+        <h2 class="section-title">Things I've Worked On</h2>
+
         <div class="projects-grid">
 
           <article class="project-card">
@@ -687,6 +700,7 @@
       <section id="contact">
         <p class="chapter">Epilogue</p>
         <h2 class="section-title">Get in Touch</h2>
+
         <div class="contact-content">
           <div class="contact-illustration">
             <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -698,7 +712,9 @@
               <circle cx="65" cy="25" r="3" fill="currentColor"/>
             </svg>
           </div>
+
           <p class="contact-text">I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+
           <div class="contact-links">
             <a href="mailto:hello@example.com" class="contact-button">Email Me</a>
             <a href="#" class="contact-button">LinkedIn</a>
@@ -714,11 +730,12 @@
         </div>
         <div class="page-number">— Page 1 of 1 —</div>
       </footer>
+
     </main>
   </div>
 
   <script>
-    // Typing Animation
+    // Typing effect
     function initTypingAnimation() {
       const text = "Hello, I'm Manya!";
       const typingElement = document.getElementById('typingText');
@@ -740,35 +757,47 @@
       setTimeout(typeText, 500);
     }
 
-    // Start typing animation when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initTypingAnimation);
     } else {
       initTypingAnimation();
     }
 
-    // Theme Toggle
+    // Theme toggle palettes
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
-    
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    body.setAttribute('data-theme', currentTheme);
-    themeToggle.innerHTML = currentTheme === 'dark' ? '☀ Light' : '☾ Dark';
+
+    const palettes = [
+      { theme: 'light', class: '', nextLabel: 'Switch to Sepia' },
+      { theme: 'light', class: 'palette-sepia', nextLabel: 'Switch to Dark' },
+      { theme: 'dark', class: '', nextLabel: 'Switch to Light' }
+    ];
+
+    let paletteIdx = Number(localStorage.getItem('paletteIdx') || 0);
+
+    function setPalette(idx) {
+      paletteIdx = idx;
+      const p = palettes[idx];
+      body.setAttribute('data-theme', p.theme);
+      body.classList.remove('palette-sepia');
+      if (p.class) body.classList.add(p.class);
+
+      themeToggle.innerHTML = p.nextLabel;
+      localStorage.setItem('paletteIdx', String(paletteIdx));
+    }
+
+    setPalette(paletteIdx);
 
     themeToggle.addEventListener('click', () => {
-      const theme = body.getAttribute('data-theme');
-      const newTheme = theme === 'light' ? 'dark' : 'light';
-      
-      body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      themeToggle.innerHTML = newTheme === 'dark' ? '☀ Light' : '☾ Dark';
+      paletteIdx = (paletteIdx + 1) % palettes.length;
+      setPalette(paletteIdx);
     });
 
-    // Font Size Control
+    // Font size controls
     const fontDecrease = document.getElementById('fontDecrease');
     const fontIncrease = document.getElementById('fontIncrease');
     const htmlElement = document.documentElement;
-    
+
     let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 18;
     htmlElement.style.fontSize = currentFontSize + 'px';
 
@@ -788,17 +817,16 @@
       }
     });
 
-    // Progress Bar
+    // Progress bar
     window.addEventListener('scroll', () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       const scrollTop = window.scrollY;
       const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
-      
       document.getElementById('progressBar').style.width = progress + '%';
     });
 
-    // Bookmark Navigation
+    // Bookmark navigation
     const bookmarks = document.querySelectorAll('.bookmark-item');
     const sections = document.querySelectorAll('section[id]');
 
@@ -806,17 +834,13 @@
       bookmark.addEventListener('click', () => {
         const sectionId = bookmark.getAttribute('data-section');
         const section = document.getElementById(sectionId);
-        
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
       });
     });
 
-    // Active bookmark on scroll
     window.addEventListener('scroll', () => {
       let current = '';
-      
+
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 200;
         if (window.scrollY >= sectionTop) {
@@ -832,36 +856,59 @@
       });
     });
 
-    // Smooth scrolling for all links
+    // Smooth scrolling for in-page links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+      anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
 
-    // Update time in header
+    // Time in header
     function updateTime() {
       const now = new Date();
-      const time = now.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
+      const time = now.toLocaleTimeString('en-US', {
+        hour: 'numeric',
         minute: '2-digit',
-        hour12: true 
+        hour12: true
       });
       const timeElement = document.querySelector('.time');
-      if (timeElement) {
-        timeElement.textContent = time;
-      }
+      if (timeElement) timeElement.textContent = time;
     }
-    
+
     updateTime();
     setInterval(updateTime, 60000);
+
+    // Text highlighting
+    const highlightBtn = document.getElementById("highlightBtn");
+
+    highlightBtn.addEventListener("click", () => {
+      const selection = window.getSelection();
+      if (!selection.rangeCount) return;
+
+      const selectedText = selection.toString();
+      if (!selectedText.trim()) return;
+
+      const range = selection.getRangeAt(0);
+
+      const span = document.createElement("span");
+      span.classList.add("highlight-mark");
+      span.textContent = selectedText;
+
+      // Remove highlight on click
+      span.addEventListener("click", () => {
+        span.replaceWith(document.createTextNode(span.textContent));
+      });
+
+      range.deleteContents();
+      range.insertNode(span);
+
+      selection.removeAllRanges();
+    });
   </script>
+
 </body>
 </html>
