@@ -22,6 +22,11 @@
       --accent: #4a4a4a;
       --shadow: rgba(0, 0, 0, 0.06);
       --highlight: #fff3a3;
+
+      /* Soft accent inks for pops of color */
+      --accent-ink: #7b4b2a;
+      --accent-pill: #efe1cf;
+      --accent-tag: #f3e3cf;
     }
 
     body.palette-sepia {
@@ -34,6 +39,26 @@
       --accent: #8a6c47;
       --shadow: rgba(90, 60, 40, 0.09);
       --highlight: #f4e1a1;
+
+      --accent-ink: #7a4a2b;
+      --accent-pill: #ebdbc6;
+      --accent-tag: #f0e0cd;
+    }
+
+    /* New sky / light blue palette */
+    body.palette-sky {
+      --bg: #e4f0f8;
+      --page: #f7fbff;
+      --text: #233548;
+      --text-light: #5b6b80;
+      --border: #c3d6e8;
+      --accent: #406b8e;
+      --shadow: rgba(0, 40, 80, 0.08);
+      --highlight: #fff7b3; /* keep a warm-ish highlight */
+
+      --accent-ink: #325a80;
+      --accent-pill: #ddeaf7;
+      --accent-tag: #e4f0fb;
     }
 
     [data-theme="dark"] {
@@ -45,6 +70,10 @@
       --accent: #a8a8a8;
       --shadow: rgba(0, 0, 0, 0.28);
       --highlight: #5a5200;
+
+      --accent-ink: #f0c58a;
+      --accent-pill: #3a2b1a;
+      --accent-tag: #3b3124;
     }
 
     /* Highlighted text */
@@ -53,6 +82,7 @@
       padding: 2px 1px;
       border-radius: 3px;
       cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(123, 75, 42, 0.12);
     }
 
     body {
@@ -124,9 +154,10 @@
       left: 1px;
       top: 1px;
       bottom: 1px;
-      width: 70%;
+      width: 70%; /* will be overridden by JS */
       background: var(--text-light);
       border-radius: 1px;
+      transition: width 0.3s ease, background-color 0.3s ease;
     }
 
     .logo {
@@ -162,7 +193,9 @@
     .theme-toggle:hover,
     .font-size-btn:hover,
     .highlight-btn:hover {
-      background: var(--bg);
+      background: var(--accent-pill);
+      border-color: var(--accent-ink);
+      color: var(--accent-ink);
     }
 
     /* Tooltip wrapper for highlight */
@@ -231,7 +264,7 @@
 
     .progress-bar {
       height: 100%;
-      background: var(--accent);
+      background: var(--accent-ink);
       width: 0%;
       transition: width 0.3s ease;
     }
@@ -251,9 +284,9 @@
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--accent-ink);
       margin-bottom: 1rem;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     section {
@@ -300,7 +333,7 @@
     }
 
     #typingText {
-      border-right: 3px solid var(--text);
+      border-right: 3px solid var(--accent-ink);
       padding-right: 5px;
       animation: blink 0.7s step-end infinite;
       display: inline-block;
@@ -308,7 +341,7 @@
 
     @keyframes blink {
       from, to { border-color: transparent; }
-      50% { border-color: var(--text); }
+      50% { border-color: var(--accent-ink); }
     }
 
     .hero-subtitle {
@@ -321,7 +354,7 @@
     .hero-meta {
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
-      color: var(--text-light);
+      color: var(--accent-ink);
       margin-top: 2rem;
     }
 
@@ -341,20 +374,22 @@
     }
 
     .skill-box {
-      border: 2px solid var(--border);
+      border: 1px solid var(--border);
       padding: 1rem 1.5rem;
       text-align: center;
-      border-radius: 6px;
-      background: var(--bg);
+      border-radius: 999px;
+      background: var(--accent-pill);
       transition: all 0.3s;
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
       font-weight: 500;
+      color: var(--accent-ink);
     }
 
     .skill-box:hover {
-      border-color: var(--accent);
+      border-color: var(--accent-ink);
       transform: translateY(-2px);
+      box-shadow: 0 4px 10px var(--shadow);
     }
 
     .projects-grid { display: grid; gap: 4rem; }
@@ -371,6 +406,7 @@
     .project-card:hover {
       box-shadow: 0 8px 24px var(--shadow);
       transform: translateY(-4px);
+      border-color: var(--accent-ink);
     }
 
     .project-number {
@@ -378,7 +414,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--accent-ink);
       margin-bottom: 0.5rem;
     }
 
@@ -407,15 +443,16 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
       padding: 0.3rem 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text-light);
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--accent-tag);
+      color: var(--accent-ink);
     }
 
     .project-link {
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
-      color: var(--accent);
+      color: var(--accent-ink);
       text-decoration: none;
       font-weight: 500;
       transition: all 0.3s;
@@ -455,19 +492,20 @@
     .contact-button {
       font-family: 'Inter', sans-serif;
       padding: 0.8rem 2rem;
-      border: 2px solid var(--accent);
+      border: 2px solid var(--accent-ink);
       background: transparent;
-      color: var(--text);
+      color: var(--accent-ink);
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 999px;
       font-size: 0.95rem;
       font-weight: 500;
       transition: all 0.3s;
       cursor: pointer;
+      background: var(--accent-pill);
     }
 
     .contact-button:hover {
-      background: var(--accent);
+      background: var(--accent-ink);
       color: var(--page);
     }
 
@@ -492,7 +530,7 @@
     .bookmark {
       position: fixed;
       right: 2rem;
-      top: 100px;
+      top: 130px; /* below highlights button */
       width: 40px;
       display: flex;
       flex-direction: column;
@@ -503,11 +541,11 @@
     .bookmark-item {
       width: 40px;
       height: 50px;
-      background: var(--accent);
+      background: var(--accent-ink);
       clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
       cursor: pointer;
       transition: all 0.3s;
-      opacity: 0.3;
+      opacity: 0.35;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -548,7 +586,167 @@
       .header-container { padding: 1rem 1.5rem; }
     }
 
-    a { color: rgb(171, 58, 2); transition: all 0.3s; }
+    a {
+      color: var(--accent-ink);
+      transition: all 0.3s;
+    }
+
+    a:hover {
+      color: var(--accent-ink);
+      text-decoration: underline;
+    }
+
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button,
+    .contact-button {
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    button:active,
+    .contact-button:active {
+      transform: scale(0.96);
+      box-shadow: 0 1px 4px var(--shadow);
+    }
+
+    @keyframes bookmarkPulse {
+      0% { transform: translateX(-5px) scale(1); }
+      50% { transform: translateX(-5px) scale(1.04); }
+      100% { transform: translateX(-5px) scale(1); }
+    }
+
+    .bookmark-item.active {
+      opacity: 1;
+      transform: translateX(-5px);
+      animation: bookmarkPulse 3s ease-in-out infinite;
+    }
+
+    /* Highlights UI */
+    .highlights {
+      position: fixed;
+      right: 2rem;
+      top: 80px; /* below sticky header, above bookmark bar */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.4rem;
+      z-index: 200; /* above header & bookmarks */
+    }
+
+    .highlights-toggle {
+      background: var(--accent-pill);
+      border: 1px solid var(--accent-ink);
+      color: var(--accent-ink);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+
+    .highlights-toggle:hover {
+      background: var(--accent-ink);
+      color: var(--page);
+    }
+
+    .highlights-panel {
+      position: absolute;
+      top: 40px;
+      right: 48px;
+      width: 230px;
+      max-height: 260px;
+      background: var(--page);
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 18px var(--shadow);
+      border-radius: 6px;
+      padding: 0.6rem 0.7rem 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .highlights-panel.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .highlights-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-bottom: 0.4rem;
+    }
+
+    /* Section heading inside highlights list */
+    .highlight-section-heading {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+      margin-bottom: 0.1rem;
+      color: var(--text-light);
+      padding: 0.25rem 0.4rem 0;
+    }
+
+    #highlightsList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .highlight-item {
+      padding: 0.35rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      line-height: 1.4;
+      color: var(--text-light);
+    }
+
+    .highlight-item:hover {
+      background: var(--bg);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    /* When we jump to a highlight, give it a quick focus ring */
+    .highlight-mark.highlight-focus {
+      outline: 2px solid var(--accent-ink);
+      outline-offset: 2px;
+    }
+
+    /* On small screens, hide the side UI */
+    @media (max-width: 768px) {
+      .highlights {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -594,11 +792,21 @@
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
+  <!-- Highlights stack -->
+  <div class="highlights">
+    <button id="highlightsToggle" class="highlights-toggle" aria-label="Highlights">✶</button>
+    <div id="highlightsPanel" class="highlights-panel">
+      <div class="highlights-header">Highlights</div>
+      <ul id="highlightsList"></ul>
+    </div>
+  </div>
+
+  <!-- Bookmark navigation -->
   <div class="bookmark">
-    <div class="bookmark-item active" data-section="hero">H</div>
-    <div class="bookmark-item" data-section="about">A</div>
-    <div class="bookmark-item" data-section="projects">P</div>
-    <div class="bookmark-item" data-section="contact">C</div>
+    <div class="bookmark-item active" data-section="hero"> ★</div>
+    <div class="bookmark-item" data-section="about">𖨆</div>
+    <div class="bookmark-item" data-section="projects">모</div>
+    <div class="bookmark-item" data-section="contact">⌯⌲</div>
   </div>
 
   <div class="page">
@@ -735,178 +943,461 @@
   </div>
 
   <script>
-    // Typing effect
-    function initTypingAnimation() {
-      const text = "Hello, I'm Manya!";
-      const typingElement = document.getElementById('typingText');
-      let index = 0;
+    document.addEventListener('DOMContentLoaded', () => {
+      // Typing effect
+      function initTypingAnimation() {
+        const texts = ["Hello, I'm Manya!"];
+        const typingElement = document.getElementById('typingText');
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
 
-      function typeText() {
-        if (index < text.length) {
-          typingElement.textContent += text.charAt(index);
-          index++;
-          setTimeout(typeText, 100);
-        } else {
-          setTimeout(() => {
-            typingElement.style.borderRight = 'none';
-            typingElement.style.animation = 'none';
-          }, 500);
+        function typeText() {
+          const currentText = texts[textIndex];
+
+          if (isDeleting) {
+            typingElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+          } else {
+            typingElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+          }
+
+          let typeSpeed = isDeleting ? 50 : 100;
+
+          if (!isDeleting && charIndex === currentText.length) {
+            typeSpeed = 7000; // Pause at end
+            isDeleting = true;
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            typeSpeed = 1000; // Pause before next text
+          }
+
+          setTimeout(typeText, typeSpeed);
         }
+
+        setTimeout(typeText, 1000);
       }
 
-      setTimeout(typeText, 500);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initTypingAnimation);
-    } else {
       initTypingAnimation();
-    }
 
-    // Theme toggle palettes
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
+      // Theme toggle palettes
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
 
-    const palettes = [
-      { theme: 'light', class: '', nextLabel: 'Switch to Sepia' },
-      { theme: 'light', class: 'palette-sepia', nextLabel: 'Switch to Dark' },
-      { theme: 'dark', class: '', nextLabel: 'Switch to Light' }
-    ];
+      const palettes = [
+        { theme: 'light', class: '', nextLabel: 'Switch to Sepia' },
+        { theme: 'light', class: 'palette-sepia', nextLabel: 'Switch to Sky' },
+        { theme: 'light', class: 'palette-sky', nextLabel: 'Switch to Dark' },
+        { theme: 'dark', class: '', nextLabel: 'Switch to Light' }
+      ];
 
-    let paletteIdx = Number(localStorage.getItem('paletteIdx') || 0);
+      let paletteIdx = Number(localStorage.getItem('paletteIdx') || 0);
 
-    function setPalette(idx) {
-      paletteIdx = idx;
-      const p = palettes[idx];
-      body.setAttribute('data-theme', p.theme);
-      body.classList.remove('palette-sepia');
-      if (p.class) body.classList.add(p.class);
+      function setPalette(idx) {
+        paletteIdx = idx;
+        const p = palettes[idx];
+        body.setAttribute('data-theme', p.theme);
+        body.classList.remove('palette-sepia', 'palette-sky');
+        if (p.class) body.classList.add(p.class);
 
-      themeToggle.innerHTML = p.nextLabel;
-      localStorage.setItem('paletteIdx', String(paletteIdx));
-    }
+        themeToggle.innerHTML = p.nextLabel;
+        localStorage.setItem('paletteIdx', String(paletteIdx));
+      }
 
-    setPalette(paletteIdx);
-
-    themeToggle.addEventListener('click', () => {
-      paletteIdx = (paletteIdx + 1) % palettes.length;
       setPalette(paletteIdx);
-    });
 
-    // Font size controls
-    const fontDecrease = document.getElementById('fontDecrease');
-    const fontIncrease = document.getElementById('fontIncrease');
-    const htmlElement = document.documentElement;
-
-    let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 18;
-    htmlElement.style.fontSize = currentFontSize + 'px';
-
-    fontDecrease.addEventListener('click', () => {
-      if (currentFontSize > 14) {
-        currentFontSize -= 2;
-        htmlElement.style.fontSize = currentFontSize + 'px';
-        localStorage.setItem('fontSize', currentFontSize);
-      }
-    });
-
-    fontIncrease.addEventListener('click', () => {
-      if (currentFontSize < 24) {
-        currentFontSize += 2;
-        htmlElement.style.fontSize = currentFontSize + 'px';
-        localStorage.setItem('fontSize', currentFontSize);
-      }
-    });
-
-    // Progress bar
-    window.addEventListener('scroll', () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY;
-      const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
-      document.getElementById('progressBar').style.width = progress + '%';
-    });
-
-    // Bookmark navigation
-    const bookmarks = document.querySelectorAll('.bookmark-item');
-    const sections = document.querySelectorAll('section[id]');
-
-    bookmarks.forEach(bookmark => {
-      bookmark.addEventListener('click', () => {
-        const sectionId = bookmark.getAttribute('data-section');
-        const section = document.getElementById(sectionId);
-        if (section) section.scrollIntoView({ behavior: 'smooth' });
+      themeToggle.addEventListener('click', () => {
+        paletteIdx = (paletteIdx + 1) % palettes.length;
+        setPalette(paletteIdx);
       });
-    });
 
-    window.addEventListener('scroll', () => {
-      let current = '';
+      // Font size controls
+      const fontDecrease = document.getElementById('fontDecrease');
+      const fontIncrease = document.getElementById('fontIncrease');
+      const htmlElement = document.documentElement;
 
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 200;
-        if (window.scrollY >= sectionTop) {
-          current = section.getAttribute('id');
+      let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 18;
+      htmlElement.style.fontSize = currentFontSize + 'px';
+
+      fontDecrease.addEventListener('click', () => {
+        if (currentFontSize > 14) {
+          currentFontSize -= 2;
+          htmlElement.style.fontSize = currentFontSize + 'px';
+          localStorage.setItem('fontSize', currentFontSize);
         }
       });
+
+      fontIncrease.addEventListener('click', () => {
+        if (currentFontSize < 24) {
+          currentFontSize += 2;
+          htmlElement.style.fontSize = currentFontSize + 'px';
+          localStorage.setItem('fontSize', currentFontSize);
+        }
+      });
+
+      // Randomize battery level on each load
+      const batteryLevelEl = document.querySelector('.battery span');
+      const batteryFillEl = document.querySelector('.battery-fill');
+      if (batteryLevelEl && batteryFillEl) {
+        const level = Math.floor(40 + Math.random() * 56); // 40–95%
+        batteryLevelEl.textContent = level + '%';
+        batteryFillEl.style.width = level + '%';
+
+        if (level < 25) {
+          batteryFillEl.style.backgroundColor = '#b63a2b'; // low battery
+        } else if (level < 55) {
+          batteryFillEl.style.backgroundColor = '#c48b2e'; // medium
+        } else {
+          batteryFillEl.style.backgroundColor = 'var(--text-light)'; // normal
+        }
+      }
+
+      // Progress bar
+      window.addEventListener('scroll', () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
+        const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+      });
+
+      // Bookmark navigation
+      const bookmarks = document.querySelectorAll('.bookmark-item');
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+
+      const headerEl = document.querySelector('header');
+      const HEADER_OFFSET = headerEl ? headerEl.offsetHeight + 20 : 80;
 
       bookmarks.forEach(bookmark => {
-        bookmark.classList.remove('active');
-        if (bookmark.getAttribute('data-section') === current) {
-          bookmark.classList.add('active');
+        bookmark.addEventListener('click', () => {
+          const sectionId = bookmark.getAttribute('data-section');
+          const section = document.getElementById(sectionId);
+          if (!section) return;
+
+          const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
+
+          window.scrollTo({
+            top: sectionTop - HEADER_OFFSET,
+            behavior: 'smooth'
+          });
+        });
+      });
+
+      // Update active bookmark on scroll
+      window.addEventListener('scroll', () => {
+        let currentId = sections[0]?.id;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - HEADER_OFFSET - 100;
+          if (window.pageYOffset >= sectionTop) {
+            currentId = section.id;
+          }
+        });
+
+        bookmarks.forEach(bookmark => {
+          bookmark.classList.toggle(
+            'active',
+            bookmark.getAttribute('data-section') === currentId
+          );
+        });
+      });
+
+      // Highlights panel toggle
+      const highlightsToggle = document.getElementById('highlightsToggle');
+      const highlightsPanel = document.getElementById('highlightsPanel');
+
+      if (highlightsToggle && highlightsPanel) {
+        highlightsToggle.addEventListener('click', () => {
+          highlightsPanel.classList.toggle('open');
+        });
+      }
+
+      // Smooth scrolling for in-page links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            const rectTop = target.getBoundingClientRect().top + window.pageYOffset;
+            const headerEl = document.querySelector('header');
+            const offset = headerEl ? headerEl.offsetHeight + 20 : 80;
+            window.scrollTo({
+              top: rectTop - offset,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Time in header
+      function updateTime() {
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        const timeElement = document.querySelector('.time');
+        if (timeElement) timeElement.textContent = time;
+      }
+
+      updateTime();
+      setInterval(updateTime, 60000);
+
+      // === Text highlighting + highlights sidebar with persistence ===
+      const highlightBtn = document.getElementById("highlightBtn");
+      let highlights = []; // { id, text, sectionId }
+
+      const HIGHLIGHTS_STORAGE_KEY = "manyaHighlightsV1";
+
+      function saveHighlights() {
+        try {
+          localStorage.setItem(HIGHLIGHTS_STORAGE_KEY, JSON.stringify(highlights));
+        } catch (e) {
+          console.warn("Could not save highlights", e);
         }
-      });
-    });
+      }
 
-    // Smooth scrolling for in-page links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      function removeHighlightById(id) {
+        highlights = highlights.filter(h => h.id !== id);
+        renderHighlightsList();
+        saveHighlights();
+      }
+
+      function attachHighlightSpanEvents(span, id) {
+        span.dataset.highlightId = id;
+        span.addEventListener("click", () => {
+          // Clicking a highlight in the text removes it
+          const textNode = document.createTextNode(span.textContent);
+          span.replaceWith(textNode);
+          removeHighlightById(id);
+        });
+      }
+
+      // Map section id to human-friendly label
+      function getSectionLabel(sectionId) {
+        if (!sectionId) return "Other";
+
+        const section = document.getElementById(sectionId);
+        if (!section) return "Other";
+
+        // Prefer the visible section title if present
+        const titleEl = section.querySelector(".section-title");
+        if (titleEl && titleEl.textContent.trim()) {
+          return titleEl.textContent.trim();
         }
+
+        // Fallback: chapter label (e.g. "Chapter One")
+        const chapterEl = section.querySelector(".chapter");
+        if (chapterEl && chapterEl.textContent.trim()) {
+          return chapterEl.textContent.trim();
+        }
+
+        // Last resort: prettify the raw id
+        return sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+      }
+
+      function renderHighlightsList() {
+        const list = document.getElementById("highlightsList");
+        if (!list) return;
+
+        list.innerHTML = "";
+
+        if (!highlights.length) {
+          const empty = document.createElement("li");
+          empty.className = "highlight-item";
+          empty.textContent = "No highlights yet.";
+          empty.style.color = "var(--text-light)";
+          list.appendChild(empty);
+          return;
+        }
+
+        // Group highlights by sectionId, preserving order of first appearance
+        const groups = {};
+        const order = [];
+
+        highlights.forEach(h => {
+          const key = h.sectionId || "__other__";
+          if (!groups[key]) {
+            groups[key] = [];
+            order.push(key);
+          }
+          groups[key].push(h);
+        });
+
+        order.forEach(sectionKey => {
+          const sectionId = sectionKey === "__other__" ? null : sectionKey;
+          const label = getSectionLabel(sectionId);
+
+          // Section heading
+          const headingLi = document.createElement("li");
+          headingLi.className = "highlight-section-heading";
+          headingLi.textContent = label;
+          list.appendChild(headingLi);
+
+          // Highlights under this section
+          groups[sectionKey].forEach(h => {
+            const li = document.createElement("li");
+            li.className = "highlight-item";
+
+            const snippet =
+              h.text.length > 90 ? h.text.slice(0, 87).trimEnd() + "…" : h.text;
+
+            li.textContent = snippet;
+
+            li.addEventListener("click", () => {
+              const span = document.querySelector(
+                `.highlight-mark[data-highlight-id="${h.id}"]`
+              );
+
+              if (span) {
+                span.scrollIntoView({ behavior: "smooth", block: "center" });
+                span.classList.add("highlight-focus");
+                setTimeout(() => span.classList.remove("highlight-focus"), 900);
+              } else if (h.sectionId) {
+                // fallback: scroll to the section if the exact span isn't found
+                const sec = document.getElementById(h.sectionId);
+                if (sec) {
+                  const rectTop = sec.getBoundingClientRect().top + window.pageYOffset;
+                  const headerEl = document.querySelector('header');
+                  const offset = headerEl ? headerEl.offsetHeight + 20 : 80;
+                  window.scrollTo({
+                    top: rectTop - offset,
+                    behavior: "smooth"
+                  });
+                }
+              }
+            });
+
+            list.appendChild(li);
+          });
+        });
+      }
+
+      function restoreHighlights() {
+        let saved;
+        try {
+          saved = JSON.parse(localStorage.getItem(HIGHLIGHTS_STORAGE_KEY) || "[]");
+        } catch (e) {
+          saved = [];
+        }
+
+        if (!Array.isArray(saved) || !saved.length) {
+          highlights = [];
+          renderHighlightsList();
+          return;
+        }
+
+        highlights = saved;
+
+        // For each saved highlight, find the text again and wrap it
+        highlights.forEach(h => {
+          const section = h.sectionId ? document.getElementById(h.sectionId) : document.body;
+          if (!section) return;
+
+          const walker = document.createTreeWalker(
+            section,
+            NodeFilter.SHOW_TEXT,
+            null
+          );
+
+          let node;
+          let foundNode = null;
+          let startIndex = -1;
+
+          while ((node = walker.nextNode())) {
+            const parentMark = node.parentElement && node.parentElement.closest(".highlight-mark");
+            if (parentMark) continue; // don't double-wrap
+
+            const idx = node.nodeValue.indexOf(h.text);
+            if (idx !== -1) {
+              foundNode = node;
+              startIndex = idx;
+              break;
+            }
+          }
+
+          if (!foundNode || startIndex === -1) return;
+
+          const range = document.createRange();
+          range.setStart(foundNode, startIndex);
+          range.setEnd(foundNode, startIndex + h.text.length);
+
+          const span = document.createElement("span");
+          span.classList.add("highlight-mark");
+          span.textContent = h.text;
+
+          range.deleteContents();
+          range.insertNode(span);
+
+          attachHighlightSpanEvents(span, h.id);
+        });
+
+        renderHighlightsList();
+      }
+
+      if (highlightBtn) {
+        highlightBtn.addEventListener("click", () => {
+          const selection = window.getSelection();
+          if (!selection || !selection.rangeCount) return;
+
+          const selectedText = selection.toString();
+          if (!selectedText.trim()) return;
+
+          const range = selection.getRangeAt(0);
+
+          // Create the span and insert it
+          const span = document.createElement("span");
+          span.classList.add("highlight-mark");
+          span.textContent = selectedText;
+
+          const id = "hl-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+
+          range.deleteContents();
+          range.insertNode(span);
+          selection.removeAllRanges();
+
+          // Attach behavior & log the highlight
+          attachHighlightSpanEvents(span, id);
+
+          const section = span.closest("section");
+          const sectionId = section ? section.id : null;
+
+          highlights.push({
+            id,
+            text: selectedText,
+            sectionId
+          });
+
+          renderHighlightsList();
+          saveHighlights();
+        });
+      }
+
+      // Run once on load to restore saved highlights
+      restoreHighlights();
+
+      // Section reveal on scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15
+        }
+      );
+
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.add('reveal-section');
+        observer.observe(section);
       });
-    });
-
-    // Time in header
-    function updateTime() {
-      const now = new Date();
-      const time = now.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
-      });
-      const timeElement = document.querySelector('.time');
-      if (timeElement) timeElement.textContent = time;
-    }
-
-    updateTime();
-    setInterval(updateTime, 60000);
-
-    // Text highlighting
-    const highlightBtn = document.getElementById("highlightBtn");
-
-    highlightBtn.addEventListener("click", () => {
-      const selection = window.getSelection();
-      if (!selection.rangeCount) return;
-
-      const selectedText = selection.toString();
-      if (!selectedText.trim()) return;
-
-      const range = selection.getRangeAt(0);
-
-      const span = document.createElement("span");
-      span.classList.add("highlight-mark");
-      span.textContent = selectedText;
-
-      // Remove highlight on click
-      span.addEventListener("click", () => {
-        span.replaceWith(document.createTextNode(span.textContent));
-      });
-
-      range.deleteContents();
-      range.insertNode(span);
-
-      selection.removeAllRanges();
     });
   </script>
 
