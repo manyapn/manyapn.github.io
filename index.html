@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name - Portfolio</title>
+  <title>Manya Pradeep Narayan - Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -140,6 +140,23 @@
       background: var(--bg);
     }
 
+    .font-size-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.6rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      transition: all 0.3s;
+      font-weight: 600;
+    }
+
+    .font-size-btn:hover {
+      background: var(--bg);
+    }
+
     /* Progress Bar */
     .progress-container {
       position: fixed;
@@ -213,8 +230,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      animation: fadeIn 1s ease forwards;
+      opacity: 1;
     }
 
     .hero-illustration img {
@@ -223,16 +239,23 @@
       object-fit: contain;
     }
 
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
     .hero-title {
       font-size: 3.5rem;
       font-weight: 700;
       margin-bottom: 1.5rem;
       line-height: 1.2;
+    }
+
+    #typingText {
+      border-right: 3px solid var(--text);
+      padding-right: 5px;
+      animation: blink 0.7s step-end infinite;
+      display: inline-block;
+    }
+
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--text); }
     }
 
     .hero-subtitle {
@@ -247,25 +270,6 @@
       font-size: 0.9rem;
       color: var(--text-light);
       margin-top: 2rem;
-    }
-
-    /* Simple Illustrations */
-    .illustration {
-      width: 100%;
-      max-width: 280px;
-      height: 200px;
-      margin: 3rem auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--border);
-      border-radius: 8px;
-      background: var(--page);
-    }
-
-    .illustration svg {
-      width: 80%;
-      height: 80%;
     }
 
     /* About Section */
@@ -321,26 +325,6 @@
     .project-card:hover {
       box-shadow: 0 8px 24px var(--shadow);
       transform: translateY(-4px);
-    }
-
-    .project-illustration {
-      width: 100%;
-      height: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 2rem;
-      border: 2px solid var(--border);
-      border-radius: 6px;
-      background: var(--page);
-      padding: 2rem;
-    }
-
-    .project-illustration svg {
-      width: 100%;
-      height: 100%;
-      max-width: 120px;
-      max-height: 120px;
     }
 
     .project-number {
@@ -590,6 +574,8 @@
       </div>
       <a href="#" class="logo">Portfolio</a>
       <div class="controls">
+        <button class="font-size-btn" id="fontDecrease">A-</button>
+        <button class="font-size-btn" id="fontIncrease">A+</button>
         <button class="theme-toggle" id="themeToggle">☾ Dark</button>
       </div>
     </div>
@@ -613,9 +599,9 @@
         <div class="hero-illustration">
           <img src="light-mode.PNG" alt="Light Mode Illustration" />
         </div>
-        <h1 class="hero-title">Hello, I'm Manya!</h1>
+        <h1 class="hero-title"><span id="typingText"></span></h1>
         <p class="hero-subtitle">Studying Computer Science @ Cornell University</p>
-        <p class="hero-meta">Hometown: Seattle · Available for opportunities</p>
+        <p class="hero-meta">Hometown: Seattle · Available for Opportunities</p>
       </section>
 
       <!-- About -->
@@ -623,9 +609,9 @@
         <p class="chapter">Chapter One</p>
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
-          <p>I’m a Computer Science student at Cornell University with a passion for using technology to expand access, equity, and opportunity. My work often sits at the intersection of tech, education, and social impact - whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like Girls Who Code.</p>
-          <p>I’m especially interested in how thoughtful design and human-centered computing can make technology more equitable. Previously, I’ve led initiatives focused on accessible tech education, spoken on panels about diversity in STEM, and developed digital resources to help level the playing field for students across Washington State.</p>
-          <p>When I'm not writing code, you'll find me <a href="#">reading</a> (this website, in fact, is inspired by my first favorite piece of technology, a Kindle Paperwhite), <a href="#">exploring new coffee shops</a>, or spending time with friends and family. </p>
+          <p>I'm a Computer Science student at Cornell University with a passion for using technology to expand access, equity, and opportunity. My work often sits at the intersection of tech, education, and social impact - whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like Girls Who Code.</p>
+          <p>I'm especially interested in how thoughtful design and human-centered computing can make technology more equitable. Previously, I've led initiatives focused on accessible tech education, spoken on panels about diversity in STEM, and developed digital resources to help level the playing field for students across Washington State.</p>
+          <p>When I'm not writing code, you'll find me <a href="#">reading</a> (this website, in fact, is inspired by my first favorite piece of technology, a Kindle Paperwhite), <a href="#">exploring new coffee shops</a>, or spending time with friends and family.</p>
         </div>
 
         <div class="skills-grid">
@@ -640,15 +626,13 @@
         </div>
       </section>
 
-        <!-- Projects -->
-       
+      <!-- Projects -->
       <section id="projects">
         <p class="chapter">Chapter Two</p>
         <h2 class="section-title">Selected Projects</h2>
         <div class="projects-grid">
 
-            <article class="project-card">
-            
+          <article class="project-card">
             <p class="project-number">Project 01</p>
             <h3 class="project-title">LessonLoop</h3>
             <p class="project-desc">Contributing to an AI-powered professional learning platform that boosts student engagement by helping educators identify barriers and apply effective instructional strategies. Implementing prototypes using Vue, Nuxt, DynamoDB, Node, and Amazon Bedrock for AI agent deployment.</p>
@@ -661,9 +645,7 @@
             <a href="#" class="project-link">View Project →</a>
           </article>
 
-
           <article class="project-card">
-            
             <p class="project-number">Project 02</p>
             <h3 class="project-title">Ocean Wave Pomodoro Timer</h3>
             <p class="project-desc">A Chrome extension that helps users stay focused and productive using the Pomodoro Technique. Built with React.js, featuring customizable work/rest intervals and session tracking.</p>
@@ -676,7 +658,6 @@
           </article>
 
           <article class="project-card">
-            
             <p class="project-number">Project 03</p>
             <h3 class="project-title">The Myth of the Undefeated Boxer</h3>
             <p class="project-desc">Analyzing boxing trends across decades to explore the evolution of the sport and identify what defines greatness in boxing through comprehensive data analysis.</p>
@@ -689,7 +670,6 @@
           </article>
 
           <article class="project-card">
-            
             <p class="project-number">Project 04</p>
             <h3 class="project-title">Sudoku Solver</h3>
             <p class="project-desc">A Python program that solves Sudoku puzzles of different sizes using recursive backtracking. Uses sets to track valid row, column, and square values with efficient constraint checks.</p>
@@ -702,7 +682,6 @@
 
         </div>
       </section>
-
 
       <!-- Contact -->
       <section id="contact">
@@ -739,6 +718,35 @@
   </div>
 
   <script>
+    // Typing Animation
+    function initTypingAnimation() {
+      const text = "Hello, I'm Manya!";
+      const typingElement = document.getElementById('typingText');
+      let index = 0;
+
+      function typeText() {
+        if (index < text.length) {
+          typingElement.textContent += text.charAt(index);
+          index++;
+          setTimeout(typeText, 100);
+        } else {
+          setTimeout(() => {
+            typingElement.style.borderRight = 'none';
+            typingElement.style.animation = 'none';
+          }, 500);
+        }
+      }
+
+      setTimeout(typeText, 500);
+    }
+
+    // Start typing animation when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTypingAnimation);
+    } else {
+      initTypingAnimation();
+    }
+
     // Theme Toggle
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
@@ -754,6 +762,30 @@
       body.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       themeToggle.innerHTML = newTheme === 'dark' ? '☀ Light' : '☾ Dark';
+    });
+
+    // Font Size Control
+    const fontDecrease = document.getElementById('fontDecrease');
+    const fontIncrease = document.getElementById('fontIncrease');
+    const htmlElement = document.documentElement;
+    
+    let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 18;
+    htmlElement.style.fontSize = currentFontSize + 'px';
+
+    fontDecrease.addEventListener('click', () => {
+      if (currentFontSize > 14) {
+        currentFontSize -= 2;
+        htmlElement.style.fontSize = currentFontSize + 'px';
+        localStorage.setItem('fontSize', currentFontSize);
+      }
+    });
+
+    fontIncrease.addEventListener('click', () => {
+      if (currentFontSize < 24) {
+        currentFontSize += 2;
+        htmlElement.style.fontSize = currentFontSize + 'px';
+        localStorage.setItem('fontSize', currentFontSize);
+      }
     });
 
     // Progress Bar
