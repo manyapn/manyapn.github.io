@@ -1,507 +1,835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inner Peace - Mindfulness & Mental Wellness</title>
-    <link href="tooplate-inner-peace.css" rel="stylesheet">
-<!--
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-Tooplate 2143 Inner Peace
+    :root {
+      --bg: #f4f1ea;
+      --page: #faf8f3;
+      --text: #2b2b2b;
+      --text-light: #5a5a5a;
+      --border: #d4d0c8;
+      --accent: #4a4a4a;
+      --shadow: rgba(0, 0, 0, 0.06);
+    }
 
-https://www.tooplate.com/view/2143-inner-peace
+    [data-theme="dark"] {
+      --bg: #1a1a1a;
+      --page: #2b2b2b;
+      --text: #d4d0c8;
+      --text-light: #8a8a8a;
+      --border: #3a3a3a;
+      --accent: #a8a8a8;
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
 
-Free HTML CSS Template
+    body {
+      font-family: 'Literata', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 18px;
+      transition: all 0.4s ease;
+      -webkit-font-smoothing: antialiased;
+    }
 
--->
+    .sans {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Kindle Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--page);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .header-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .device-status {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .battery {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .battery-icon {
+      width: 20px;
+      height: 10px;
+      border: 1.5px solid var(--text-light);
+      border-radius: 2px;
+      position: relative;
+    }
+
+    .battery-icon::after {
+      content: '';
+      position: absolute;
+      right: -3px;
+      top: 2px;
+      width: 2px;
+      height: 4px;
+      background: var(--text-light);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .battery-fill {
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      bottom: 1px;
+      width: 70%;
+      background: var(--text-light);
+      border-radius: 1px;
+    }
+
+    .logo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .theme-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      transition: all 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background: var(--bg);
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--border);
+      z-index: 100;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Page Container */
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--page);
+      min-height: 100vh;
+      box-shadow: 0 0 30px var(--shadow);
+    }
+
+    .page-content {
+      padding: 4rem 3rem;
+    }
+
+    /* Chapter Heading */
+    .chapter {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    /* Section */
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 3rem;
+      line-height: 1.3;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 6rem 0;
+      text-align: center;
+    }
+
+    .hero-illustration {
+      width: 30rem;
+      height: 30rem;
+      margin: 0 auto 0.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .hero-illustration img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 2rem;
+    }
+
+    /* Simple Illustrations */
+    .illustration {
+      width: 100%;
+      max-width: 280px;
+      height: 200px;
+      margin: 3rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--page);
+    }
+
+    .illustration svg {
+      width: 80%;
+      height: 80%;
+    }
+
+    /* About Section */
+    .about-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .about-content p {
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .skill-box {
+      border: 2px solid var(--border);
+      padding: 1rem 1.5rem;
+      text-align: center;
+      border-radius: 6px;
+      background: var(--bg);
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .skill-box:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      gap: 4rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+      background: var(--bg);
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 8px 24px var(--shadow);
+      transform: translateY(-4px);
+    }
+
+    .project-illustration {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      background: var(--page);
+      padding: 2rem;
+    }
+
+    .project-illustration svg {
+      width: 100%;
+      height: 100%;
+      max-width: 120px;
+      max-height: 120px;
+    }
+
+    .project-number {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-light);
+    }
+
+    .project-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact */
+    .contact-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-illustration {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-illustration svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .contact-text {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-button {
+      font-family: 'Inter', sans-serif;
+      padding: 0.8rem 2rem;
+      border: 2px solid var(--accent);
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .contact-button:hover {
+      background: var(--accent);
+      color: var(--page);
+    }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .page-number {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    /* Bookmark Ribbon */
+    .bookmark {
+      position: fixed;
+      right: 2rem;
+      top: 100px;
+      width: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 50;
+    }
+
+    .bookmark-item {
+      width: 40px;
+      height: 50px;
+      background: var(--accent);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      cursor: pointer;
+      transition: all 0.3s;
+      opacity: 0.3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--page);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .bookmark-item:hover,
+    .bookmark-item.active {
+      opacity: 1;
+      transform: translateX(-5px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .page-content {
+        padding: 3rem 2rem;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .hero {
+        padding: 4rem 0;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .about-content {
+        margin-bottom: 2rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      }
+
+      .bookmark {
+        display: none;
+      }
+
+      .device-status {
+        display: none;
+      }
+
+      .contact-links {
+        flex-direction: column;
+      }
+
+      .contact-button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 16px;
+      }
+
+      .page-content {
+        padding: 2rem 1.5rem;
+      }
+
+      .hero-illustration {
+        width: 150px;
+        height: 150px;
+        font-size: 6rem;
+      }
+
+      .header-container {
+        padding: 1rem 1.5rem;
+      }
+    }
+
+    a {
+      color: rgb(81, 44, 44);
+      transition: all 0.3s;
+    }
+  </style>
 </head>
-<body>
-    <div class="geometric-bg"></div>
-
-    <!-- Header -->
-    <header>
-        <nav>
-            <a href="#hero" class="logo">
-                <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <circle cx="20" cy="20" r="18" fill="none" stroke="url(#logoGradient)" stroke-width="2"/>
-                    <circle cx="20" cy="20" r="14" fill="none" stroke="url(#logoGradient)" stroke-width="1.5" opacity="0.7"/>
-                    <circle cx="20" cy="20" r="10" fill="none" stroke="url(#logoGradient)" stroke-width="1" opacity="0.5"/>
-                    <circle cx="20" cy="20" r="6" fill="none" stroke="url(#logoGradient)" stroke-width="0.5" opacity="0.3"/>
-                    <circle cx="20" cy="20" r="3" fill="url(#logoGradient)"/>
-                </svg>
-                <span class="logo-text">Inner Peace</span>
-            </a>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#hero" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#practices" class="nav-link">Practices</a></li>
-                <li><a href="#resources" class="nav-link">Resources</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section with Enhanced Background -->
-    <section id="hero">
-        <!-- Network Background -->
-        <div class="network-bg">
-            <div class="network-line"></div>
-            <div class="network-line"></div>
-            <div class="network-line"></div>
-            <div class="network-line"></div>
-            <div class="network-line"></div>
-            <div class="network-line"></div>
-            <div class="network-line"></div>
-            <div class="network-line"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
-            <div class="network-dot"></div>
+<body data-theme="light">
+  <header>
+    <div class="header-container">
+      <div class="device-status">
+        <span class="time">2:47 PM</span>
+        <div class="battery">
+          <div class="battery-icon">
+            <div class="battery-fill"></div>
+          </div>
+          <span>75%</span>
         </div>
+      </div>
+      <a href="#" class="logo">Portfolio</a>
+      <div class="controls">
+        <button class="theme-toggle" id="themeToggle">☾ Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="bookmark">
+    <div class="bookmark-item active" data-section="hero">H</div>
+    <div class="bookmark-item" data-section="about">A</div>
+    <div class="bookmark-item" data-section="projects">P</div>
+    <div class="bookmark-item" data-section="contact">C</div>
+  </div>
+
+  <div class="page">
+    <main class="page-content">
+      <!-- Hero -->
+      <section id="hero" class="hero">
+        <div class="hero-illustration">
+          <img src="light-mode.PNG" alt="Light Mode Illustration" />
+        </div>
+        <h1 class="hero-title">Hello, I'm Manya!</h1>
+        <p class="hero-subtitle">Studying Computer Science @ Cornell University</p>
+        <p class="hero-meta">Hometown: Seattle · Available for opportunities</p>
+      </section>
+
+      <!-- About -->
+      <section id="about">
+        <p class="chapter">Chapter One</p>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <p>I’m a Computer Science student at Cornell University with a passion for using technology to expand access, equity, and opportunity. My work often sits at the intersection of tech, education, and social impact - whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like Girls Who Code.</p>
+          <p>I’m especially interested in how thoughtful design and human-centered computing can make technology more equitable. Previously, I’ve led initiatives focused on accessible tech education, spoken on panels about diversity in STEM, and developed digital resources to help level the playing field for students across Washington State.</p>
+          <p>When I'm not writing code, you'll find me <a href="#">reading</a> (this website, in fact, is inspired by my first favorite piece of technology, a Kindle Paperwhite), <a href="#">exploring new coffee shops</a>, or spending time with friends and family. </p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-box">HTML & CSS</div>
+          <div class="skill-box">JavaScript</div>
+          <div class="skill-box">React</div>
+          <div class="skill-box">Vue</div>
+          <div class="skill-box">Python</div>
+          <div class="skill-box">Django</div>
+          <div class="skill-box">Java</div>
+          <div class="skill-box">Git & GitHub</div>
+        </div>
+      </section>
+
+        <!-- Projects -->
+       
+      <section id="projects">
+        <p class="chapter">Chapter Two</p>
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="projects-grid">
+
+            <article class="project-card">
+            
+            <p class="project-number">Project 01</p>
+            <h3 class="project-title">LessonLoop</h3>
+            <p class="project-desc">Contributing to an AI-powered professional learning platform that boosts student engagement by helping educators identify barriers and apply effective instructional strategies. Implementing prototypes using Vue, Nuxt, DynamoDB, Node, and Amazon Bedrock for AI agent deployment.</p>
+            <div class="project-tags">
+              <span class="tag">Vue</span>
+              <span class="tag">AWS</span>
+              <span class="tag">AI/ML</span>
+              <span class="tag">DynamoDB</span>
+            </div>
+            <a href="#" class="project-link">View Project →</a>
+          </article>
+
+
+          <article class="project-card">
+            
+            <p class="project-number">Project 02</p>
+            <h3 class="project-title">Ocean Wave Pomodoro Timer</h3>
+            <p class="project-desc">A Chrome extension that helps users stay focused and productive using the Pomodoro Technique. Built with React.js, featuring customizable work/rest intervals and session tracking.</p>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Chrome Extension</span>
+              <span class="tag">Productivity</span>
+            </div>
+            <a href="#" class="project-link">View Project →</a>
+          </article>
+
+          <article class="project-card">
+            
+            <p class="project-number">Project 03</p>
+            <h3 class="project-title">The Myth of the Undefeated Boxer</h3>
+            <p class="project-desc">Analyzing boxing trends across decades to explore the evolution of the sport and identify what defines greatness in boxing through comprehensive data analysis.</p>
+            <div class="project-tags">
+              <span class="tag">Data Analysis</span>
+              <span class="tag">Research</span>
+              <span class="tag">Visualization</span>
+            </div>
+            <a href="#" class="project-link">View Project →</a>
+          </article>
+
+          <article class="project-card">
+            
+            <p class="project-number">Project 04</p>
+            <h3 class="project-title">Sudoku Solver</h3>
+            <p class="project-desc">A Python program that solves Sudoku puzzles of different sizes using recursive backtracking. Uses sets to track valid row, column, and square values with efficient constraint checks.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Algorithms</span>
+              <span class="tag">Recursion</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+
+      <!-- Contact -->
+      <section id="contact">
+        <p class="chapter">Epilogue</p>
+        <h2 class="section-title">Get in Touch</h2>
+        <div class="contact-content">
+          <div class="contact-illustration">
+            <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="25" y="45" width="100" height="70" rx="3" stroke="currentColor" stroke-width="3" fill="none"/>
+              <path d="M 25 45 L 75 85 L 125 45" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
+              <path d="M 25 115 L 60 85 M 125 115 L 90 85" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="75" cy="30" r="3" fill="currentColor"/>
+              <circle cx="85" cy="25" r="3" fill="currentColor"/>
+              <circle cx="65" cy="25" r="3" fill="currentColor"/>
+            </svg>
+          </div>
+          <p class="contact-text">I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+          <div class="contact-links">
+            <a href="mailto:hello@example.com" class="contact-button">Email Me</a>
+            <a href="#" class="contact-button">LinkedIn</a>
+            <a href="#" class="contact-button">GitHub</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+        <div class="footer-text">
+          © 2025 Manya Pradeep Narayan · Designed & Developed with Care
+        </div>
+        <div class="page-number">— Page 1 of 1 —</div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    body.setAttribute('data-theme', currentTheme);
+    themeToggle.innerHTML = currentTheme === 'dark' ? '☀ Light' : '☾ Dark';
+
+    themeToggle.addEventListener('click', () => {
+      const theme = body.getAttribute('data-theme');
+      const newTheme = theme === 'light' ? 'dark' : 'light';
+      
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      themeToggle.innerHTML = newTheme === 'dark' ? '☀ Light' : '☾ Dark';
+    });
+
+    // Progress Bar
+    window.addEventListener('scroll', () => {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const scrollTop = window.scrollY;
+      const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+      
+      document.getElementById('progressBar').style.width = progress + '%';
+    });
+
+    // Bookmark Navigation
+    const bookmarks = document.querySelectorAll('.bookmark-item');
+    const sections = document.querySelectorAll('section[id]');
+
+    bookmarks.forEach(bookmark => {
+      bookmark.addEventListener('click', () => {
+        const sectionId = bookmark.getAttribute('data-section');
+        const section = document.getElementById(sectionId);
         
-        <div class="peace-bg">
-            <div class="breathing-circle"></div>
-            <div class="breathing-circle"></div>
-            <div class="breathing-circle"></div>
-            <div class="breathing-circle"></div>
-        </div>
-        <div class="floating-elements">
-            <div class="zen-stone"></div>
-            <div class="zen-stone"></div>
-            <div class="zen-stone"></div>
-        </div>
-        <div class="mandala-bg">
-            <div class="mandala-circle"></div>
-            <div class="mandala-circle"></div>
-            <div class="mandala-circle"></div>
-        </div>
-        <div class="hero-content">
-            <h1>Find Your Inner Peace</h1>
-            <p>Journey towards mental wellness through mindfulness, meditation, and self-discovery</p>
-            <a href="#about" class="cta-button">Begin Your Journey</a>
-        </div>
-    </section>
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
 
-    <!-- About Section - Complete Redesign -->
-    <section id="about">
-        <h2 class="section-title">fjkdlsfjldsjflkds</h2>
-        <p class="section-subtitle">
-            Transform your mind, transform your life
-        </p>
-        
-        <!-- Floating Cards Design -->
-        <div class="about-floating-cards">
-            <div class="floating-card">
-                <div class="card-icon">
-                    <div class="icon-wrapper">🧠</div>
-                </div>
-                <h3>Rewire Your Brain</h3>
-                <p>Neuroplasticity in action - just 10 minutes daily physically reshapes your brain for better focus and emotional control.</p>
-            </div>
-            
-            <div class="floating-card">
-                <div class="card-icon">
-                    <div class="icon-wrapper">⚡</div>
-                </div>
-                <h3>Instant Calm</h3>
-                <p>Access immediate stress relief through proven breathing techniques that activate your parasympathetic nervous system.</p>
-            </div>
-            
-            <div class="floating-card">
-                <div class="card-icon">
-                    <div class="icon-wrapper">🎯</div>
-                </div>
-                <h3>Peak Performance</h3>
-                <p>Achieve flow states more easily and unlock your full potential in work, creativity, and personal growth.</p>
-            </div>
-        </div>
+    // Active bookmark on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 200;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
 
-        <!-- Stats Banner -->
-        <div class="stats-banner">
-            <div class="stat-block">
-                <div class="stat-value">85%</div>
-                <div class="stat-desc">Stress Reduction</div>
-            </div>
-            <div class="stat-block">
-                <div class="stat-value">3X</div>
-                <div class="stat-desc">Better Focus</div>
-            </div>
-            <div class="stat-block">
-                <div class="stat-value">10K+</div>
-                <div class="stat-desc">Happy Members</div>
-            </div>
-            <div class="stat-block">
-                <div class="stat-value">4.9★</div>
-                <div class="stat-desc">User Rating</div>
-            </div>
-        </div>
+      bookmarks.forEach(bookmark => {
+        bookmark.classList.remove('active');
+        if (bookmark.getAttribute('data-section') === current) {
+          bookmark.classList.add('active');
+        }
+      });
+    });
 
-        <!-- Feature Showcase -->
-        <div class="feature-showcase">
-            <div class="showcase-content">
-                <h3>Why Choose Inner Peace?</h3>
-                <ul class="feature-list">
-                    <li>
-                        <span class="feature-check">✓</span>
-                        <span>Science-backed techniques proven by neuroscience</span>
-                    </li>
-                    <li>
-                        <span class="feature-check">✓</span>
-                        <span>Personalized journey adapted to your needs</span>
-                    </li>
-                    <li>
-                        <span class="feature-check">✓</span>
-                        <span>Expert guidance from certified instructors</span>
-                    </li>
-                    <li>
-                        <span class="feature-check">✓</span>
-                        <span>Track your progress with real metrics</span>
-                    </li>
-                    <li>
-                        <span class="feature-check">✓</span>
-                        <span>Brought to you by Tooplate website</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    // Smooth scrolling for all links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
 
-    <!-- Practices Section - Enhanced Timeline Design -->
-    <section id="practices">
-        <div class="practices-container">
-            <h2 class="section-title">Mindfulness Practices</h2>
-            <p class="section-subtitle">Master these core practices to build your mindfulness toolkit</p>
-            
-            <div class="practice-layout">
-                <!-- Futuristic Left Timeline -->
-                <div class="timeline-track">
-                    <div class="timeline-progress"></div>
-                    <div class="timeline-points">
-                        <div class="timeline-point active">
-                            <div class="futuristic-label">
-                                <span class="label-text">Foundation</span>
-                            </div>
-                            <div class="timeline-indicator"></div>
-                        </div>
-                        <div class="timeline-point">
-                            <div class="futuristic-label">
-                                <span class="label-text">Breathing</span>
-                            </div>
-                            <div class="timeline-indicator"></div>
-                        </div>
-                        <div class="timeline-point">
-                            <div class="futuristic-label">
-                                <span class="label-text">Awareness</span>
-                            </div>
-                            <div class="timeline-indicator"></div>
-                        </div>
-                        <div class="timeline-point">
-                            <div class="futuristic-label">
-                                <span class="label-text">Integration</span>
-                            </div>
-                            <div class="timeline-indicator"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Content Area -->
-                <div class="practice-content-area">
-                    <div class="practice-card-new">
-                        <div class="practice-header">
-                            <div class="practice-icon-new">🧘</div>
-                            <div class="practice-info">
-                                <h3>Foundation Meditation</h3>
-                                <span class="practice-duration">10-20 minutes daily</span>
-                            </div>
-                        </div>
-                        <p class="practice-description">
-                            Begin your journey with guided meditation sessions designed specifically for beginners. Learn the fundamental techniques of sitting meditation, including proper posture, attention anchoring, and working with wandering thoughts. Our progressive approach ensures you build a solid foundation without feeling overwhelmed.
-                        </p>
-                        <div class="practice-benefits">
-                            <a href="#" class="benefit-tag">Stress Reduction</a>
-                            <a href="#" class="benefit-tag">Mental Clarity</a>
-                            <a href="#" class="benefit-tag">Emotional Balance</a>
-                            <a href="#" class="benefit-tag">Better Sleep</a>
-                        </div>
-                    </div>
-
-                    <div class="practice-card-new">
-                        <div class="practice-header">
-                            <div class="practice-icon-new">🌬️</div>
-                            <div class="practice-info">
-                                <h3>Conscious Breathing</h3>
-                                <span class="practice-duration">5-10 minutes as needed</span>
-                            </div>
-                        </div>
-                        <p class="practice-description">
-                            Master the art of breath awareness with techniques that instantly calm your nervous system. From box breathing to 4-7-8 patterns, discover how different breathing exercises can energize, relax, or center you throughout your day. Perfect for managing anxiety and stress in real-time.
-                        </p>
-                        <div class="practice-benefits">
-                            <a href="#" class="benefit-tag">Instant Calm</a>
-                            <a href="#" class="benefit-tag">Energy Boost</a>
-                            <a href="#" class="benefit-tag">Focus Enhancement</a>
-                            <a href="#" class="benefit-tag">Anxiety Relief</a>
-                        </div>
-                    </div>
-
-                    <div class="practice-card-new">
-                        <div class="practice-header">
-                            <div class="practice-icon-new">📝</div>
-                            <div class="practice-info">
-                                <h3>Mindful Awareness</h3>
-                                <span class="practice-duration">15 minutes daily</span>
-                            </div>
-                        </div>
-                        <p class="practice-description">
-                            Develop meta-awareness through journaling and body scan practices. Learn to observe your thoughts, emotions, and physical sensations without judgment. This practice includes gratitude exercises, emotional check-ins, and reflective writing to deepen self-understanding.
-                        </p>
-                        <div class="practice-benefits">
-                            <a href="#" class="benefit-tag">Self-Discovery</a>
-                            <a href="#" class="benefit-tag">Emotional Intelligence</a>
-                            <a href="#" class="benefit-tag">Pattern Recognition</a>
-                            <a href="#" class="benefit-tag">Gratitude</a>
-                        </div>
-                    </div>
-
-                    <div class="practice-card-new">
-                        <div class="practice-header">
-                            <div class="practice-icon-new">🚶</div>
-                            <div class="practice-info">
-                                <h3>Living Mindfully</h3>
-                                <span class="practice-duration">Throughout the day</span>
-                            </div>
-                        </div>
-                        <p class="practice-description">
-                            Integrate mindfulness into every aspect of your daily life. From mindful eating to walking meditation, learn how to transform routine activities into opportunities for presence. Discover how to maintain awareness during work, conversations, and even challenging situations.
-                        </p>
-                        <div class="practice-benefits">
-                            <a href="#" class="benefit-tag">Present Living</a>
-                            <a href="#" class="benefit-tag">Joy in Simple Things</a>
-                            <a href="#" class="benefit-tag">Mindful Communication</a>
-                            <a href="#" class="benefit-tag">Work-Life Balance</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Resources Section - Tab Structure -->
-    <section id="resources">
-        <h2 class="section-title">Resources & Tools</h2>
-        <p class="section-subtitle">Everything you need to support your mindfulness practice</p>
-        
-        <div class="resource-tabs">
-            <button class="tab-btn active" onclick="showTab('meditations')">Meditations</button>
-            <button class="tab-btn" onclick="showTab('courses')">Courses</button>
-            <button class="tab-btn" onclick="showTab('tools')">Tools</button>
-        </div>
-
-        <div id="meditations" class="tab-content active">
-            <div class="resource-list">
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail morning-meditation"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Morning Meditation</h3>
-                        <p>Start your day with clarity and intention through our 15-minute morning practice.</p>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail stress-relief"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Stress Relief Session</h3>
-                        <p>Quick 10-minute guided meditation for immediate stress and anxiety relief.</p>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail sleep-meditation"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Sleep Meditation</h3>
-                        <p>Peaceful bedtime meditation to help you unwind and prepare for restful sleep.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="courses" class="tab-content">
-            <div class="resource-list">
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail mbsr-course"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>8-Week MBSR Program</h3>
-                        <p>Comprehensive Mindfulness-Based Stress Reduction course with certified instructors.</p>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail leadership-course"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Mindful Leadership</h3>
-                        <p>Develop presence and emotional intelligence for effective leadership.</p>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail beginner-course"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Beginner's Journey</h3>
-                        <p>30-day introduction to mindfulness with daily lessons and practices.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="tools" class="tab-content">
-            <div class="resource-list">
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail timer-tool"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Meditation Timer</h3>
-                        <p>Customizable timer with ambient sounds and interval bells for your practice.</p>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail mood-tracker"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Mood Tracker</h3>
-                        <p>Monitor your emotional patterns and see how mindfulness impacts your well-being.</p>
-                    </div>
-                </div>
-                <div class="resource-card">
-                    <div class="resource-image">
-                        <div class="resource-thumbnail breathing-tool"></div>
-                    </div>
-                    <div class="resource-body">
-                        <h3>Breathing Exercises</h3>
-                        <p>Interactive breathing patterns for different situations and energy levels.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section - Two Columns -->
-    <section id="contact">
-        <div class="contact-container">
-            <h2 class="section-title">Connect With Us</h2>
-            
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h3>Get in Touch</h3>
-                    
-                    <div class="info-item">
-                        <div class="info-icon">📍</div>
-                        <div class="info-text">
-                            <h4>Visit Us</h4>
-                            <p>123 Wellness Street<br>Mindful City, MC 12345</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-icon">📧</div>
-                        <div class="info-text">
-                            <h4>Email</h4>
-                            <p>hello@innerpeace.com<br>support@innerpeace.com</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-icon">📞</div>
-                        <div class="info-text">
-                            <h4>Phone</h4>
-                            <p>+1 (555) 123-4567<br>Mon-Fri, 9am-6pm EST</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item">
-                        <div class="info-icon">💬</div>
-                        <div class="info-text">
-                            <h4>Live Chat</h4>
-                            <p>Available 24/7 for urgent support</p>
-                        </div>
-                    </div>
-
-                    <div class="social-links">
-                        <a href="#" class="social-link">f</a>
-                        <a href="#" class="social-link">t</a>
-                        <a href="#" class="social-link">i</a>
-                        <a href="#" class="social-link">l</a>
-                    </div>
-                </div>
-
-                <div class="contact-form">
-                    <h3 style="color: var(--primary); font-size: 1.8rem; margin-bottom: 2rem;">Send a Message</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <a href="#terms">Terms of Service</a>
-                <a href="#support">Support</a>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Inner Peace. All rights reserved. Nurturing minds, one breath at a time. 
-                Designed by <a rel="nofollow noopener" href="https://www.tooplate.com" target="_blank" style="color: var(--accent); text-decoration: none; transition: color 0.3s ease;">Tooplate</a></p>
-            </div>
-        </div>
-    </footer>
-<script src="tooplate-inner-peace-scripts.js"></script>
+    // Update time in header
+    function updateTime() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { 
+        hour: 'numeric', 
+        minute: '2-digit',
+        hour12: true 
+      });
+      const timeElement = document.querySelector('.time');
+      if (timeElement) {
+        timeElement.textContent = time;
+      }
+    }
+    
+    updateTime();
+    setInterval(updateTime, 60000);
+  </script>
 </body>
 </html>
