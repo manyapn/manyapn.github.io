@@ -22,6 +22,11 @@
       --accent: #4a4a4a;
       --shadow: rgba(0, 0, 0, 0.06);
       --highlight: #fff3a3;
+
+      /* Soft accent inks for pops of color */
+      --accent-ink: #7b4b2a;
+      --accent-pill: #efe1cf;
+      --accent-tag: #f3e3cf;
     }
 
     body.palette-sepia {
@@ -34,6 +39,26 @@
       --accent: #8a6c47;
       --shadow: rgba(90, 60, 40, 0.09);
       --highlight: #f4e1a1;
+
+      --accent-ink: #7a4b2b;
+      --accent-pill: #ebdbc6;
+      --accent-tag: #f0e0cd;
+    }
+
+    /* New sky / light blue palette */
+    body.palette-sky {
+      --bg: #e4f0f8;
+      --page: #f7fbff;
+      --text: #233548;
+      --text-light: #5b6b80;
+      --border: #c3d6e8;
+      --accent: #406b8e;
+      --shadow: rgba(0, 40, 80, 0.08);
+      --highlight: #fff7b3; /* keep a warm-ish highlight */
+
+      --accent-ink: #325a80;
+      --accent-pill: #ddeaf7;
+      --accent-tag: #e4f0fb;
     }
 
     [data-theme="dark"] {
@@ -45,6 +70,10 @@
       --accent: #a8a8a8;
       --shadow: rgba(0, 0, 0, 0.28);
       --highlight: #5a5200;
+
+      --accent-ink: #f0c58a;
+      --accent-pill: #3a2b1a;
+      --accent-tag: #3b3124;
     }
 
     /* Highlighted text */
@@ -53,6 +82,7 @@
       padding: 2px 1px;
       border-radius: 3px;
       cursor: pointer;
+      box-shadow: 0 0 0 1px rgba(123, 75, 42, 0.12);
     }
 
     body {
@@ -124,9 +154,10 @@
       left: 1px;
       top: 1px;
       bottom: 1px;
-      width: 70%;
+      width: 70%; /* will be overridden by JS */
       background: var(--text-light);
       border-radius: 1px;
+      transition: width 0.3s ease, background-color 0.3s ease;
     }
 
     .logo {
@@ -162,7 +193,9 @@
     .theme-toggle:hover,
     .font-size-btn:hover,
     .highlight-btn:hover {
-      background: var(--bg);
+      background: var(--accent-pill);
+      border-color: var(--accent-ink);
+      color: var(--accent-ink);
     }
 
     /* Tooltip wrapper for highlight */
@@ -231,7 +264,7 @@
 
     .progress-bar {
       height: 100%;
-      background: var(--accent);
+      background: var(--accent-ink);
       width: 0%;
       transition: width 0.3s ease;
     }
@@ -251,9 +284,9 @@
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--accent-ink);
       margin-bottom: 1rem;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     section {
@@ -300,7 +333,7 @@
     }
 
     #typingText {
-      border-right: 3px solid var(--text);
+      border-right: 3px solid var(--accent-ink);
       padding-right: 5px;
       animation: blink 0.7s step-end infinite;
       display: inline-block;
@@ -308,7 +341,7 @@
 
     @keyframes blink {
       from, to { border-color: transparent; }
-      50% { border-color: var(--text); }
+      50% { border-color: var(--accent-ink); }
     }
 
     .hero-subtitle {
@@ -321,7 +354,7 @@
     .hero-meta {
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
-      color: var(--text-light);
+      color: var(--accent-ink);
       margin-top: 2rem;
     }
 
@@ -341,20 +374,226 @@
     }
 
     .skill-box {
-      border: 2px solid var(--border);
+      border: 1px solid var(--border);
       padding: 1rem 1.5rem;
       text-align: center;
-      border-radius: 6px;
-      background: var(--bg);
+      border-radius: 999px;
+      background: var(--accent-pill);
       transition: all 0.3s;
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
       font-weight: 500;
+      color: var(--accent-ink);
     }
 
     .skill-box:hover {
-      border-color: var(--accent);
+      border-color: var(--accent-ink);
       transform: translateY(-2px);
+      box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    /* Timeline styles */
+    .timeline {
+      position: relative;
+      margin-top: 1.5rem;
+      padding-left: 1.5rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.4rem;
+      bottom: 0.4rem;
+      border-left: 1px solid var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 1.5rem;
+      padding-bottom: 2.75rem;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -0.32rem;
+      top: 0.55rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--accent-ink);
+      box-shadow: 0 0 0 3px var(--page);
+    }
+
+    .timeline-card {
+      background: var(--bg);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 1.5rem 1.75rem;
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .timeline-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.35rem;
+    }
+
+    .timeline-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    .timeline-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 0.8rem;
+    }
+
+    .timeline-body p {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-body ul {
+      margin: 0 0 0.6rem 1.1rem;
+      padding-left: 0.9rem;
+      list-style: disc;
+      font-size: 1rem;
+    }
+
+    .timeline-body li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* Timeline media (images) */
+    .timeline-media {
+      margin-top: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--page);
+      border-radius: 6px;
+      padding: 0.6rem 0.6rem 0.8rem;
+      box-shadow: 0 3px 10px var(--shadow);
+    }
+
+    .timeline-media img {
+      display: block;
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .timeline-caption {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    /* DECA carousel */
+    .image-carousel .carousel-inner {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .image-carousel .carousel-image {
+      display: none;
+    }
+
+    .image-carousel .carousel-image.active {
+      display: block;
+    }
+
+    .carousel-controls {
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .carousel-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent-pill);
+      border-color: var(--accent-ink);
+      color: var(--accent-ink);
+    }
+
+    .carousel-counter {
+      opacity: 0.85;
+    }
+
+    /* Cornell Data Journal definition tooltip */
+    .definition-link {
+      position: relative;
+      text-decoration: underline dotted;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+      cursor: pointer;
+    }
+
+    .definition-popover {
+      position: absolute;
+      left: 0;
+      top: 130%;
+      min-width: 140px;
+      max-width: 200px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      background: var(--page);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 14px var(--shadow);
+      border-radius: 4px;
+      padding: 0.45rem 0.6rem;
+      color: var(--text-light);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 150;
+      white-space: nowrap;
+    }
+
+    .definition-link:hover .definition-popover,
+    .definition-link:focus-visible .definition-popover {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .definition-link:focus-visible {
+      outline: 2px solid var(--accent-ink);
+      outline-offset: 2px;
     }
 
     .projects-grid { display: grid; gap: 4rem; }
@@ -371,6 +610,7 @@
     .project-card:hover {
       box-shadow: 0 8px 24px var(--shadow);
       transform: translateY(-4px);
+      border-color: var(--accent-ink);
     }
 
     .project-number {
@@ -378,7 +618,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--accent-ink);
       margin-bottom: 0.5rem;
     }
 
@@ -407,15 +647,16 @@
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
       padding: 0.3rem 0.8rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--text-light);
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: var(--accent-tag);
+      color: var(--accent-ink);
     }
 
     .project-link {
       font-family: 'Inter', sans-serif;
       font-size: 0.9rem;
-      color: var(--accent);
+      color: var(--accent-ink);
       text-decoration: none;
       font-weight: 500;
       transition: all 0.3s;
@@ -455,19 +696,20 @@
     .contact-button {
       font-family: 'Inter', sans-serif;
       padding: 0.8rem 2rem;
-      border: 2px solid var(--accent);
+      border: 2px solid var(--accent-ink);
       background: transparent;
-      color: var(--text);
+      color: var(--accent-ink);
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 999px;
       font-size: 0.95rem;
       font-weight: 500;
       transition: all 0.3s;
       cursor: pointer;
+      background: var(--accent-pill);
     }
 
     .contact-button:hover {
-      background: var(--accent);
+      background: var(--accent-ink);
       color: var(--page);
     }
 
@@ -492,7 +734,7 @@
     .bookmark {
       position: fixed;
       right: 2rem;
-      top: 100px;
+      top: 130px; /* below highlights button */
       width: 40px;
       display: flex;
       flex-direction: column;
@@ -503,11 +745,11 @@
     .bookmark-item {
       width: 40px;
       height: 50px;
-      background: var(--accent);
+      background: var(--accent-ink);
       clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
       cursor: pointer;
       transition: all 0.3s;
-      opacity: 0.3;
+      opacity: 0.35;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -548,7 +790,169 @@
       .header-container { padding: 1rem 1.5rem; }
     }
 
-    a { color: rgb(171, 58, 2); transition: all 0.3s; }
+    a {
+      color: var(--accent-ink);
+      transition: all 0.3s;
+    }
+
+    a:hover {
+      color: var(--accent-ink);
+      text-decoration: underline;
+    }
+
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    button,
+    .contact-button,
+    .carousel-btn {
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    button:active,
+    .contact-button:active,
+    .carousel-btn:active {
+      transform: scale(0.96);
+      box-shadow: 0 1px 4px var(--shadow);
+    }
+
+    @keyframes bookmarkPulse {
+      0% { transform: translateX(-5px) scale(1); }
+      50% { transform: translateX(-5px) scale(1.04); }
+      100% { transform: translateX(-5px) scale(1); }
+    }
+
+    .bookmark-item.active {
+      opacity: 1;
+      transform: translateX(-5px);
+      animation: bookmarkPulse 3s ease-in-out infinite;
+    }
+
+    /* Highlights UI */
+    .highlights {
+      position: fixed;
+      right: 2rem;
+      top: 80px; /* below sticky header, above bookmark bar */
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.4rem;
+      z-index: 200; /* above header & bookmarks */
+    }
+
+    .highlights-toggle {
+      background: var(--accent-pill);
+      border: 1px solid var(--accent-ink);
+      color: var(--accent-ink);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      box-shadow: 0 2px 6px var(--shadow);
+    }
+
+    .highlights-toggle:hover {
+      background: var(--accent-ink);
+      color: var(--page);
+    }
+
+    .highlights-panel {
+      position: absolute;
+      top: 40px;
+      right: 48px;
+      width: 230px;
+      max-height: 260px;
+      background: var(--page);
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 18px var(--shadow);
+      border-radius: 6px;
+      padding: 0.6rem 0.7rem 0.5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .highlights-panel.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .highlights-header {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-light);
+      margin-bottom: 0.4rem;
+    }
+
+    /* Section heading inside highlights list */
+    .highlight-section-heading {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 0.4rem;
+      margin-bottom: 0.1rem;
+      color: var(--text-light);
+      padding: 0.25rem 0.4rem 0;
+    }
+
+    #highlightsList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .highlight-item {
+      padding: 0.35rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      line-height: 1.4;
+      color: var(--text-light);
+    }
+
+    .highlight-item:hover {
+      background: var(--bg);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    /* When we jump to a highlight, give it a quick focus ring */
+    .highlight-mark.highlight-focus {
+      outline: 2px solid var(--accent-ink);
+      outline-offset: 2px;
+    }
+
+    /* On small screens, hide the side UI */
+    @media (max-width: 768px) {
+      .highlights {
+        display: none;
+      }
+    }
   </style>
 </head>
 
@@ -580,7 +984,8 @@
             <strong>How highlighting works</strong><br>
             1. Select any text on the page.<br>
             2. Click <em>Highlight</em> to mark it.<br>
-            3. Click a highlighted passage to remove it.
+            3. Click a highlighted passage to remove it. <br>
+            4. To access your highlights, click the <em>✶</em> button on the right
           </div>
         </div>
 
@@ -594,11 +999,22 @@
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
+  <!-- Highlights stack -->
+  <div class="highlights">
+    <button id="highlightsToggle" class="highlights-toggle" aria-label="Highlights">✶</button>
+    <div id="highlightsPanel" class="highlights-panel">
+      <div class="highlights-header">Highlights</div>
+      <ul id="highlightsList"></ul>
+    </div>
+  </div>
+
+  <!-- Bookmark navigation -->
   <div class="bookmark">
-    <div class="bookmark-item active" data-section="hero">H</div>
-    <div class="bookmark-item" data-section="about">A</div>
-    <div class="bookmark-item" data-section="projects">P</div>
-    <div class="bookmark-item" data-section="contact">C</div>
+    <div class="bookmark-item active" data-section="hero"> ★</div>
+    <div class="bookmark-item" data-section="about">𖨆</div>
+    <div class="bookmark-item" data-section="experience">✦</div>
+    <div class="bookmark-item" data-section="projects">모</div>
+    <div class="bookmark-item" data-section="contact">⌯⌲</div>
   </div>
 
   <div class="page">
@@ -611,7 +1027,7 @@
         </div>
         <h1 class="hero-title"><span id="typingText"></span></h1>
         <p class="hero-subtitle">Studying Computer Science @ Cornell University</p>
-        <p class="hero-meta">Hometown: Seattle · Available for Opportunities</p>
+        <p class="hero-meta">Hometown: Seattle, WA · Available for Opportunities</p>
       </section>
 
       <!-- About -->
@@ -619,28 +1035,180 @@
         <p class="chapter">Chapter One</p>
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
-          <p>I'm a Computer Science student at Cornell University with a passion for using technology to expand access, equity, and opportunity. My work often sits at the intersection of tech, education, and social impact - whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like Girls Who Code.</p>
+          <p>I'm a <strong>Computer Science student at Cornell University</strong> with a passion for using technology to expand <strong>access, equity, and opportunity</strong>. My work often sits at the intersection of tech, education, and social impact — whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like <a href="#">Girls Who Code.</a></p>
 
-          <p>I'm especially interested in how thoughtful design and human-centered computing can make technology more equitable. Previously, I've led initiatives focused on accessible tech education, spoken on panels about diversity in STEM, and developed digital resources to help level the playing field for students across Washington State.</p>
+          <p>I'm especially interested in how <strong>thoughtful design</strong> and <strong>human-centered computing</strong> can make technology more equitable. Previously, I've led initiatives focused on <a href="#">accessible tech education</a>, spoken on panels about <a href="#">diversity in STEM</a>, and <a href="#">developed digital resources</a> to help level the playing field for students across Washington State.</p>
 
-          <p>When I'm not writing code, you'll find me <a href="#">reading</a> (this website, in fact, is inspired by my first favorite piece of technology, a Kindle Paperwhite), <a href="#">exploring new coffee shops</a>, or spending time with friends and family.</p>
+          <p>When I'm not writing code, you'll find me <a href="#">reading</a> (this website, in fact, is inspired by my first favorite piece of technology, a <strong>Kindle Paperwhite</strong>), <a href="#">exploring new coffee shops</a>, or spending time with friends and family.</p>
         </div>
 
         <div class="skills-grid">
-          <div class="skill-box">HTML & CSS</div>
+          <div class="skill-box">HTML &amp; CSS</div>
           <div class="skill-box">JavaScript</div>
           <div class="skill-box">React</div>
           <div class="skill-box">Vue</div>
           <div class="skill-box">Python</div>
           <div class="skill-box">Django</div>
           <div class="skill-box">Java</div>
-          <div class="skill-box">Git & GitHub</div>
+          <div class="skill-box">Git &amp; GitHub</div>
+        </div>
+      </section>
+
+      <!-- Experiences / Timeline -->
+      <section id="experience">
+        <p class="chapter">Chapter Two</p>
+        <h2 class="section-title">Things I've Done</h2>
+
+        <div class="about-content">
+          <p>Over the past few years, I've been lucky to <strong>learn</strong>, <strong>lead</strong>, and <strong>build</strong> alongside some incredible communities. A few chapters from that journey:</p>
+        </div>
+
+        <div class="timeline">
+
+          <!-- Cornell University -->
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-label sans">Present</div>
+              <h3 class="timeline-title">Cornell University</h3>
+              <div class="timeline-body">
+                <p><strong>University life</strong> has given me the chance to dive into communities that challenge me, inspire me, and help me grow as both a technologist and a collaborator.</p>
+                <ul>
+                  <li><strong>Developer · Engineers Without Borders</strong> — building tools and solutions that create real impact for communities around me.</li>
+                  <li><strong>Developer · Women in Computing Technical Committee</strong> — creating resources and internal tools that support an inclusive tech community.</li>
+                  <li>
+                    <strong>Analyst ·
+                      <a href="https://cornelldatajournal.org/" target="_blank" rel="noopener noreferrer" class="definition-link">
+                        Cornell Data Journal
+                        <span class="definition-popover">Check out our work!</span>
+                      </a>
+                    </strong> — exploring data-driven storytelling and research.
+                  </li>
+                  <li><strong>Member · Kappa Theta Pi</strong> — Cornell’s professional tech fraternity, where I’ve found mentorship, leadership opportunities, and a tight-knit support network.</li>
+                  <li><strong>Mentor · Girls Who Code</strong> — helping younger students discover the confidence and creativity that comes with learning to code.</li>
+                </ul>
+              </div>
+
+              <!-- Cornell image (optional later if you add one) -->
+              <!--
+              <div class="timeline-media">
+                <img src="cornell.jpg" alt="Cornell campus" />
+              </div>
+              -->
+            </div>
+          </article>
+
+          <!-- Washington DECA -->
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-label sans">Leadership &amp; Impact</div>
+              <h3 class="timeline-title">Washington DECA</h3>
+              <div class="timeline-meta sans">
+                State President · Area 3 President · Vice President of Career Development
+              </div>
+              <div class="timeline-body">
+                <p>My journey with <strong>Washington DECA</strong> has been one of my most meaningful leadership experiences.</p>
+                <ul>
+                  <li><strong>State President</strong> — represented <strong>16,000+ students</strong> studying business, marketing, and entrepreneurship across Washington. Guided a <strong>12-member executive team</strong> and helped launch <strong>20+ statewide initiatives</strong>, from professional clothing scholarships to an <strong>AI-powered test prep chatbot</strong> that improved member test performance.</li>
+                  <li><strong>Board of Directors</strong> — served as the <strong>first high school student</strong> appointed to Washington DECA’s Board, contributing to long-term strategy development.</li>
+                  <li><strong>Area 3 President &amp; VP of Career Development</strong> — represented the largest DECA Area in the state (<strong>2,000+ students</strong>), visited chapters, led social media outreach, and helped organize conferences that brought thousands of students together.</li>
+                  <li><strong>Innovation &amp; Advocacy</strong> — founded a <strong>16-person team</strong> that created a statewide leadership resource hub used by <strong>165+ schools</strong>, earning international recognition with the <strong>Innovation IMPACT Award</strong>. Developed advocacy booths connecting <strong>300+ student stories</strong> with state legislators to advocate for increased CTE funding.</li>
+                </ul>
+              </div>
+
+              <!-- DECA image carousel -->
+              <div class="timeline-media image-carousel" data-carousel>
+                <div class="carousel-inner">
+                  <img src="deca1.jpg" alt="Washington DECA event 1" class="carousel-image active">
+                  <img src="deca2.jpg" alt="Washington DECA event 2" class="carousel-image">
+                  <img src="deca3.PNG" alt="Washington DECA event 3" class="carousel-image">
+                  <img src="deca4.jpeg" alt="Washington DECA event 4" class="carousel-image">
+                </div>
+                <div class="carousel-controls">
+                  <button class="carousel-btn" data-direction="prev" type="button" aria-label="Previous DECA photo">‹ Prev</button>
+                  <span class="carousel-counter sans" data-carousel-counter>1 / 4</span>
+                  <button class="carousel-btn" data-direction="next" type="button" aria-label="Next DECA photo">Next ›</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Girls Who Code -->
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-label sans">Equity, Education &amp; Community</div>
+              <h3 class="timeline-title">Girls Who Code @ Eastlake High School</h3>
+              <div class="timeline-meta sans">
+                Co-Lead · Workshop Organizer · Community Builder
+              </div>
+              <div class="timeline-body">
+                <p><strong>Girls Who Code @ Eastlake</strong> gave me a front-row seat to what happens when you create space for students to truly belong in tech.</p>
+                <ul>
+                  <li><strong>Co-led a 100+ member chapter</strong> — organized bi-weekly workshops and events focused on building skills and confidence.</li>
+                  <li><strong>Expanded membership by 35%</strong> by centering inclusivity, accessibility, and community in everything we did.</li>
+                  <li><strong>Founded Girls Who Code Jr.</strong> — designed monthly workshops (with a volunteer team) to introduce elementary students to coding in fun, empowering ways.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-media">
+                <img src="gwc_meeting.jpg" alt="Girls Who Code meeting at Eastlake High School" />
+              </div>
+            </div>
+          </article>
+
+          <!-- STEAMobile -->
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-label sans">Equity, Education &amp; Community</div>
+              <h3 class="timeline-title">STEAMobile</h3>
+              <div class="timeline-meta sans">
+                Co-Founder · Curriculum &amp; Brand Design · Program Lead
+              </div>
+              <div class="timeline-body">
+                <p><strong>STEAMobile</strong> is a female-led STEAM education nonprofit I co-founded to make hands-on STEAM learning more accessible.</p>
+                <ul>
+                  <li><strong>Built the organization from the ground up</strong> — from shaping the business plan to designing the brand and curriculum.</li>
+                  <li><strong>Hosted camps and community workshops</strong> that centered curiosity, creativity, and confidence in STEAM.</li>
+                  <li><strong>Partnered with organizations</strong> such as the Bellevue Collection to bring engaging STEM experiences to <strong>hundreds of K–8 students</strong>.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-media">
+                <img src="steamobile.jpg" alt="STEAMobile STEAM education workshop with students" />
+              </div>
+            </div>
+          </article>
+
+          <!-- Data Structures TA -->
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <div class="timeline-label sans">Teaching &amp; Mentorship</div>
+              <h3 class="timeline-title">Data Structures Teaching Assistant</h3>
+              <div class="timeline-body">
+                <p><strong>Teaching</strong> has always been one of my favorite ways to deepen my own understanding.</p>
+                <ul>
+                  <li><strong>Data Structures TA</strong> for my high school course — supported peers one-on-one with challenging concepts, labs, and projects.</li>
+                  <li><strong>Mentorship &amp; communication</strong> — reinforced my passion for breaking down complex ideas in approachable, encouraging ways.</li>
+                </ul>
+              </div>
+
+              <figure class="timeline-media">
+                <img src="ta.jpg" alt="Teaching assistants for Data Structures course" />
+                <figcaption class="timeline-caption sans">me and my lovely co-TA</figcaption>
+              </figure>
+            </div>
+          </article>
+
         </div>
       </section>
 
       <!-- Projects -->
       <section id="projects">
-        <p class="chapter">Chapter Two</p>
+        <p class="chapter">Chapter Three</p>
         <h2 class="section-title">Things I've Worked On</h2>
 
         <div class="projects-grid">
@@ -648,7 +1216,7 @@
           <article class="project-card">
             <p class="project-number">Project 01</p>
             <h3 class="project-title">LessonLoop</h3>
-            <p class="project-desc">Contributing to an AI-powered professional learning platform that boosts student engagement by helping educators identify barriers and apply effective instructional strategies. Implementing prototypes using Vue, Nuxt, DynamoDB, Node, and Amazon Bedrock for AI agent deployment.</p>
+            <p class="project-desc">Contributing to an <strong>AI-powered professional learning platform</strong> that boosts student engagement by helping educators identify barriers and apply effective instructional strategies. Implementing prototypes using <strong>Vue, Nuxt, DynamoDB, Node, and Amazon Bedrock</strong> for AI agent deployment.</p>
             <div class="project-tags">
               <span class="tag">Vue</span>
               <span class="tag">AWS</span>
@@ -661,7 +1229,7 @@
           <article class="project-card">
             <p class="project-number">Project 02</p>
             <h3 class="project-title">Ocean Wave Pomodoro Timer</h3>
-            <p class="project-desc">A Chrome extension that helps users stay focused and productive using the Pomodoro Technique. Built with React.js, featuring customizable work/rest intervals and session tracking.</p>
+            <p class="project-desc">A <strong>Chrome extension</strong> that helps users stay focused and productive using the <strong>Pomodoro Technique</strong>. Built with <strong>React.js</strong>, featuring customizable work/rest intervals and session tracking.</p>
             <div class="project-tags">
               <span class="tag">React</span>
               <span class="tag">Chrome Extension</span>
@@ -673,7 +1241,7 @@
           <article class="project-card">
             <p class="project-number">Project 03</p>
             <h3 class="project-title">The Myth of the Undefeated Boxer</h3>
-            <p class="project-desc">Analyzing boxing trends across decades to explore the evolution of the sport and identify what defines greatness in boxing through comprehensive data analysis.</p>
+            <p class="project-desc">Analyzing <strong>boxing trends across decades</strong> to explore the evolution of the sport and identify what defines greatness in boxing through <strong>comprehensive data analysis and visualization</strong>.</p>
             <div class="project-tags">
               <span class="tag">Data Analysis</span>
               <span class="tag">Research</span>
@@ -685,7 +1253,7 @@
           <article class="project-card">
             <p class="project-number">Project 04</p>
             <h3 class="project-title">Sudoku Solver</h3>
-            <p class="project-desc">A Python program that solves Sudoku puzzles of different sizes using recursive backtracking. Uses sets to track valid row, column, and square values with efficient constraint checks.</p>
+            <p class="project-desc">A <strong>Python</strong> program that solves Sudoku puzzles of different sizes using <strong>recursive backtracking</strong>. Uses sets to track valid row, column, and square values with efficient constraint checks.</p>
             <div class="project-tags">
               <span class="tag">Python</span>
               <span class="tag">Algorithms</span>
@@ -726,7 +1294,7 @@
       <!-- Footer -->
       <footer>
         <div class="footer-text">
-          © 2025 Manya Pradeep Narayan · Designed & Developed with Care
+          © 2025 Manya Pradeep Narayan · Designed &amp; Developed with Care
         </div>
         <div class="page-number">— Page 1 of 1 —</div>
       </footer>
@@ -735,178 +1303,624 @@
   </div>
 
   <script>
-    // Typing effect
-    function initTypingAnimation() {
-      const text = "Hello, I'm Manya!";
-      const typingElement = document.getElementById('typingText');
-      let index = 0;
+    document.addEventListener('DOMContentLoaded', () => {
+      // Typing effect
+      function initTypingAnimation() {
+        const texts = ["Hello, I'm Manya!"];
+        const typingElement = document.getElementById('typingText');
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
 
-      function typeText() {
-        if (index < text.length) {
-          typingElement.textContent += text.charAt(index);
-          index++;
-          setTimeout(typeText, 100);
-        } else {
-          setTimeout(() => {
-            typingElement.style.borderRight = 'none';
-            typingElement.style.animation = 'none';
-          }, 500);
+        function typeText() {
+          const currentText = texts[textIndex];
+
+          if (isDeleting) {
+            typingElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+          } else {
+            typingElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+          }
+
+          let typeSpeed = isDeleting ? 50 : 100;
+
+          if (!isDeleting && charIndex === currentText.length) {
+            typeSpeed = 7000; // Pause at end
+            isDeleting = true;
+          } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+            typeSpeed = 1000; // Pause before next text
+          }
+
+          setTimeout(typeText, typeSpeed);
         }
+
+        setTimeout(typeText, 1000);
       }
 
-      setTimeout(typeText, 500);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initTypingAnimation);
-    } else {
       initTypingAnimation();
-    }
 
-    // Theme toggle palettes
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
+      // Theme toggle palettes
+      const themeToggle = document.getElementById('themeToggle');
+      const body = document.body;
 
-    const palettes = [
-      { theme: 'light', class: '', nextLabel: 'Switch to Sepia' },
-      { theme: 'light', class: 'palette-sepia', nextLabel: 'Switch to Dark' },
-      { theme: 'dark', class: '', nextLabel: 'Switch to Light' }
-    ];
+      const heroImg = document.querySelector('.hero-illustration img');
 
-    let paletteIdx = Number(localStorage.getItem('paletteIdx') || 0);
+      function updateHeroImage() {
+        if (!heroImg) return;
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        heroImg.src = isDark ? 'dark-mode.png' : 'light-mode.PNG';
+        heroImg.alt = isDark ? 'Dark Mode Illustration' : 'Light Mode Illustration';
+      }
 
-    function setPalette(idx) {
-      paletteIdx = idx;
-      const p = palettes[idx];
-      body.setAttribute('data-theme', p.theme);
-      body.classList.remove('palette-sepia');
-      if (p.class) body.classList.add(p.class);
 
-      themeToggle.innerHTML = p.nextLabel;
-      localStorage.setItem('paletteIdx', String(paletteIdx));
-    }
+      const palettes = [
+        { theme: 'light', class: '', nextLabel: 'Switch to Sepia' },
+        { theme: 'light', class: 'palette-sepia', nextLabel: 'Switch to Sky' },
+        { theme: 'light', class: 'palette-sky', nextLabel: 'Switch to Dark' },
+        { theme: 'dark', class: '', nextLabel: 'Switch to Light' }
+      ];
 
-    setPalette(paletteIdx);
+      let paletteIdx = Number(localStorage.getItem('paletteIdx') || 0);
 
-    themeToggle.addEventListener('click', () => {
-      paletteIdx = (paletteIdx + 1) % palettes.length;
+      function setPalette(idx) {
+        paletteIdx = idx;
+        const p = palettes[idx];
+        body.setAttribute('data-theme', p.theme);
+        body.classList.remove('palette-sepia', 'palette-sky');
+        if (p.class) body.classList.add(p.class);
+
+        themeToggle.innerHTML = p.nextLabel;
+        localStorage.setItem('paletteIdx', String(paletteIdx));
+
+        // update hero image based on theme
+        updateHeroImage();
+      }
+
       setPalette(paletteIdx);
-    });
 
-    // Font size controls
-    const fontDecrease = document.getElementById('fontDecrease');
-    const fontIncrease = document.getElementById('fontIncrease');
-    const htmlElement = document.documentElement;
-
-    let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 18;
-    htmlElement.style.fontSize = currentFontSize + 'px';
-
-    fontDecrease.addEventListener('click', () => {
-      if (currentFontSize > 14) {
-        currentFontSize -= 2;
-        htmlElement.style.fontSize = currentFontSize + 'px';
-        localStorage.setItem('fontSize', currentFontSize);
-      }
-    });
-
-    fontIncrease.addEventListener('click', () => {
-      if (currentFontSize < 24) {
-        currentFontSize += 2;
-        htmlElement.style.fontSize = currentFontSize + 'px';
-        localStorage.setItem('fontSize', currentFontSize);
-      }
-    });
-
-    // Progress bar
-    window.addEventListener('scroll', () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.scrollY;
-      const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
-      document.getElementById('progressBar').style.width = progress + '%';
-    });
-
-    // Bookmark navigation
-    const bookmarks = document.querySelectorAll('.bookmark-item');
-    const sections = document.querySelectorAll('section[id]');
-
-    bookmarks.forEach(bookmark => {
-      bookmark.addEventListener('click', () => {
-        const sectionId = bookmark.getAttribute('data-section');
-        const section = document.getElementById(sectionId);
-        if (section) section.scrollIntoView({ behavior: 'smooth' });
+      themeToggle.addEventListener('click', () => {
+        paletteIdx = (paletteIdx + 1) % palettes.length;
+        setPalette(paletteIdx);
       });
-    });
 
-    window.addEventListener('scroll', () => {
-      let current = '';
+      // Font size controls
+      const fontDecrease = document.getElementById('fontDecrease');
+      const fontIncrease = document.getElementById('fontIncrease');
+      const htmlElement = document.documentElement;
 
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 200;
-        if (window.scrollY >= sectionTop) {
-          current = section.getAttribute('id');
+      let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 18;
+      htmlElement.style.fontSize = currentFontSize + 'px';
+
+      fontDecrease.addEventListener('click', () => {
+        if (currentFontSize > 14) {
+          currentFontSize -= 2;
+          htmlElement.style.fontSize = currentFontSize + 'px';
+          localStorage.setItem('fontSize', currentFontSize);
         }
       });
+
+      fontIncrease.addEventListener('click', () => {
+        if (currentFontSize < 20) {
+          currentFontSize += 2;
+          htmlElement.style.fontSize = currentFontSize + 'px';
+          localStorage.setItem('fontSize', currentFontSize);
+        }
+      });
+
+      // Randomize battery level on each load
+      const batteryLevelEl = document.querySelector('.battery span');
+      const batteryFillEl = document.querySelector('.battery-fill');
+      if (batteryLevelEl && batteryFillEl) {
+        const level = Math.floor(40 + Math.random() * 56); // 40–95%
+        batteryLevelEl.textContent = level + '%';
+        batteryFillEl.style.width = level + '%';
+
+        if (level < 25) {
+          batteryFillEl.style.backgroundColor = '#b63a2b'; // low battery
+        } else if (level < 55) {
+          batteryFillEl.style.backgroundColor = '#c48b2e'; // medium
+        } else {
+          batteryFillEl.style.backgroundColor = 'var(--text-light)'; // normal
+        }
+      }
+
+      // Progress bar
+      window.addEventListener('scroll', () => {
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.scrollY;
+        const progress = (scrollTop / (documentHeight - windowHeight)) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+      });
+
+      // Bookmark navigation
+      const bookmarks = document.querySelectorAll('.bookmark-item');
+      const sections = Array.from(document.querySelectorAll('section[id]'));
+
+      const headerEl = document.querySelector('header');
+      const HEADER_OFFSET = headerEl ? headerEl.offsetHeight + 20 : 80;
 
       bookmarks.forEach(bookmark => {
-        bookmark.classList.remove('active');
-        if (bookmark.getAttribute('data-section') === current) {
-          bookmark.classList.add('active');
-        }
-      });
-    });
+        bookmark.addEventListener('click', () => {
+          const sectionId = bookmark.getAttribute('data-section');
+          const section = document.getElementById(sectionId);
+          if (!section) return;
 
-    // Smooth scrolling for in-page links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
+          const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
 
-    // Time in header
-    function updateTime() {
-      const now = new Date();
-      const time = now.toLocaleTimeString('en-US', {
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true
+          window.scrollTo({
+            top: sectionTop - HEADER_OFFSET,
+            behavior: 'smooth'
+          });
+        });
       });
-      const timeElement = document.querySelector('.time');
-      if (timeElement) timeElement.textContent = time;
+
+      // Update active bookmark on scroll
+      window.addEventListener('scroll', () => {
+        let currentId = sections[0]?.id;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - HEADER_OFFSET - 100;
+          if (window.pageYOffset >= sectionTop) {
+            currentId = section.id;
+          }
+        });
+
+        bookmarks.forEach(bookmark => {
+          bookmark.classList.toggle(
+            'active',
+            bookmark.getAttribute('data-section') === currentId
+          );
+        });
+      });
+
+      // Highlights panel toggle
+      const highlightsToggle = document.getElementById('highlightsToggle');
+      const highlightsPanel = document.getElementById('highlightsPanel');
+
+      if (highlightsToggle && highlightsPanel) {
+        highlightsToggle.addEventListener('click', () => {
+          highlightsPanel.classList.toggle('open');
+        });
+      }
+
+      // Smooth scrolling for in-page links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            const rectTop = target.getBoundingClientRect().top + window.pageYOffset;
+            const headerEl = document.querySelector('header');
+            const offset = headerEl ? headerEl.offsetHeight + 20 : 80;
+            window.scrollTo({
+              top: rectTop - offset,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // Time in header
+      function updateTime() {
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        const timeElement = document.querySelector('.time');
+        if (timeElement) timeElement.textContent = time;
+      }
+
+      updateTime();
+      setInterval(updateTime, 60000);
+
+      // === Text highlighting + highlights sidebar with persistence ===
+      const highlightBtn = document.getElementById("highlightBtn");
+      let highlights = []; // { id, text, sectionId }
+
+      const HIGHLIGHTS_STORAGE_KEY = "manyaHighlightsV1";
+
+      function saveHighlights() {
+        try {
+          localStorage.setItem(HIGHLIGHTS_STORAGE_KEY, JSON.stringify(highlights));
+        } catch (e) {
+          console.warn("Could not save highlights", e);
+        }
+      }
+
+      function removeHighlightById(id) {
+        highlights = highlights.filter(h => h.id !== id);
+        renderHighlightsList();
+        saveHighlights();
+      }
+
+      function removeHighlightGroup(id) {
+        document.querySelectorAll(`.highlight-mark[data-highlight-id="${id}"]`)
+          .forEach(span => {
+            const parent = span.parentNode;
+            while (span.firstChild) {
+              parent.insertBefore(span.firstChild, span);
+            }
+            span.remove();
+          });
+      }
+
+      function attachHighlightSpanEvents(span, id) {
+        span.dataset.highlightId = id;
+        span.addEventListener("click", () => {
+          removeHighlightGroup(id);
+          removeHighlightById(id);
+        });
+      }
+
+      function applyInlineHighlight(range, id) {
+        // Root for walking text nodes
+        const root = range.commonAncestorContainer.nodeType === Node.TEXT_NODE
+          ? range.commonAncestorContainer.parentNode
+          : range.commonAncestorContainer;
+
+        const walker = document.createTreeWalker(
+          root,
+          NodeFilter.SHOW_TEXT,
+          {
+            acceptNode(node) {
+              if (!range.intersectsNode(node)) return NodeFilter.FILTER_SKIP;
+              if (!node.nodeValue.trim()) return NodeFilter.FILTER_SKIP;
+              if (node.parentElement && node.parentElement.closest(".highlight-mark")) {
+                return NodeFilter.FILTER_SKIP;
+              }
+              return NodeFilter.FILTER_ACCEPT;
+            }
+          }
+        );
+
+        const textNodes = [];
+        let n;
+        while ((n = walker.nextNode())) {
+          textNodes.push(n);
+        }
+
+        const startNode = range.startContainer;
+        const endNode = range.endContainer;
+
+        let started = false;
+
+        textNodes.forEach(node => {
+          let from = 0;
+          let to = node.nodeValue.length;
+
+          if (!started) {
+            if (node === startNode) {
+              started = true;
+              from = range.startOffset;
+            } else {
+              return; // haven't reached selection yet
+            }
+          } else {
+            from = 0; // nodes after the start
+          }
+
+          if (!started) return;
+
+          if (node === endNode) {
+            to = range.endOffset;
+          }
+
+          if (to <= from) return;
+
+          let target = node;
+
+          // split left side
+          if (from > 0) {
+            target = target.splitText(from);
+            to -= from;
+          }
+
+          // split right side
+          if (to < target.nodeValue.length) {
+            target.splitText(to);
+          }
+
+          const span = document.createElement("span");
+          span.classList.add("highlight-mark");
+          span.dataset.highlightId = id;
+          target.parentNode.replaceChild(span, target);
+          span.appendChild(target);
+          attachHighlightSpanEvents(span, id);
+
+          if (node === endNode) {
+            started = false;
+          }
+        });
+      }
+
+
+      // Map section id to human-friendly label
+      function getSectionLabel(sectionId) {
+        if (!sectionId) return "Other";
+
+        const section = document.getElementById(sectionId);
+        if (!section) return "Other";
+
+        // Prefer the visible section title if present
+        const titleEl = section.querySelector(".section-title");
+        if (titleEl && titleEl.textContent.trim()) {
+          return titleEl.textContent.trim();
+        }
+
+        // Fallback: chapter label (e.g. "Chapter One")
+        const chapterEl = section.querySelector(".chapter");
+        if (chapterEl && chapterEl.textContent.trim()) {
+          return chapterEl.textContent.trim();
+        }
+
+        // Last resort: prettify the raw id
+        return sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+      }
+
+      function renderHighlightsList() {
+        const list = document.getElementById("highlightsList");
+        if (!list) return;
+
+        list.innerHTML = "";
+
+        if (!highlights.length) {
+          const empty = document.createElement("li");
+          empty.className = "highlight-item";
+          empty.textContent = "No highlights yet.";
+          empty.style.color = "var(--text-light)";
+          list.appendChild(empty);
+          return;
+        }
+
+        // Group highlights by sectionId, preserving order of first appearance
+        const groups = {};
+        const order = [];
+
+        highlights.forEach(h => {
+          const key = h.sectionId || "__other__";
+          if (!groups[key]) {
+            groups[key] = [];
+            order.push(key);
+          }
+          groups[key].push(h);
+        });
+
+        order.forEach(sectionKey => {
+          const sectionId = sectionKey === "__other__" ? null : sectionKey;
+          const label = getSectionLabel(sectionId);
+
+          // Section heading
+          const headingLi = document.createElement("li");
+          headingLi.className = "highlight-section-heading";
+          headingLi.textContent = label;
+          list.appendChild(headingLi);
+
+          // Highlights under this section
+          groups[sectionKey].forEach(h => {
+            const li = document.createElement("li");
+            li.className = "highlight-item";
+
+            const snippet =
+              h.text.length > 90 ? h.text.slice(0, 87).trimEnd() + "…" : h.text;
+
+            li.textContent = snippet;
+
+            li.addEventListener("click", () => {
+              const span = document.querySelector(
+                `.highlight-mark[data-highlight-id="${h.id}"]`
+              );
+
+              if (span) {
+                span.scrollIntoView({ behavior: "smooth", block: "center" });
+                span.classList.add("highlight-focus");
+                setTimeout(() => span.classList.remove("highlight-focus"), 900);
+              } else if (h.sectionId) {
+                // fallback: scroll to the section if the exact span isn't found
+                const sec = document.getElementById(h.sectionId);
+                if (sec) {
+                  const rectTop = sec.getBoundingClientRect().top + window.pageYOffset;
+                  const headerEl = document.querySelector('header');
+                  const offset = headerEl ? headerEl.offsetHeight + 20 : 80;
+                  window.scrollTo({
+                    top: rectTop - offset,
+                    behavior: "smooth"
+                  });
+                }
+              }
+            });
+
+            list.appendChild(li);
+          });
+        });
+      }
+
+      function restoreHighlights() {
+        let saved;
+        try {
+          saved = JSON.parse(localStorage.getItem(HIGHLIGHTS_STORAGE_KEY) || "[]");
+        } catch (e) {
+          saved = [];
+        }
+
+        if (!Array.isArray(saved) || !saved.length) {
+          highlights = [];
+          renderHighlightsList();
+          return;
+        }
+
+        const successfullyRestored = [];
+
+        saved.forEach(h => {
+          const section = h.sectionId ? document.getElementById(h.sectionId) : document.body;
+          if (!section) return;
+
+          // Collect all text nodes in this section in order
+          const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT, null);
+          const textNodes = [];
+          let node;
+          while ((node = walker.nextNode())) {
+            // ignore text inside existing highlights (in case of duplicate runs)
+            if (node.parentElement && node.parentElement.closest(".highlight-mark")) continue;
+            textNodes.push(node);
+          }
+
+          if (!textNodes.length) return;
+
+          const fullText = textNodes.map(n => n.nodeValue).join("");
+          const searchText = h.text;
+          const startIdx = fullText.indexOf(searchText);
+
+          if (startIdx === -1) return; // text not found in this section
+
+          const endIdx = startIdx + searchText.length;
+
+          let currentIdx = 0;
+          let startNode = null, startOffset = 0;
+          let endNode = null, endOffset = 0;
+
+          for (const tn of textNodes) {
+            const nodeText = tn.nodeValue;
+            const nodeStart = currentIdx;
+            const nodeEnd = currentIdx + nodeText.length;
+
+            // Find start
+            if (startNode === null && startIdx >= nodeStart && startIdx <= nodeEnd) {
+              startNode = tn;
+              startOffset = startIdx - nodeStart;
+            }
+
+            // Find end (end index is exclusive)
+            if (endNode === null && endIdx >= nodeStart && endIdx <= nodeEnd) {
+              endNode = tn;
+              endOffset = endIdx - nodeStart;
+            }
+
+            currentIdx = nodeEnd;
+          }
+
+          if (!startNode || !endNode) return;
+
+          const range = document.createRange();
+          range.setStart(startNode, startOffset);
+          range.setEnd(endNode, startOffset + h.text.length);
+
+          // Create inline-only highlights (no block wrapping)
+          applyInlineHighlight(range, h.id);
+          successfullyRestored.push(h);
+
+        });
+
+        highlights = successfullyRestored;
+        saveHighlights();
+        renderHighlightsList();
     }
 
-    updateTime();
-    setInterval(updateTime, 60000);
 
-    // Text highlighting
-    const highlightBtn = document.getElementById("highlightBtn");
+      if (highlightBtn) {
+        highlightBtn.addEventListener("click", () => {
+          const selection = window.getSelection();
+          if (!selection || !selection.rangeCount) return;
 
-    highlightBtn.addEventListener("click", () => {
-      const selection = window.getSelection();
-      if (!selection.rangeCount) return;
+          const selectedText = selection.toString();
+          if (!selectedText.trim()) return;
 
-      const selectedText = selection.toString();
-      if (!selectedText.trim()) return;
+          const range = selection.getRangeAt(0).cloneRange();
+          const id = "hl-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
 
-      const range = selection.getRangeAt(0);
+          applyInlineHighlight(range, id);
+          selection.removeAllRanges();
 
-      const span = document.createElement("span");
-      span.classList.add("highlight-mark");
-      span.textContent = selectedText;
+          const section = range.commonAncestorContainer.nodeType === Node.ELEMENT_NODE
+            ? range.commonAncestorContainer.closest("section")
+            : (range.commonAncestorContainer.parentElement && range.commonAncestorContainer.parentElement.closest("section"));
 
-      // Remove highlight on click
-      span.addEventListener("click", () => {
-        span.replaceWith(document.createTextNode(span.textContent));
+          const sectionId = section ? section.id : null;
+
+          highlights.push({
+            id,
+            text: selectedText,
+            sectionId
+          });
+
+          renderHighlightsList();
+          saveHighlights();
+        });
+      }
+
+      // Run once on load to restore saved highlights
+      restoreHighlights();
+
+      // Simple image carousel logic for DECA (and any future carousels)
+      const carousels = document.querySelectorAll('[data-carousel]');
+      carousels.forEach(carousel => {
+        const images = carousel.querySelectorAll('.carousel-image');
+        if (!images.length) return;
+
+        let index = 0;
+        const counter = carousel.querySelector('[data-carousel-counter]');
+        const prevBtn = carousel.querySelector('[data-direction="prev"]');
+        const nextBtn = carousel.querySelector('[data-direction="next"]');
+
+        function show(idx) {
+          images.forEach((img, i) => {
+            img.classList.toggle('active', i === idx);
+          });
+          if (counter) {
+            counter.textContent = (idx + 1) + ' / ' + images.length;
+          }
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener('click', () => {
+            index = (index - 1 + images.length) % images.length;
+            show(index);
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', () => {
+            index = (index + 1) % images.length;
+            show(index);
+          });
+        }
+
+        // Allow clicking the image area to advance as well (optional, but nice)
+        const inner = carousel.querySelector('.carousel-inner');
+        if (inner) {
+          inner.addEventListener('click', () => {
+            index = (index + 1) % images.length;
+            show(index);
+          });
+        }
+
+        show(index);
       });
 
-      range.deleteContents();
-      range.insertNode(span);
+      // Section reveal on scroll
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15
+        }
+      );
 
-      selection.removeAllRanges();
+      document.querySelectorAll('section').forEach(section => {
+        section.classList.add('reveal-section');
+        observer.observe(section);
+      });
     });
   </script>
 
