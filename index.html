@@ -366,191 +366,226 @@
 
     .about-content p { margin-bottom: 1.5rem; }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
-      margin-top: 3rem;
+    .skills-categories {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      background: var(--bg);
+    }
+
+    .skill-category-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-category-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .skill-box {
       border: 1px solid var(--border);
-      padding: 1rem 1.5rem;
+      padding: 0.5rem 1rem;
       text-align: center;
       border-radius: 999px;
       background: var(--accent-pill);
       transition: all 0.3s;
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       font-weight: 500;
       color: var(--accent-ink);
     }
 
     .skill-box:hover {
       border-color: var(--accent-ink);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px var(--shadow);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px var(--shadow);
     }
 
-    /* Timeline styles */
-    .timeline {
-      position: relative;
+    /* Accordion Experience Styles */
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
       margin-top: 1.5rem;
-      padding-left: 1.5rem;
-      border-left: 1px solid var(--border);
     }
 
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.4rem;
-      bottom: 0.4rem;
-      border-left: 1px solid var(--border);
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-left: 1.5rem;
-      padding-bottom: 2.75rem;
-    }
-
-    .timeline-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: -0.32rem;
-      top: 0.55rem;
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: var(--accent-ink);
-      box-shadow: 0 0 0 3px var(--page);
-    }
-
-    .timeline-card {
-      background: var(--bg);
-      border-radius: 8px;
+    .accordion-item {
       border: 1px solid var(--border);
-      padding: 1.5rem 1.75rem;
-      box-shadow: 0 4px 12px var(--shadow);
+      border-radius: 6px;
+      background: var(--bg);
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
     }
 
-    .timeline-label {
+    .accordion-item:hover {
+      box-shadow: 0 2px 8px var(--shadow);
+    }
+
+    .accordion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s ease;
+    }
+
+    .accordion-header:hover {
+      background: var(--page);
+    }
+
+    .accordion-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .accordion-label {
       font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-light);
-      margin-bottom: 0.35rem;
     }
 
-    .timeline-title {
-      font-size: 1.25rem;
+    .accordion-title {
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 0.6rem;
-      line-height: 1.4;
+      line-height: 1.3;
     }
 
-    .timeline-meta {
+    .accordion-meta {
       font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-bottom: 0.8rem;
-    }
-
-    .timeline-body p {
-      font-size: 1rem;
-      line-height: 1.7;
-      margin-bottom: 0.9rem;
-    }
-
-    .timeline-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-body ul {
-      margin: 0 0 0.6rem 1.1rem;
-      padding-left: 0.9rem;
-      list-style: disc;
-      font-size: 1rem;
-    }
-
-    .timeline-body li {
-      margin-bottom: 0.35rem;
-    }
-
-    /* Timeline media (images) */
-    .timeline-media {
-      margin-top: 1.2rem;
-      border: 1px solid var(--border);
-      background: var(--page);
-      border-radius: 6px;
-      padding: 0.6rem 0.6rem 0.8rem;
-      box-shadow: 0 3px 10px var(--shadow);
-    }
-
-    .timeline-media img {
-      display: block;
-      width: 100%;
-      max-height: 380px;
-      object-fit: cover;
-      border-radius: 4px;
-    }
-
-    .timeline-caption {
-      margin-top: 0.4rem;
       font-size: 0.8rem;
-      text-align: center;
       color: var(--text-light);
+      margin-top: 0.15rem;
     }
 
-    /* DECA carousel */
-    .image-carousel .carousel-inner {
-      position: relative;
+    .accordion-toggle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--accent-ink);
+      transition: transform 0.2s ease;
+    }
+
+    .accordion-item.open .accordion-toggle {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
       overflow: hidden;
-      border-radius: 4px;
+      transition: max-height 0.3s ease;
     }
 
-    .image-carousel .carousel-image {
+    .accordion-item.open .accordion-content {
+      max-height: 800px;
+    }
+
+    .accordion-inner {
+      padding: 0 1.25rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-text {
+      padding-top: 1rem;
+    }
+
+    .accordion-text p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .accordion-text ul {
+      margin: 0 0 0.5rem 1rem;
+      padding-left: 0.75rem;
+      list-style: disc;
+      font-size: 0.95rem;
+    }
+
+    .accordion-text li {
+      margin-bottom: 0.3rem;
+      line-height: 1.6;
+    }
+
+    .accordion-photos {
+      display: none;
+      padding-top: 1rem;
+    }
+
+    .accordion-photos.active {
+      display: block;
+    }
+
+    .accordion-text.hidden {
       display: none;
     }
 
-    .image-carousel .carousel-image.active {
-      display: block;
+    .accordion-photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.75rem;
     }
 
-    .carousel-controls {
-      margin-top: 0.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .accordion-photo-grid img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .accordion-photo-grid img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+
+    .view-toggle-btn {
       font-family: 'Inter', sans-serif;
       font-size: 0.75rem;
-      color: var(--text-light);
-    }
-
-    .carousel-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 0.2rem 0.6rem;
-      font-size: 0.85rem;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    }
-
-    .carousel-btn:hover {
-      background: var(--accent-pill);
-      border-color: var(--accent-ink);
       color: var(--accent-ink);
+      background: var(--accent-pill);
+      border: 1px solid var(--accent-ink);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      cursor: pointer;
+      margin-top: 0.75rem;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .carousel-counter {
-      opacity: 0.85;
+    .view-toggle-btn:hover {
+      background: var(--accent-ink);
+      color: var(--page);
+    }
+
+    @media (max-width: 480px) {
+      .accordion-header {
+        padding: 0.85rem 1rem;
+      }
+      .accordion-title {
+        font-size: 1rem;
+      }
+      .accordion-photo-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     /* Cornell Data Journal definition tooltip */
@@ -1035,171 +1070,187 @@
         <p class="chapter">Chapter One</p>
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
-          <p>I'm a <strong>Computer Science student at Cornell University</strong> with a passion for using technology to expand <strong>access, equity, and opportunity</strong>. My work often sits at the intersection of tech, education, and social impact — whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like <a href="#">Girls Who Code.</a></p>
+          <p>I'm a <strong>Computer Science student at Cornell University</strong> with a passion for using technology to expand <strong>access, equity, and opportunity</strong>. My work often sits at the intersection of <strong>tech, education, and social impact</strong>, whether building tools to support underserved students, designing inclusive learning experiences, or empowering young girls to explore STEM through programs like Girls Who Code.</p>
 
-          <p>I'm especially interested in how <strong>thoughtful design</strong> and <strong>human-centered computing</strong> can make technology more equitable. Previously, I've led initiatives focused on <a href="#">accessible tech education</a>, spoken on panels about <a href="#">diversity in STEM</a>, and <a href="#">developed digital resources</a> to help level the playing field for students across Washington State.</p>
+          <p>I'm especially interested in how <strong>thoughtful design and human-centered computing</strong> can make technology more equitable. Previously, I've led initiatives focused on accessible tech education, spoken on panels about diversity in STEM, and developed digital resources to help level the playing field for students across Washington State.</p>
 
-          <p>When I'm not writing code, you'll find me <a href="#">reading</a> (this website, in fact, is inspired by my first favorite piece of technology, a <strong>Kindle Paperwhite</strong>), <a href="#">exploring new coffee shops</a>, or spending time with friends and family.</p>
+          <p>When I'm not writing code, you'll find me reading (this website is inspired by my first favorite piece of technology, a Kindle Paperwhite), exploring new coffee shops, or spending time with friends and family.</p>
         </div>
 
-        <div class="skills-grid">
-          <div class="skill-box">HTML &amp; CSS</div>
-          <div class="skill-box">JavaScript</div>
-          <div class="skill-box">React</div>
-          <div class="skill-box">Vue</div>
-          <div class="skill-box">Python</div>
-          <div class="skill-box">Django</div>
-          <div class="skill-box">Java</div>
-          <div class="skill-box">Git &amp; GitHub</div>
+        <div class="skills-categories">
+          <div class="skill-category">
+            <h4 class="skill-category-title">Languages</h4>
+            <div class="skill-category-items">
+              <span class="skill-box">Python</span>
+              <span class="skill-box">Java</span>
+              <span class="skill-box">JavaScript</span>
+              <span class="skill-box">TypeScript</span>
+              <span class="skill-box">HTML5</span>
+              <span class="skill-box">CSS3</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4 class="skill-category-title">Frameworks &amp; Libraries</h4>
+            <div class="skill-category-items">
+              <span class="skill-box">React</span>
+              <span class="skill-box">Vue.js</span>
+              <span class="skill-box">Next.js</span>
+              <span class="skill-box">Nuxt</span>
+              <span class="skill-box">Node.js</span>
+              <span class="skill-box">Flask</span>
+              <span class="skill-box">Tailwind CSS</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h4 class="skill-category-title">Developer Tools</h4>
+            <div class="skill-category-items">
+              <span class="skill-box">Git/GitHub</span>
+              <span class="skill-box">VS Code</span>
+              <span class="skill-box">IntelliJ</span>
+              <span class="skill-box">Figma</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Experiences / Timeline -->
+      <!-- Experiences / Accordion -->
       <section id="experience">
         <p class="chapter">Chapter Two</p>
         <h2 class="section-title">Things I've Done</h2>
 
-        <div class="about-content">
-          <p>Over the past few years, I've been lucky to <strong>learn</strong>, <strong>lead</strong>, and <strong>build</strong> alongside some incredible communities. A few chapters from that journey:</p>
-        </div>
-
-        <div class="timeline">
+        <div class="accordion-list">
 
           <!-- Cornell University -->
-          <article class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-label sans">Present</div>
-              <h3 class="timeline-title">Cornell University</h3>
-              <div class="timeline-body">
-                <p><strong>University life</strong> has given me the chance to dive into communities that challenge me, inspire me, and help me grow as both a technologist and a collaborator.</p>
-                <ul>
-                  <li><strong>Developer · Engineers Without Borders</strong> — building tools and solutions that create real impact for communities around me.</li>
-                  <li><strong>Developer · Women in Computing Technical Committee</strong> — creating resources and internal tools that support an inclusive tech community.</li>
-                  <li>
-                    <strong>Analyst ·
-                      <a href="https://cornelldatajournal.org/" target="_blank" rel="noopener noreferrer" class="definition-link">
-                        Cornell Data Journal
-                        <span class="definition-popover">Check out our work!</span>
-                      </a>
-                    </strong> — exploring data-driven storytelling and research.
-                  </li>
-                  <li><strong>Member · Kappa Theta Pi</strong> — Cornell’s professional tech fraternity, where I’ve found mentorship, leadership opportunities, and a tight-knit support network.</li>
-                  <li><strong>Mentor · Girls Who Code</strong> — helping younger students discover the confidence and creativity that comes with learning to code.</li>
-                </ul>
+          <article class="accordion-item" data-accordion>
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-label">Present</span>
+                <h3 class="accordion-title">Cornell University</h3>
               </div>
-
-              <!-- Cornell image (optional later if you add one) -->
-              <!--
-              <div class="timeline-media">
-                <img src="cornell.jpg" alt="Cornell campus" />
+              <span class="accordion-toggle">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="accordion-text">
+                  <p>University life has given me the chance to dive into communities that challenge me, inspire me, and help me grow as both a technologist and a collaborator.</p>
+                  <ul>
+                    <li><strong>Developer, Engineers Without Borders:</strong> Building tools and solutions that create real impact for communities around me.</li>
+                    <li><strong>Developer, Women in Computing:</strong> Creating resources and internal tools that support an inclusive tech community.</li>
+                    <li><strong>Analyst, Cornell Data Journal:</strong> Exploring data-driven storytelling and research.</li>
+                    <li><strong>Member, Kappa Theta Pi:</strong> Part of Cornell's professional tech fraternity.</li>
+                    <li><strong>Mentor, Girls Who Code:</strong> Helping younger students discover confidence in coding.</li>
+                  </ul>
+                </div>
               </div>
-              -->
             </div>
           </article>
 
           <!-- Washington DECA -->
-          <article class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-label sans">Leadership &amp; Impact</div>
-              <h3 class="timeline-title">Washington DECA</h3>
-              <div class="timeline-meta sans">
-                State President · Area 3 President · Vice President of Career Development
+          <article class="accordion-item" data-accordion data-has-photos>
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-label">Leadership</span>
+                <h3 class="accordion-title">Washington DECA</h3>
+                <span class="accordion-meta">State President · Area 3 President · VP of Career Development</span>
               </div>
-              <div class="timeline-body">
-                <p>My journey with <strong>Washington DECA</strong> has been one of my most meaningful leadership experiences.</p>
-                <ul>
-                  <li><strong>State President</strong> — represented <strong>16,000+ students</strong> studying business, marketing, and entrepreneurship across Washington. Guided a <strong>12-member executive team</strong> and helped launch <strong>20+ statewide initiatives</strong>, from professional clothing scholarships to an <strong>AI-powered test prep chatbot</strong> that improved member test performance.</li>
-                  <li><strong>Board of Directors</strong> — served as the <strong>first high school student</strong> appointed to Washington DECA’s Board, contributing to long-term strategy development.</li>
-                  <li><strong>Area 3 President &amp; VP of Career Development</strong> — represented the largest DECA Area in the state (<strong>2,000+ students</strong>), visited chapters, led social media outreach, and helped organize conferences that brought thousands of students together.</li>
-                  <li><strong>Innovation &amp; Advocacy</strong> — founded a <strong>16-person team</strong> that created a statewide leadership resource hub used by <strong>165+ schools</strong>, earning international recognition with the <strong>Innovation IMPACT Award</strong>. Developed advocacy booths connecting <strong>300+ student stories</strong> with state legislators to advocate for increased CTE funding.</li>
-                </ul>
-              </div>
-
-              <!-- DECA image carousel -->
-              <div class="timeline-media image-carousel" data-carousel>
-                <div class="carousel-inner">
-                  <img src="deca1.jpg" alt="Washington DECA event 1" class="carousel-image active">
-                  <img src="deca2.jpg" alt="Washington DECA event 2" class="carousel-image">
-                  <img src="deca3.PNG" alt="Washington DECA event 3" class="carousel-image">
-                  <img src="deca4.jpeg" alt="Washington DECA event 4" class="carousel-image">
+              <span class="accordion-toggle">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="accordion-text">
+                  <ul>
+                    <li><strong>State President:</strong> Represented 16,000+ students, guided a 12-member executive team, and launched 20+ statewide initiatives including an AI-powered test prep chatbot.</li>
+                    <li><strong>Board of Directors:</strong> Served as the first high school student appointed to Washington DECA's Board.</li>
+                    <li><strong>Area 3 President:</strong> Represented the largest DECA Area in the state (2,000+ students).</li>
+                    <li><strong>Innovation and Advocacy:</strong> Founded a 16-person team that created a statewide leadership resource hub used by 165+ schools.</li>
+                  </ul>
+                  <button class="view-toggle-btn" data-view-toggle>See Photos</button>
                 </div>
-                <div class="carousel-controls">
-                  <button class="carousel-btn" data-direction="prev" type="button" aria-label="Previous DECA photo">‹ Prev</button>
-                  <span class="carousel-counter sans" data-carousel-counter>1 / 4</span>
-                  <button class="carousel-btn" data-direction="next" type="button" aria-label="Next DECA photo">Next ›</button>
+                <div class="accordion-photos">
+                  <div class="accordion-photo-grid">
+                    <img src="deca1.jpg" alt="Washington DECA event 1">
+                    <img src="deca2.jpg" alt="Washington DECA event 2">
+                    <img src="deca3.PNG" alt="Washington DECA event 3">
+                    <img src="deca4.jpeg" alt="Washington DECA event 4">
+                  </div>
+                  <button class="view-toggle-btn" data-view-toggle>See Text</button>
                 </div>
               </div>
             </div>
           </article>
 
           <!-- Girls Who Code -->
-          <article class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-label sans">Equity, Education &amp; Community</div>
-              <h3 class="timeline-title">Girls Who Code @ Eastlake High School</h3>
-              <div class="timeline-meta sans">
-                Co-Lead · Workshop Organizer · Community Builder
+          <article class="accordion-item" data-accordion data-has-photos>
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-label">Education</span>
+                <h3 class="accordion-title">Girls Who Code @ Eastlake High School</h3>
+                <span class="accordion-meta">Co-Lead · Workshop Organizer · Community Builder</span>
               </div>
-              <div class="timeline-body">
-                <p><strong>Girls Who Code @ Eastlake</strong> gave me a front-row seat to what happens when you create space for students to truly belong in tech.</p>
-                <ul>
-                  <li><strong>Co-led a 100+ member chapter</strong> — organized bi-weekly workshops and events focused on building skills and confidence.</li>
-                  <li><strong>Expanded membership by 35%</strong> by centering inclusivity, accessibility, and community in everything we did.</li>
-                  <li><strong>Founded Girls Who Code Jr.</strong> — designed monthly workshops (with a volunteer team) to introduce elementary students to coding in fun, empowering ways.</li>
-                </ul>
-              </div>
-
-              <div class="timeline-media">
-                <img src="gwc_meeting.jpg" alt="Girls Who Code meeting at Eastlake High School" />
+              <span class="accordion-toggle">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="accordion-text">
+                  <ul>
+                    <li><strong>Co-led a 100+ member chapter:</strong> Organized bi-weekly workshops focused on building skills and confidence.</li>
+                    <li><strong>Expanded membership by 35%:</strong> Centered inclusivity, accessibility, and community.</li>
+                    <li><strong>Founded Girls Who Code Jr.:</strong> Designed monthly workshops for elementary students.</li>
+                  </ul>
+                  <button class="view-toggle-btn" data-view-toggle>See Photos</button>
+                </div>
+                <div class="accordion-photos">
+                  <div class="accordion-photo-grid">
+                    <img src="gwc_meeting.jpg" alt="Girls Who Code meeting">
+                  </div>
+                  <button class="view-toggle-btn" data-view-toggle>See Text</button>
+                </div>
               </div>
             </div>
           </article>
 
           <!-- STEAMobile -->
-          <article class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-label sans">Equity, Education &amp; Community</div>
-              <h3 class="timeline-title">STEAMobile</h3>
-              <div class="timeline-meta sans">
-                Co-Founder · Curriculum &amp; Brand Design · Program Lead
+          <article class="accordion-item" data-accordion>
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-label">Nonprofit</span>
+                <h3 class="accordion-title">STEAMobile</h3>
+                <span class="accordion-meta">Co-Founder · Curriculum Design · Program Lead</span>
               </div>
-              <div class="timeline-body">
-                <p><strong>STEAMobile</strong> is a female-led STEAM education nonprofit I co-founded to make hands-on STEAM learning more accessible.</p>
-                <ul>
-                  <li><strong>Built the organization from the ground up</strong> — from shaping the business plan to designing the brand and curriculum.</li>
-                  <li><strong>Hosted camps and community workshops</strong> that centered curiosity, creativity, and confidence in STEAM.</li>
-                  <li><strong>Partnered with organizations</strong> such as the Bellevue Collection to bring engaging STEM experiences to <strong>hundreds of K–8 students</strong>.</li>
-                </ul>
-              </div>
-
-              <div class="timeline-media">
-                <img src="steamobile.jpg" alt="STEAMobile STEAM education workshop with students" />
+              <span class="accordion-toggle">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="accordion-text">
+                  <p>A female-led STEAM education nonprofit I co-founded to make hands-on learning more accessible.</p>
+                  <ul>
+                    <li><strong>Built the organization from the ground up:</strong> Shaped the business plan, brand, and curriculum.</li>
+                    <li><strong>Hosted camps and workshops:</strong> Centered curiosity, creativity, and confidence in STEAM.</li>
+                    <li><strong>Partnered with organizations:</strong> Worked with groups like the Bellevue Collection to bring STEM experiences to hundreds of K-8 students.</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </article>
 
           <!-- Data Structures TA -->
-          <article class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-card">
-              <div class="timeline-label sans">Teaching &amp; Mentorship</div>
-              <h3 class="timeline-title">Data Structures Teaching Assistant</h3>
-              <div class="timeline-body">
-                <p><strong>Teaching</strong> has always been one of my favorite ways to deepen my own understanding.</p>
-                <ul>
-                  <li><strong>Data Structures TA</strong> for my high school course — supported peers one-on-one with challenging concepts, labs, and projects.</li>
-                  <li><strong>Mentorship &amp; communication</strong> — reinforced my passion for breaking down complex ideas in approachable, encouraging ways.</li>
-                </ul>
+          <article class="accordion-item" data-accordion>
+            <div class="accordion-header">
+              <div class="accordion-header-left">
+                <span class="accordion-label">Teaching</span>
+                <h3 class="accordion-title">Data Structures Teaching Assistant</h3>
               </div>
-
-              <figure class="timeline-media">
-                <img src="ta.jpg" alt="eaching assistants for Data Structures course" />
-                <figcaption class="timeline-caption sans">me and my lovely co-TA</figcaption>
-              </figure>
+              <span class="accordion-toggle">▼</span>
+            </div>
+            <div class="accordion-content">
+              <div class="accordion-inner">
+                <div class="accordion-text">
+                  <ul>
+                    <li><strong>Data Structures TA:</strong> Supported peers one-on-one with challenging concepts, labs, and projects.</li>
+                    <li><strong>Mentorship and Communication:</strong> Reinforced my passion for breaking down complex ideas in approachable ways.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </article>
 
@@ -1216,49 +1267,53 @@
           <article class="project-card">
             <p class="project-number">Project 01</p>
             <h3 class="project-title">LessonLoop</h3>
-            <p class="project-desc">Contributing to an <strong>AI-powered professional learning platform</strong> that boosts student engagement by helping educators identify barriers and apply effective instructional strategies. Implementing prototypes using <strong>Vue, Nuxt, DynamoDB, Node, and Amazon Bedrock</strong> for AI agent deployment.</p>
+            <p class="project-desc">Contributing to an AI-powered ed-tech professional learning platform to improve student engagement, collaborating with a cross-functional team under mentorship from the Founder and CTO. Developing and prototyping a web application on AWS using Vue and Nuxt (frontend), Node.js (backend), DynamoDB (database), and Amazon Bedrock for AI agent deployment.</p>
             <div class="project-tags">
               <span class="tag">Vue</span>
+              <span class="tag">Nuxt</span>
+              <span class="tag">Node.js</span>
               <span class="tag">AWS</span>
-              <span class="tag">AI/ML</span>
               <span class="tag">DynamoDB</span>
             </div>
-            <a href="#" class="project-link">View Project →</a>
           </article>
 
           <article class="project-card">
             <p class="project-number">Project 02</p>
-            <h3 class="project-title">Ocean Wave Pomodoro Timer</h3>
-            <p class="project-desc">A <strong>Chrome extension</strong> that helps users stay focused and productive using the <strong>Pomodoro Technique</strong>. Built with <strong>React.js</strong>, featuring customizable work/rest intervals and session tracking.</p>
+            <h3 class="project-title">MagicFold</h3>
+            <p class="project-desc">Developed a web-based zine maker enabling users to design 8-panel digital zines (foldable art books), preview as interactive flip books, and download print-ready PDFs for physical assembly. Integrated Fabric.js for drawing tools, jsPDF for PDF generation, react-pageflip for animations, and URL-based sharing using client-side compression.</p>
             <div class="project-tags">
               <span class="tag">React</span>
-              <span class="tag">Chrome Extension</span>
-              <span class="tag">Productivity</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Tailwind CSS</span>
             </div>
-            <a href="#" class="project-link">View Project →</a>
+            <a href="https://magic-fold.vercel.app/" class="project-link">View Project →</a>
           </article>
 
           <article class="project-card">
             <p class="project-number">Project 03</p>
             <h3 class="project-title">The Myth of the Undefeated Boxer</h3>
-            <p class="project-desc">Analyzing <strong>boxing trends across decades</strong> to explore the evolution of the sport and identify what defines greatness in boxing through <strong>comprehensive data analysis and visualization</strong>.</p>
+            <p class="project-desc">Web-scraped and analyzed 4,500+ boxing matches using BeautifulSoup and pandas to investigate undefeated record drivers for Cornell Data Journal alongside a 4-person team. Performed statistical analysis (t-tests, correlation) and created visualizations showing undefeated fighters have shorter careers and more title fights, indicating strategic matchmaking.</p>
             <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">BeautifulSoup</span>
+              <span class="tag">pandas</span>
               <span class="tag">Data Analysis</span>
-              <span class="tag">Research</span>
-              <span class="tag">Visualization</span>
             </div>
-            <a href="#" class="project-link">View Project →</a>
+            <a href="https://drive.google.com/file/d/1AklK5eIyK92vlWpr6OAhOCkkg2isP6X9/view" target="_blank" rel="noopener noreferrer" class="project-link">View Project →</a>
           </article>
 
           <article class="project-card">
             <p class="project-number">Project 04</p>
             <h3 class="project-title">Sudoku Solver</h3>
-            <p class="project-desc">A <strong>Python</strong> program that solves Sudoku puzzles of different sizes using <strong>recursive backtracking</strong>. Uses sets to track valid row, column, and square values with efficient constraint checks.</p>
+            <p class="project-desc">Built a web-based Sudoku solver that visualizes the backtracking algorithm in real-time. Implemented step-by-step animation system highlighting constraint propagation and backtracking steps by recording solver state changes during recursion, with adjustable speed and difficulty via API integration.</p>
             <div class="project-tags">
+              <span class="tag">Flask</span>
+              <span class="tag">JavaScript</span>
               <span class="tag">Python</span>
               <span class="tag">Algorithms</span>
-              <span class="tag">Recursion</span>
             </div>
+            <a href="https://sudoku-solver-sable.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link">View Project →</a>
           </article>
 
         </div>
@@ -1281,12 +1336,12 @@
             </svg>
           </div>
 
-          <p class="contact-text">I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
+          <p class="contact-text">I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out.</p>
 
           <div class="contact-links">
-            <a href="mailto:hello@example.com" class="contact-button">Email Me</a>
-            <a href="#" class="contact-button">LinkedIn</a>
-            <a href="#" class="contact-button">GitHub</a>
+            <a href="mailto:mp2343@cornell.edu" class="contact-button">Email Me</a>
+            <a href="https://www.linkedin.com/in/manya-pradeep-narayan/" target="_blank" rel="noopener noreferrer" class="contact-button">LinkedIn</a>
+            <a href="https://github.com/manyapn" target="_blank" rel="noopener noreferrer" class="contact-button">GitHub</a>
           </div>
         </div>
       </section>
@@ -1296,7 +1351,7 @@
         <div class="footer-text">
           © 2025 Manya Pradeep Narayan · Designed &amp; Developed with Care
         </div>
-        <div class="page-number">— Page 1 of 1 —</div>
+        <div class="page-number">- Page 1 of 1 -</div>
       </footer>
 
     </main>
@@ -1354,7 +1409,6 @@
         heroImg.src = isDark ? 'dark-mode.png' : 'light-mode.PNG';
         heroImg.alt = isDark ? 'Dark Mode Illustration' : 'Light Mode Illustration';
       }
-
 
       const palettes = [
         { theme: 'light', class: '', nextLabel: 'Switch to Sepia' },
@@ -1639,7 +1693,6 @@
         });
       }
 
-
       // Map section id to human-friendly label
       function getSectionLabel(sectionId) {
         if (!sectionId) return "Other";
@@ -1808,19 +1861,17 @@
 
           const range = document.createRange();
           range.setStart(startNode, startOffset);
-          range.setEnd(endNode, startOffset + h.text.length);
+          range.setEnd(endNode, endOffset); // use endOffset for proper range
 
           // Create inline-only highlights (no block wrapping)
           applyInlineHighlight(range, h.id);
           successfullyRestored.push(h);
-
         });
 
         highlights = successfullyRestored;
         saveHighlights();
         renderHighlightsList();
-    }
-
+      }
 
       if (highlightBtn) {
         highlightBtn.addEventListener("click", () => {
@@ -1854,7 +1905,11 @@
       }
 
       // Run once on load to restore saved highlights
-      restoreHighlights();
+      try {
+        restoreHighlights();
+      } catch (e) {
+        console.error("Error restoring highlights; skipping highlight restoration.", e);
+      }
 
       // Simple image carousel logic for DECA (and any future carousels)
       const carousels = document.querySelectorAll('[data-carousel]');
@@ -1890,7 +1945,7 @@
           });
         }
 
-        // Allow clicking the image area to advance as well (optional, but nice)
+        // Allow clicking the image area to advance as well
         const inner = carousel.querySelector('.carousel-inner');
         if (inner) {
           inner.addEventListener('click', () => {
@@ -1900,6 +1955,40 @@
         }
 
         show(index);
+      });
+
+      // Accordion functionality
+      const accordionItems = document.querySelectorAll('[data-accordion]');
+      accordionItems.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+          // Close other open accordions (optional - remove if you want multiple open)
+          accordionItems.forEach(other => {
+            if (other !== item && other.classList.contains('open')) {
+              other.classList.remove('open');
+            }
+          });
+          item.classList.toggle('open');
+        });
+      });
+
+      // Photo/Text toggle functionality
+      const viewToggleBtns = document.querySelectorAll('[data-view-toggle]');
+      viewToggleBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const inner = btn.closest('.accordion-inner');
+          const textDiv = inner.querySelector('.accordion-text');
+          const photosDiv = inner.querySelector('.accordion-photos');
+
+          if (textDiv.classList.contains('hidden')) {
+            textDiv.classList.remove('hidden');
+            photosDiv.classList.remove('active');
+          } else {
+            textDiv.classList.add('hidden');
+            photosDiv.classList.add('active');
+          }
+        });
       });
 
       // Section reveal on scroll
@@ -1921,7 +2010,7 @@
         section.classList.add('reveal-section');
         observer.observe(section);
       });
-    });
+    }); 
   </script>
 
 </body>
