@@ -98,6 +98,7 @@
     .sans { font-family: 'Inter', sans-serif; }
 
     header {
+      position: -webkit-sticky;
       position: sticky;
       top: 0;
       background: var(--page);
@@ -109,7 +110,7 @@
     .header-container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 18px 36px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -117,10 +118,10 @@
 
     .device-status {
       display: flex;
-      gap: 1.5rem;
+      gap: 27px;
       align-items: center;
       font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
+      font-size: 13.5px;
       color: var(--text-light);
     }
 
@@ -161,7 +162,7 @@
     }
 
     .logo {
-      font-size: 1rem;
+      font-size: 18px;
       font-weight: 600;
       color: var(--text);
       text-decoration: none;
@@ -171,7 +172,7 @@
 
     .controls {
       display: flex;
-      gap: 1rem;
+      gap: 18px;
       align-items: center;
     }
 
@@ -181,11 +182,11 @@
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 0.4rem 0.8rem;
+      padding: 7px 14px;
       border-radius: 4px;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
+      font-size: 13.5px;
       transition: all 0.3s;
       font-weight: 600;
     }
@@ -244,6 +245,75 @@
       border-width: 0 5px 5px 5px;
       border-style: solid;
       border-color: transparent transparent var(--page) transparent;
+    }
+
+    /* Hamburger menu button */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      transition: all 0.3s;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle:hover {
+      background: var(--accent-pill);
+      border-color: var(--accent-ink);
+      color: var(--accent-ink);
+    }
+
+    /* Mobile dropdown menu */
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      background: var(--page);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 12px var(--shadow);
+      padding: 16px 24px;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 99;
+      display: flex;
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 24px;
+      opacity: 0;
+      transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.2s ease;
+    }
+
+    .mobile-menu.open {
+      max-height: 200px;
+      padding: 16px 24px;
+      opacity: 1;
+    }
+
+    .mobile-menu-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mobile-menu-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .mobile-menu-buttons {
+      display: flex;
+      gap: 8px;
     }
 
     .highlight-wrapper:hover .highlight-tooltip {
@@ -394,6 +464,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+      max-width: 100%;
     }
 
     .skill-box {
@@ -580,8 +651,15 @@
       .accordion-header {
         padding: 0.85rem 1rem;
       }
+      .accordion-header-left {
+        max-width: calc(100% - 30px);
+      }
       .accordion-title {
         font-size: 1rem;
+      }
+      .accordion-meta {
+        word-break: break-word;
+        font-size: 0.7rem;
       }
       .accordion-photo-grid {
         grid-template-columns: 1fr 1fr;
@@ -631,15 +709,21 @@
       outline-offset: 2px;
     }
 
-    .projects-grid { display: grid; gap: 4rem; }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
 
     .project-card {
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 2.5rem;
+      padding: 1.5rem;
       transition: all 0.3s ease;
       background: var(--bg);
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
     }
 
     .project-card:hover {
@@ -650,38 +734,68 @@
 
     .project-number {
       font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--accent-ink);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .project-title {
-      font-size: 1.8rem;
+      font-size: 1.25rem;
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
       line-height: 1.3;
     }
 
     .project-desc {
-      font-size: 1rem;
-      line-height: 1.7;
+      font-size: 0.9rem;
+      line-height: 1.6;
       color: var(--text-light);
-      margin-bottom: 1.5rem;
+      margin-bottom: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .project-desc.expanded {
+      display: block;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+
+    .project-read-more {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--accent-ink);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      margin: 0.4rem 0 0.75rem 0;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .project-read-more:hover {
+      text-decoration: underline;
     }
 
     .project-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      max-width: 100%;
+      margin-top: auto;
     }
 
     .tag {
       font-family: 'Inter', sans-serif;
-      font-size: 0.75rem;
-      padding: 0.3rem 0.8rem;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
       border-radius: 999px;
       border: 1px solid transparent;
       background: var(--accent-tag);
@@ -801,28 +915,132 @@
     }
 
     @media (max-width: 768px) {
-      .page-content { padding: 3rem 2rem; }
-      section { padding: 3rem 0; }
-      .hero { padding: 4rem 0; }
-      .hero-title { font-size: 2.5rem; }
-      .section-title { font-size: 2rem; }
-      .about-content { margin-bottom: 2rem; }
-      .skills-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+      html, body {
+        overflow-x: hidden;
+      }
+      .page {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      /* Mobile header */
+      .header-container {
+        padding: 12px 20px;
+      }
+      .device-status {
+        display: none;
+      }
+      .controls {
+        display: none;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .page-content { padding: 2.5rem 1.5rem; }
+      section { padding: 2.5rem 0; }
+      .hero { padding: 3rem 0; }
+      .hero-illustration { width: 280px; height: 280px; }
+      .hero-title { font-size: 2rem; }
+      .hero-subtitle { font-size: 1.1rem; }
+      .hero-meta { font-size: 0.85rem; }
+      .section-title { font-size: 1.75rem; margin-bottom: 2rem; }
+      .about-content { margin-bottom: 2rem; font-size: 1rem; }
       .bookmark { display: none; }
-      .device-status { display: none; }
-      .contact-links { flex-direction: column; }
+      .highlights { display: none; }
+      .contact-illustration {
+        margin-bottom: 1rem;
+      }
+      .contact-text {
+        margin-bottom: 1.5rem;
+      }
+      .contact-links {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
       .contact-button { width: 100%; }
       .highlight-tooltip {
         right: auto;
         left: 0;
       }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .project-card {
+        padding: 1.25rem;
+      }
+      .project-title {
+        font-size: 1.15rem;
+      }
+      .project-desc {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
+      }
+      .skill-category {
+        padding: 1rem;
+      }
+      .skill-box {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+      }
     }
 
     @media (max-width: 480px) {
       body { font-size: 16px; }
-      .page-content { padding: 2rem 1.5rem; }
-      .hero-illustration { width: 150px; height: 150px; font-size: 6rem; }
-      .header-container { padding: 1rem 1.5rem; }
+      .page-content { padding: 1.5rem 1rem; }
+      .hero { padding: 2rem 0; }
+      .hero-illustration { width: 240px; height: 240px; }
+      .hero-title { font-size: 1.6rem; }
+      .hero-subtitle { font-size: 1rem; }
+      .section-title { font-size: 1.5rem; }
+      .chapter {
+        font-size: 0.65rem;
+      }
+      .accordion-title {
+        font-size: 0.95rem;
+      }
+      .accordion-meta {
+        font-size: 0.7rem;
+      }
+      .accordion-header {
+        padding: 0.75rem 1rem;
+      }
+      .accordion-inner {
+        padding: 0 1rem 1rem;
+      }
+      .accordion-text p,
+      .accordion-text ul {
+        font-size: 0.9rem;
+      }
+      .project-card {
+        padding: 1rem;
+      }
+      .project-number {
+        font-size: 0.65rem;
+      }
+      .project-title {
+        font-size: 1.05rem;
+      }
+      .project-desc {
+        font-size: 0.8rem;
+      }
+      .projects-grid {
+        gap: 0.75rem;
+      }
+      .contact-illustration {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 0.75rem;
+      }
+      .contact-text {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+      .contact-links {
+        gap: 0.5rem;
+      }
+      .footer-text {
+        font-size: 0.75rem;
+      }
     }
 
     a {
@@ -869,6 +1087,22 @@
       opacity: 1;
       transform: translateX(-5px);
       animation: bookmarkPulse 3s ease-in-out infinite;
+    }
+
+    #paper-plane {
+      width: 7rem;
+      height: 7rem;
+      margin: 0 auto 0.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+    }
+
+    #paper-plane img {
+      width: 100%;
+      height: 100%;
+      object-fit: scale-down;
     }
 
     /* Highlights UI */
@@ -982,12 +1216,13 @@
       outline-offset: 2px;
     }
 
-    /* On small screens, hide the side UI */
+    /* Hide highlights button on mobile (must come after base .highlights styles) */
     @media (max-width: 768px) {
       .highlights {
         display: none;
       }
     }
+
   </style>
 </head>
 
@@ -1027,6 +1262,24 @@
         <button class="theme-toggle" id="themeToggle">Switch to Sepia</button>
       </div>
 
+      <!-- Mobile hamburger button -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+
+    </div>
+
+    <!-- Mobile dropdown menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-row">
+        <span class="mobile-menu-label">Font Size</span>
+        <div class="mobile-menu-buttons">
+          <button class="font-size-btn" id="fontDecreaseMobile">A-</button>
+          <button class="font-size-btn" id="fontIncreaseMobile">A+</button>
+        </div>
+      </div>
+      <div class="mobile-menu-row">
+        <span class="mobile-menu-label">Theme</span>
+        <button class="theme-toggle" id="themeToggleMobile">Switch to Sepia</button>
+      </div>
     </div>
   </header>
 
@@ -1139,6 +1392,11 @@
                     <li><strong>Analyst, Cornell Data Journal:</strong> Exploring data-driven storytelling and research.</li>
                     <li><strong>Member, Kappa Theta Pi:</strong> Part of Cornell's professional tech fraternity.</li>
                     <li><strong>Mentor, Girls Who Code:</strong> Helping younger students discover confidence in coding.</li>
+                  </ul>
+                  <p style="margin-top: 1.25rem; margin-bottom: 0.5rem;"><strong>Classes Taken/Taking</strong></p>
+                  <ul>
+                    <li><strong>Fall 2025:</strong> CS 2110 (Object-Oriented Programming and Data Structures), MATH 2210 (Linear Algebra)</li>
+                    <li><strong>Spring 2026:</strong> CS 3110 (Functional Programming), CS 2800 (Discrete Math), STSCI 3200 (Statistics II), INFO 1340 (Books as Data), INFO 4210 (AI: Law, Ethics and Policy)</li>
                   </ul>
                 </div>
               </div>
@@ -1267,7 +1525,8 @@
           <article class="project-card">
             <p class="project-number">Project 01</p>
             <h3 class="project-title">LessonLoop</h3>
-            <p class="project-desc">Contributing to an AI-powered ed-tech professional learning platform to improve student engagement, collaborating with a cross-functional team under mentorship from the Founder and CTO. Developing and prototyping a web application on AWS using Vue and Nuxt (frontend), Node.js (backend), DynamoDB (database), and Amazon Bedrock for AI agent deployment.</p>
+            <p class="project-desc" data-truncate>Contributing to an AI-powered ed-tech professional learning platform to improve student engagement, collaborating with a cross-functional team under mentorship from the Founder and CTO. Developing and prototyping a web application on AWS using Vue and Nuxt (frontend), Node.js (backend), DynamoDB (database), and Amazon Bedrock for AI agent deployment.</p>
+            <button class="project-read-more" data-read-more>Read more</button>
             <div class="project-tags">
               <span class="tag">Vue</span>
               <span class="tag">Nuxt</span>
@@ -1280,7 +1539,8 @@
           <article class="project-card">
             <p class="project-number">Project 02</p>
             <h3 class="project-title">MagicFold</h3>
-            <p class="project-desc">Developed a web-based zine maker enabling users to design 8-panel digital zines (foldable art books), preview as interactive flip books, and download print-ready PDFs for physical assembly. Integrated Fabric.js for drawing tools, jsPDF for PDF generation, react-pageflip for animations, and URL-based sharing using client-side compression.</p>
+            <p class="project-desc" data-truncate>Developed a web-based zine maker enabling users to design 8-panel digital zines (foldable art books), preview as interactive flip books, and download print-ready PDFs for physical assembly. Integrated Fabric.js for drawing tools, jsPDF for PDF generation, react-pageflip for animations, and URL-based sharing using client-side compression.</p>
+            <button class="project-read-more" data-read-more>Read more</button>
             <div class="project-tags">
               <span class="tag">React</span>
               <span class="tag">Next.js</span>
@@ -1293,7 +1553,8 @@
           <article class="project-card">
             <p class="project-number">Project 03</p>
             <h3 class="project-title">The Myth of the Undefeated Boxer</h3>
-            <p class="project-desc">Web-scraped and analyzed 4,500+ boxing matches using BeautifulSoup and pandas to investigate undefeated record drivers for Cornell Data Journal alongside a 4-person team. Performed statistical analysis (t-tests, correlation) and created visualizations showing undefeated fighters have shorter careers and more title fights, indicating strategic matchmaking.</p>
+            <p class="project-desc" data-truncate>Web-scraped and analyzed 4,500+ boxing matches using BeautifulSoup and pandas to investigate undefeated record drivers for Cornell Data Journal alongside a 4-person team. Performed statistical analysis (t-tests, correlation) and created visualizations showing undefeated fighters have shorter careers and more title fights, indicating strategic matchmaking.</p>
+            <button class="project-read-more" data-read-more>Read more</button>
             <div class="project-tags">
               <span class="tag">Python</span>
               <span class="tag">BeautifulSoup</span>
@@ -1306,7 +1567,8 @@
           <article class="project-card">
             <p class="project-number">Project 04</p>
             <h3 class="project-title">Sudoku Solver</h3>
-            <p class="project-desc">Built a web-based Sudoku solver that visualizes the backtracking algorithm in real-time. Implemented step-by-step animation system highlighting constraint propagation and backtracking steps by recording solver state changes during recursion, with adjustable speed and difficulty via API integration.</p>
+            <p class="project-desc" data-truncate>Built a web-based Sudoku solver that visualizes the backtracking algorithm in real-time. Implemented step-by-step animation system highlighting constraint propagation and backtracking steps by recording solver state changes during recursion, with adjustable speed and difficulty via API integration.</p>
+            <button class="project-read-more" data-read-more>Read more</button>
             <div class="project-tags">
               <span class="tag">Flask</span>
               <span class="tag">JavaScript</span>
@@ -1314,6 +1576,17 @@
               <span class="tag">Algorithms</span>
             </div>
             <a href="https://sudoku-solver-sable.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link">View Project →</a>
+          </article>
+
+          <article class="project-card">
+            <p class="project-number">Project 05</p>
+            <h3 class="project-title">Miscellaneous Computational Humanities Experiments</h3>
+            <p class="project-desc" data-truncate>Building fun computational humanities projects inspired by Cornell's INFO 1340: Books as Data course. Will update semi-regularly at this link.</p>
+            <button class="project-read-more" data-read-more>Read more</button>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+            </div>
+            <a href="https://fossil-talk-27b.notion.site/Books-as-Data-Projects-2fdcdfdeea7e8075bcc1e91c6627f4e3" class="project-link" target="_blank" rel="noopener noreferrer">View Projects →</a>
           </article>
 
         </div>
@@ -1326,14 +1599,7 @@
 
         <div class="contact-content">
           <div class="contact-illustration">
-            <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="25" y="45" width="100" height="70" rx="3" stroke="currentColor" stroke-width="3" fill="none"/>
-              <path d="M 25 45 L 75 85 L 125 45" stroke="currentColor" stroke-width="3" fill="none" stroke-linejoin="round"/>
-              <path d="M 25 115 L 60 85 M 125 115 L 90 85" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="75" cy="30" r="3" fill="currentColor"/>
-              <circle cx="85" cy="25" r="3" fill="currentColor"/>
-              <circle cx="65" cy="25" r="3" fill="currentColor"/>
-            </svg>
+            <img id="paper-plane" src="message (1).png" alt="Paper plane icon">
           </div>
 
           <p class="contact-text">I'm always interested in hearing about new projects and opportunities. Whether you have a question or just want to say hi, feel free to reach out.</p>
@@ -1397,8 +1663,28 @@
 
       initTypingAnimation();
 
+      // Mobile menu toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('open');
+          menuToggle.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove('open');
+            menuToggle.textContent = '☰';
+          }
+        });
+      }
+
       // Theme toggle palettes
       const themeToggle = document.getElementById('themeToggle');
+      const themeToggleMobile = document.getElementById('themeToggleMobile');
       const body = document.body;
 
       const heroImg = document.querySelector('.hero-illustration img');
@@ -1426,7 +1712,9 @@
         body.classList.remove('palette-sepia', 'palette-sky');
         if (p.class) body.classList.add(p.class);
 
-        themeToggle.innerHTML = p.nextLabel;
+        // Update both desktop and mobile buttons
+        if (themeToggle) themeToggle.innerHTML = p.nextLabel;
+        if (themeToggleMobile) themeToggleMobile.innerHTML = p.nextLabel;
         localStorage.setItem('paletteIdx', String(paletteIdx));
 
         // update hero image based on theme
@@ -1435,34 +1723,44 @@
 
       setPalette(paletteIdx);
 
-      themeToggle.addEventListener('click', () => {
+      function cyclePalette() {
         paletteIdx = (paletteIdx + 1) % palettes.length;
         setPalette(paletteIdx);
-      });
+      }
+
+      if (themeToggle) themeToggle.addEventListener('click', cyclePalette);
+      if (themeToggleMobile) themeToggleMobile.addEventListener('click', cyclePalette);
 
       // Font size controls
       const fontDecrease = document.getElementById('fontDecrease');
       const fontIncrease = document.getElementById('fontIncrease');
+      const fontDecreaseMobile = document.getElementById('fontDecreaseMobile');
+      const fontIncreaseMobile = document.getElementById('fontIncreaseMobile');
       const htmlElement = document.documentElement;
 
       let currentFontSize = parseInt(localStorage.getItem('fontSize')) || 18;
       htmlElement.style.fontSize = currentFontSize + 'px';
 
-      fontDecrease.addEventListener('click', () => {
+      function decreaseFontSize() {
         if (currentFontSize > 14) {
           currentFontSize -= 2;
           htmlElement.style.fontSize = currentFontSize + 'px';
           localStorage.setItem('fontSize', currentFontSize);
         }
-      });
+      }
 
-      fontIncrease.addEventListener('click', () => {
+      function increaseFontSize() {
         if (currentFontSize < 20) {
           currentFontSize += 2;
           htmlElement.style.fontSize = currentFontSize + 'px';
           localStorage.setItem('fontSize', currentFontSize);
         }
-      });
+      }
+
+      if (fontDecrease) fontDecrease.addEventListener('click', decreaseFontSize);
+      if (fontIncrease) fontIncrease.addEventListener('click', increaseFontSize);
+      if (fontDecreaseMobile) fontDecreaseMobile.addEventListener('click', decreaseFontSize);
+      if (fontIncreaseMobile) fontIncreaseMobile.addEventListener('click', increaseFontSize);
 
       // Randomize battery level on each load
       const batteryLevelEl = document.querySelector('.battery span');
@@ -1969,6 +2267,20 @@
             }
           });
           item.classList.toggle('open');
+        });
+      });
+
+      // Project "Read more" toggle functionality
+      const readMoreBtns = document.querySelectorAll('[data-read-more]');
+      readMoreBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = btn.closest('.project-card');
+          const desc = card.querySelector('.project-desc');
+          if (desc) {
+            desc.classList.toggle('expanded');
+            btn.textContent = desc.classList.contains('expanded') ? 'Show less' : 'Read more';
+          }
         });
       });
 
