@@ -61,6 +61,86 @@
       --accent-tag: #e4f0fb;
     }
 
+    /* Warm Neutrals palette */
+    body.palette-warm-neutrals {
+      --bg: #f0efeb;
+      --page: #fff1e6;
+      --text: #1f1a16;
+      --text-light: #5b4636;
+      --border: #ddbea9;
+      --accent: #a5a58d;
+      --shadow: rgba(75, 55, 40, 0.12);
+      --highlight: #f5e6d3;
+
+      --accent-ink: #5c4033;
+      --accent-pill: #fff1e6;
+      --accent-tag: #eddcd2;
+    }
+
+    /* Pastel palette - soft pinks */
+    body.palette-pastel {
+      --bg: #fce4ec;
+      --page: #fff8fa;
+      --text: #2d1f24;
+      --text-light: #5c4a50;
+      --border: #f4c2d0;
+      --accent: #e89fb5;
+      --shadow: rgba(90, 50, 60, 0.1);
+      --highlight: #ffd6e0;
+
+      --accent-ink: #8b4a5e;
+      --accent-pill: #fff0f4;
+      --accent-tag: #fce4ec;
+    }
+
+    /* Lavender Haze palette */
+    body.palette-lavender {
+      --bg: #ece4f0;
+      --page: #fcf7ff;
+      --text: #1a1525;
+      --text-light: #4a3860;
+      --border: #d4c4e0;
+      --accent: #9b89b3;
+      --shadow: rgba(132, 94, 194, 0.12);
+      --highlight: #e8ddf5;
+
+      --accent-ink: #5c4a78;
+      --accent-pill: #f5f0fa;
+      --accent-tag: #ebe0f5;
+    }
+
+    /* Spot palette (blue/cyan with orange accents) */
+    body.palette-spot {
+      --bg: #e0f4fa;
+      --page: #f2fbff;
+      --text: #1a2530;
+      --text-light: #3d5060;
+      --border: #b8d4e8;
+      --accent: #6d8196;
+      --shadow: rgba(50, 80, 110, 0.12);
+      --highlight: #fff0d4;
+
+      --accent-ink: #2d5a7a;
+      --accent-pill: #e8f6fc;
+      --accent-tag: #d0e8f4;
+    }
+
+    /* Clean off-white palette */
+    body.palette-clean {
+      --bg: #f5f5f3;
+      --page: #fcfcfa;
+      --text: #1a1a1a;
+      --text-light: #555555;
+      --border: #e0e0de;
+      --accent: #666666;
+      --shadow: rgba(0, 0, 0, 0.08);
+      --highlight: #f0f0e8;
+
+      --accent-ink: #2a2a2a;
+      --accent-pill: #f8f8f6;
+      --accent-tag: #eeeeec;
+    }
+
     [data-theme="dark"] {
       --bg: #1a1a1a;
       --page: #232323;
@@ -1699,7 +1779,12 @@
       const palettes = [
         { theme: 'light', class: '', nextLabel: 'Switch to Sepia' },
         { theme: 'light', class: 'palette-sepia', nextLabel: 'Switch to Sky' },
-        { theme: 'light', class: 'palette-sky', nextLabel: 'Switch to Dark' },
+        { theme: 'light', class: 'palette-sky', nextLabel: 'Switch to Warm' },
+        { theme: 'light', class: 'palette-warm-neutrals', nextLabel: 'Switch to Pastel' },
+        { theme: 'light', class: 'palette-pastel', nextLabel: 'Switch to Lavender' },
+        { theme: 'light', class: 'palette-lavender', nextLabel: 'Switch to Spot' },
+        { theme: 'light', class: 'palette-spot', nextLabel: 'Switch to Clean' },
+        { theme: 'light', class: 'palette-clean', nextLabel: 'Switch to Dark' },
         { theme: 'dark', class: '', nextLabel: 'Switch to Light' }
       ];
 
@@ -1709,7 +1794,7 @@
         paletteIdx = idx;
         const p = palettes[idx];
         body.setAttribute('data-theme', p.theme);
-        body.classList.remove('palette-sepia', 'palette-sky');
+        body.classList.remove('palette-sepia', 'palette-sky', 'palette-warm-neutrals', 'palette-pastel', 'palette-lavender', 'palette-spot', 'palette-clean');
         if (p.class) body.classList.add(p.class);
 
         // Update both desktop and mobile buttons
