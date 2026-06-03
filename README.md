@@ -1,4 +1,4 @@
-# manya pradeep narayan — personal site
+# my personal site
 
 Personal site built with Next.js 16, Tailwind CSS, and Framer Motion.
 
