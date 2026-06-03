@@ -1,26 +1,361 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #eef2f4;
+  --surface: #f9faf8;
+  --ink: #202421;
+  --muted: #585f5d;
+  --line: #d8dfdf;
+
+  --link: #4f6f8f;
+  --link-hover: #354f72;
+
+  --highlight-blue: rgba(139, 182, 199, 0.35);
+  --highlight-green: rgba(144, 177, 154, 0.35);
+  --highlight-lavender: rgba(168, 175, 211, 0.35);
+  --highlight-gold: rgba(201, 176, 109, 0.38);
+
+  --research: #a8afd3;
+  --internship: #8bb6c7;
+  --club: #c9b06d;
+  --current: #506f5f;
+  --cat: #3d6a7e;
+  --heading-accent: #2d5a73;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Animated underline for links inside main — slides in from left */
+main a {
+  position: relative;
+}
+
+main a::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+main a:hover {
+  text-decoration: none;
+}
+
+main a:hover::after {
+  transform: scaleX(1);
+}
+
+/* Konami flash — marks briefly light up */
+@keyframes markFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.konami-flash mark {
+  animation: markFlash 0.15s ease 3;
+}
+
+h1 {
+  font-family: var(--font-display), sans-serif;
+  color: var(--ink);
+  font-size: clamp(2rem, 5.5vw, 2.8rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* Homepage hero heading — Dela Gothic at real scale, anchored in the palette */
+.hero-h1 {
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  margin-bottom: 1.75rem;
+  letter-spacing: -0.02em;
+  color: var(--heading-accent);
+}
+
+h2 {
+  font-family: var(--font-mono), monospace;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  max-width: 65ch;
+  margin-bottom: 1rem;
+  text-wrap: pretty;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+::selection {
+  background: var(--highlight-blue);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Mildliner marks */
+mark {
+  color: inherit;
+  background: none;
+  padding: 0;
+}
+
+.mark-blue {
+  background: linear-gradient(
+    transparent 45%,
+    var(--highlight-blue) 45%,
+    var(--highlight-blue) 88%,
+    transparent 88%
+  );
+}
+
+.mark-green {
+  background: linear-gradient(
+    transparent 45%,
+    var(--highlight-green) 45%,
+    var(--highlight-green) 88%,
+    transparent 88%
+  );
+}
+
+.mark-lavender {
+  background: linear-gradient(
+    transparent 45%,
+    var(--highlight-lavender) 45%,
+    var(--highlight-lavender) 88%,
+    transparent 88%
+  );
+}
+
+.mark-gold {
+  background: linear-gradient(
+    transparent 45%,
+    var(--highlight-gold) 45%,
+    var(--highlight-gold) 88%,
+    transparent 88%
+  );
+}
+
+/* Cat idle breathing */
+@keyframes catBreath {
+  0%, 100% { transform: none; }
+  50% { transform: scale(1.018) translateY(-1px); }
+}
+
+.cat-breathe {
+  animation: catBreath 4s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* ASCII cat — perks up on hover */
+.ascii-cat {
+  font-family: var(--font-mono), monospace;
+  color: var(--cat);
+  white-space: pre;
+  line-height: 1.1;
+  font-size: 1.1rem;
+  text-align: left;
+  margin: 0 0 1.75rem 0;
+  display: block;
+  cursor: default;
+  transition: color 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ascii-cat:hover {
+  color: var(--research);
+  transform: translateX(4px) scale(1.04);
+  cursor: pointer;
+}
+
+/* Thin divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 2.5rem 0;
+}
+
+/* Project row hover */
+.project-row {
+  padding: 0.9rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.12s ease;
+}
+
+.project-row:hover,
+.project-row:focus-within {
+  background: rgba(139, 182, 199, 0.22);
+}
+
+/* Project ↗ arrow floats toward destination on link hover */
+.arrow-icon {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+a:hover .arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+/* Filter button press */
+.filter-btn {
+  transition: transform 0.08s ease, color 0.15s ease;
+}
+
+.filter-btn:active {
+  transform: scale(0.88);
+}
+
+/* "more →" arrow slides right */
+.more-arrow {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.more-link:hover .more-arrow {
+  transform: translateX(4px);
+}
+
+/* Experience entry dot scales + glows on button hover */
+.entry-dot {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.timeline-entry-btn:hover .entry-dot {
+  transform: scale(1.5);
+}
+
+.timeline-entry-btn:hover .entry-dot[data-cat="research"] {
+  box-shadow: 0 0 0 4px rgba(168, 175, 211, 0.3);
+}
+
+.timeline-entry-btn:hover .entry-dot[data-cat="internship"] {
+  box-shadow: 0 0 0 4px rgba(139, 182, 199, 0.3);
+}
+
+.timeline-entry-btn:hover .entry-dot[data-cat="club"] {
+  box-shadow: 0 0 0 4px rgba(201, 176, 109, 0.3);
+}
+
+/* "Other fun stuff" box glows on hover */
+.fun-stuff-box {
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fun-stuff-box:hover {
+  box-shadow: 0 0 0 1px rgba(201, 176, 109, 0.35), 0 4px 24px rgba(201, 176, 109, 0.12);
+}
+
+/* Project link hover in mono bar */
+.project-link {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.project-link:hover {
+  color: var(--link);
+  text-decoration: none;
+}
+
+/* Nav entrance — slides down from slightly above */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.nav-enter {
+  animation: fadeDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Page content entrance — one moment, two steps */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.home-enter {
+  animation: fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.home-enter-delay {
+  animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.home-enter-delay-2 {
+  animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
