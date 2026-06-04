@@ -2,23 +2,7 @@ import Link from "next/link";
 import { chapters, getChaptersForPost } from "@/data/chapters";
 import { posts } from "@/data/posts";
 
-import ChapterThingsToKeepInMind from "@/content/posts/255-days-later/things-to-keep-in-mind";
-import ChapterBuildingACollegeList from "@/content/posts/255-days-later/building-a-college-list";
-import ChapterBuildingYourApplication from "@/content/posts/255-days-later/building-your-application";
-import ChapterAfterYouSubmit from "@/content/posts/255-days-later/after-you-submit";
-import ChapterDecisions from "@/content/posts/255-days-later/decisions";
-import ChapterAndItsOver from "@/content/posts/255-days-later/and-its-over";
-
-type ContentMap = Record<string, React.ComponentType>;
-
-const contentMap: ContentMap = {
-  "things-to-keep-in-mind": ChapterThingsToKeepInMind,
-  "building-a-college-list": ChapterBuildingACollegeList,
-  "building-your-application": ChapterBuildingYourApplication,
-  "after-you-submit": ChapterAfterYouSubmit,
-  decisions: ChapterDecisions,
-  "and-its-over": ChapterAndItsOver,
-};
+import { contentMap } from "@/lib/contentMap";
 
 export function generateStaticParams() {
   return chapters.map((ch) => ({
@@ -57,7 +41,7 @@ export default async function ChapterPage({
   const nextChapter =
     currentIndex < allChapters.length - 1 ? allChapters[currentIndex + 1] : null;
 
-  const Content = contentMap[chapter];
+  const Content = contentMap[`${slug}/${chapter}`];
 
   if (!post || !currentChapter || !Content) {
     return <p style={{ color: "var(--muted)" }}>chapter not found.</p>;

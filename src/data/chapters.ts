@@ -10,6 +10,15 @@ export type Chapter = {
 
 export const chapters: Chapter[] = [
   {
+    postSlug: "redesigning-my-portfolio",
+    slug: "full",
+    number: 1,
+    title: "Process + Tips",
+    description: "Ideation, themes, build process, tech stack, and deploy.",
+    readTime: "~8 min",
+    minutes: 8,
+  },
+  {
     postSlug: "255-days-later",
     slug: "things-to-keep-in-mind",
     number: 1,

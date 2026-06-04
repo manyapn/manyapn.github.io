@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { posts } from "@/data/posts";
 import { getChaptersForPost } from "@/data/chapters";
+import { contentMap } from "@/lib/contentMap";
 
 function formatDate(iso: string): string {
   const [year, month, day] = iso.split("-").map(Number);
@@ -38,42 +39,62 @@ export default async function PostOverviewPage({
     return <p style={{ color: "var(--muted)" }}>post not found.</p>;
   }
 
-  return (
-    <>
-      {/* Back link */}
+  const isSingle = chs.length === 1;
+  const FlatContent = isSingle ? contentMap[`${slug}/${chs[0].slug}`] : null;
+
+  const backLink = (
+    <p
+      className="home-enter"
+      style={{
+        fontFamily: "var(--font-mono), monospace",
+        fontSize: "0.8rem",
+        marginBottom: "2rem",
+      }}
+    >
+      <Link href="/2cents" style={{ color: "var(--muted)" }}>
+        ← 2cents
+      </Link>
+    </p>
+  );
+
+  const postHeader = (
+    <header className="home-enter-delay" style={{ marginBottom: "1.75rem" }}>
+      <h1 className="hero-h1" style={{ marginBottom: "0.5rem" }}>{post.title}</h1>
       <p
-        className="home-enter"
         style={{
           fontFamily: "var(--font-mono), monospace",
-          fontSize: "0.8rem",
-          marginBottom: "2rem",
+          fontSize: "0.75rem",
+          color: "var(--muted)",
+          marginBottom: 0,
         }}
       >
-        <Link href="/2cents" style={{ color: "var(--muted)" }}>
-          ← 2cents
-        </Link>
+        {post.tags.join(", ")} · {formatDate(post.date)}
       </p>
+    </header>
+  );
 
-      {/* Post header */}
-      <header className="home-enter-delay" style={{ marginBottom: "0.75rem" }}>
-        <h1 className="hero-h1" style={{ marginBottom: "0.5rem" }}>{post.title}</h1>
-        <p
-          style={{
-            fontFamily: "var(--font-mono), monospace",
-            fontSize: "0.75rem",
-            color: "var(--muted)",
-            marginBottom: 0,
-          }}
-        >
-          {post.tags.join(", ")} · {formatDate(post.date)}
-        </p>
-      </header>
+  /* ── Flat blog post (single chapter) ── */
+  if (isSingle && FlatContent) {
+    return (
+      <>
+        {backLink}
+        {postHeader}
+        <article className="post-content home-enter-delay">
+          <FlatContent />
+        </article>
+      </>
+    );
+  }
+
+  /* ── Multi-chapter ToC ── */
+  return (
+    <>
+      {backLink}
+      {postHeader}
 
       {/* Post intro */}
       <p className="home-enter-delay" style={{ marginBottom: "2.5rem" }}>
-        I started my college apps on July 17th, 2024. I&apos;m writing this on March 31, 2025,
-        and I just received my final decision. My process is officially done (well, mostly; I do
-        have some waitlists...). Here&apos;s everything I wish I&apos;d known.
+        {post.description}
       </p>
 
       {/* Chapter list */}
@@ -101,8 +122,8 @@ export default async function PostOverviewPage({
         ))}
       </div>
 
-      {/* Source note — after the ToC, not before */}
-      <p
+      {/* Source note — specific to the college apps post (originally a Google Doc) */}
+      {slug === "255-days-later" && <p
         className="home-enter-delay"
         style={{
           fontFamily: "var(--font-mono), monospace",
@@ -122,7 +143,7 @@ export default async function PostOverviewPage({
           read it there if you prefer
         </a>
         . some links here may be broken, but they all work in the doc.
-      </p>
+      </p>}
     </>
   );
 }

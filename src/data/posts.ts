@@ -11,6 +11,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "redesigning-my-portfolio",
+    title: "Redesigning My Portfolio: Process + Tips",
+    subtitle: "how i built this site",
+    date: "2026-06-04",
+    year: 2026,
+    tags: ["design"],
+    description: "I'm not a designer at all, so a lot of this is me figuring it out as I went! Here's the process I used, plus some tips.",
+    readTime: "1 chapter",
+  },
+  {
     slug: "255-days-later",
     title: "255 Days Later...",
     subtitle: "A College Application Journey",
@@ -22,5 +32,5 @@ export const posts: Post[] = [
   },
 ];
 
-export const allTags = ["all", "college", "advice"] as const;
+export const allTags = ["all", "college", "advice", "design"] as const;
 export type TagFilter = (typeof allTags)[number];

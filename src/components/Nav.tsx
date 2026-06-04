@@ -45,7 +45,10 @@ export default function Nav() {
     );
   }, []);
 
-  const activeLabel = links.find((l) => l.href === pathname)?.label ?? pathname;
+  const activeLabel =
+    links.find((l) => l.href === pathname)?.label ??
+    links.find((l) => l.href !== "/" && pathname.startsWith(l.href))?.label ??
+    pathname;
 
   return (
     <nav

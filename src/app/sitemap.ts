@@ -21,10 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const chapter_pages: MetadataRoute.Sitemap = chapters.map((c) => ({
-    url: `${BASE}/2cents/${c.postSlug}/${c.slug}`,
-    priority: 0.6,
-  }));
+  const chapter_pages: MetadataRoute.Sitemap = chapters
+    .filter((c) => chapters.filter((s) => s.postSlug === c.postSlug).length > 1)
+    .map((c) => ({
+      url: `${BASE}/2cents/${c.postSlug}/${c.slug}`,
+      priority: 0.6,
+    }));
 
   return [...static_pages, ...post_pages, ...chapter_pages];
 }
