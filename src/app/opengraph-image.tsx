@@ -5,17 +5,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "manya pradeep narayan";
 
-export default async function Image() {
-  const delaGothic = await fetch(
-    "https://fonts.gstatic.com/s/delagothicone/v16/hESp6XxvMDKFwft33muYpMJFNwBXe9M.woff"
-  ).then((r) => r.arrayBuffer());
+const CAT = `  ╱|、\n(˚ˎ 。7\n |、˜〵\n じしˍ,)ノ`;
 
-  const mplusRounded = await fetch(
-    "https://fonts.gstatic.com/s/mplusrounded1c/v15/VdGEAYIAV6gnpUpoWwAPe9TpXnER8dlEMw.woff"
-  ).then((r) => r.arrayBuffer());
-
-  const CAT = `  ╱|、\n(˚ˎ 。7\n |、˜〵\n じしˍ,)ノ`;
-
+export default function Image() {
   return new ImageResponse(
     (
       <div
@@ -29,12 +21,12 @@ export default async function Image() {
           padding: "72px 80px 60px",
         }}
       >
-        {/* Top: name + tagline */}
+        {/* Name + tagline */}
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <div
             style={{
-              fontFamily: "Dela Gothic One",
-              fontSize: "72px",
+              fontSize: "80px",
+              fontWeight: 700,
               color: "#2d5a73",
               letterSpacing: "-0.02em",
               lineHeight: 1.05,
@@ -44,7 +36,6 @@ export default async function Image() {
           </div>
           <div
             style={{
-              fontFamily: "M PLUS Rounded 1c",
               fontSize: "28px",
               color: "#585f5d",
               lineHeight: 1.6,
@@ -54,7 +45,7 @@ export default async function Image() {
           </div>
         </div>
 
-        {/* Bottom row: cat + url */}
+        {/* Cat + URL */}
         <div
           style={{
             display: "flex",
@@ -64,20 +55,19 @@ export default async function Image() {
         >
           <div
             style={{
-              fontFamily: "monospace",
               fontSize: "22px",
               color: "#3d6a7e",
               whiteSpace: "pre",
               lineHeight: 1.15,
+              fontFamily: "monospace",
             }}
           >
             {CAT}
           </div>
           <div
             style={{
-              fontFamily: "M PLUS Rounded 1c",
               fontSize: "22px",
-              color: "#7a9290",
+              color: "#7a8e91",
               letterSpacing: "0.02em",
             }}
           >
@@ -86,12 +76,6 @@ export default async function Image() {
         </div>
       </div>
     ),
-    {
-      ...size,
-      fonts: [
-        { name: "Dela Gothic One", data: delaGothic, weight: 400 },
-        { name: "M PLUS Rounded 1c", data: mplusRounded, weight: 400 },
-      ],
-    }
+    { ...size }
   );
 }
