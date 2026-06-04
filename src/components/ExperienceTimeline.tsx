@@ -84,7 +84,7 @@ function TimelineEntry({ entry, isFirst, index }: { entry: Experience; isFirst: 
                   href={entry.orgUrl}
                   target="_blank"
                   rel="noreferrer"
-                  style={{ color: "var(--muted)", fontWeight: "400" }}
+                  style={{ color: "var(--link)", fontWeight: "400" }}
                 >
                   @ {entry.org}
                 </a>

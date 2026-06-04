@@ -128,12 +128,15 @@ export default function Nav() {
             fontSize: "0.8rem",
           }}
         >
-          {/* Current route label */}
-          <span
+          {/* Current route label — taps home */}
+          <Link
+            href="/"
             style={{
               position: "relative",
               color: "var(--ink)",
               padding: "0.5rem 0.25rem",
+              textDecoration: "none",
+              display: "inline-block",
             }}
           >
             {activeLabel}
@@ -148,7 +151,7 @@ export default function Nav() {
                 borderRadius: "1px",
               }}
             />
-          </span>
+          </Link>
 
           {/* Right cluster: theme + toggle */}
           <span style={{ display: "flex", alignItems: "center" }}>
@@ -172,7 +175,31 @@ export default function Nav() {
                 textAlign: "center",
               }}
             >
-              {open ? "×" : "···"}
+              <AnimatePresence mode="wait" initial={false}>
+                {open ? (
+                  <motion.span
+                    key="close"
+                    initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
+                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                    exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
+                    transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ display: "inline-block" }}
+                  >
+                    ×
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="open"
+                    initial={{ opacity: 0, scale: 0.4, letterSpacing: "-0.1em" }}
+                    animate={{ opacity: 1, scale: 1, letterSpacing: "0em" }}
+                    exit={{ opacity: 0, scale: 0.4, letterSpacing: "-0.1em" }}
+                    transition={{ duration: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ display: "inline-block" }}
+                  >
+                    ···
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </span>
         </div>
