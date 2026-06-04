@@ -26,9 +26,9 @@ export default function Home() {
 
       <p className="home-enter-delay">
         outside of work, some things that make me happy are trying new cafes and
-        restaurants, <Highlight variant="blue">68°F weather</Highlight>, social
+        restaurants, 68°F weather, social
         logging apps &amp; micro-communities{" "}
-        <em>(loving retro rn)</em>, reading, collecting ikea paint chips,
+        <em>(<a href="https://retro.app/" target="_blank" rel="noopener noreferrer">loving retro rn</a>)</em>, reading, collecting home depot paint chips,
         traveling, trip planning, watching movies, and spending lots of time
         with friends and family.
       </p>

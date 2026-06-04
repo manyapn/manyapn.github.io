@@ -20,31 +20,39 @@
   --club: #c9b06d;
   --current: #506f5f;
   --cat: #3d6a7e;
+  --cat-glow: rgba(61, 106, 126, 0.25);
   --heading-accent: #2d5a73;
 }
 
 /* ── Dark mode token overrides ──────────────────── */
 [data-theme="dark"] {
-  --bg: #181d1f;
-  --surface: #1e2527;
-  --ink: #dce8ea;
-  --muted: #7a8e91;
+  /* Backgrounds — deeper base, surface gets a distinct teal lean */
+  --bg: #161b1d;
+  --surface: #1c2b2f;
+  --ink: #dde9e4;     /* green-warm bias to match light mode ink's character */
+  --muted: #7f9895;   /* warmer teal-gray; 5.65:1 on bg, 4.7:1 on surface */
   --line: #2c3a3d;
 
-  --link: #8bb6c7;
-  --link-hover: #a8d4de;
+  /* Links — slightly more vivid against the deeper bg */
+  --link: #90c4d4;
+  --link-hover: #a8d8e8;
 
-  --highlight-blue: rgba(139, 182, 199, 0.22);
-  --highlight-green: rgba(144, 177, 154, 0.22);
-  --highlight-lavender: rgba(168, 175, 211, 0.22);
-  --highlight-gold: rgba(201, 176, 109, 0.26);
+  /* Highlights — bumped for dark mode visibility */
+  --highlight-blue: rgba(139, 182, 199, 0.26);
+  --highlight-green: rgba(144, 177, 154, 0.26);
+  --highlight-lavender: rgba(170, 177, 213, 0.26);
+  --highlight-gold: rgba(203, 178, 110, 0.30);
 
-  --research: #a8afd3;
-  --internship: #8bb6c7;
-  --club: #c9b06d;
-  --current: #6b9e7e;
+  /* Category colors — brightened to pop against dark bg */
+  --research: #b2bae0;
+  --internship: #93c2d3;
+  --club: #d4b672;
+  --current: #72a882;
+
+  /* Cat stays warm medium-teal; heading-accent is its own brighter note */
   --cat: #7ab0c5;
-  --heading-accent: #7ab0c5;
+  --cat-glow: rgba(122, 176, 197, 0.28);
+  --heading-accent: #9dd3e4;
 }
 
 /* Dark mode surface overrides for hardcoded rgba values */
@@ -62,6 +70,7 @@
 
 [data-theme="dark"] .fun-stuff-box {
   background: rgba(201, 176, 109, 0.12);
+  border-color: rgba(201, 176, 109, 0.2);
 }
 
 [data-theme="dark"] .callout {
@@ -271,11 +280,12 @@ mark {
 /* Cat idle breathing */
 @keyframes catBreath {
   0%, 100% { transform: none; }
-  50% { transform: scale(1.018) translateY(-1px); }
+  40% { transform: scale(1.055) translateY(-3px); }
+  60% { transform: scale(1.055) translateY(-3px); }
 }
 
 .cat-breathe {
-  animation: catBreath 4s ease-in-out infinite;
+  animation: catBreath 3.2s ease-in-out infinite;
   display: inline-block;
 }
 
@@ -853,6 +863,15 @@ a:hover .arrow-icon {
 
 .chapter-nav a::after {
   display: none;
+}
+
+/* Nav: desktop full bar, mobile collapsed */
+.nav-desktop { display: flex; }
+.nav-mobile  { display: none; }
+
+@media (max-width: 600px) {
+  .nav-desktop { display: none; }
+  .nav-mobile  { display: block; }
 }
 
 /* Reduced motion */

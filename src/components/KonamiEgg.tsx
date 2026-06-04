@@ -42,7 +42,7 @@ export default function KonamiEgg() {
         left: "50%",
         transform: "translateX(-50%)",
         background: "var(--cat)",
-        color: "#eef2f4",
+        color: "var(--surface)",
         fontFamily: "var(--font-mono), monospace",
         fontSize: "0.82rem",
         lineHeight: 1.3,
@@ -51,7 +51,7 @@ export default function KonamiEgg() {
         zIndex: 200,
         animation: "fadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both",
         whiteSpace: "pre",
-        boxShadow: "0 4px 24px rgba(61, 106, 126, 0.25)",
+        boxShadow: "0 4px 24px var(--cat-glow)",
         pointerEvents: "none",
       }}
     >

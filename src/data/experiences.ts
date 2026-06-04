@@ -25,7 +25,7 @@ export const experiences: Experience[] = [
   {
     id: "finmd",
     period: "june – aug '26",
-    role: "Software Engineering Intern",
+    role: "Full-Stack/Product Engineering Intern",
     org: "FinMD",
     orgUrl: "https://www.finmd.com/",
     description:

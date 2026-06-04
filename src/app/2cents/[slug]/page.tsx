@@ -2,6 +2,12 @@ import Link from "next/link";
 import { posts } from "@/data/posts";
 import { getChaptersForPost } from "@/data/chapters";
 
+function formatDate(iso: string): string {
+  const [year, month, day] = iso.split("-").map(Number);
+  const months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+  return `${months[month - 1]} ${day}, ${year}`;
+}
+
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
@@ -59,37 +65,15 @@ export default async function PostOverviewPage({
             marginBottom: 0,
           }}
         >
-          {post.tags.join(", ")} · {post.date}
+          {post.tags.join(", ")} · {formatDate(post.date)}
         </p>
       </header>
 
       {/* Post intro */}
-      <p className="home-enter-delay" style={{ marginBottom: "1rem" }}>
+      <p className="home-enter-delay" style={{ marginBottom: "2.5rem" }}>
         I started my college apps on July 17th, 2024. I&apos;m writing this on March 31, 2025,
         and I just received my final decision. My process is officially done (well, mostly; I do
         have some waitlists...). Here&apos;s everything I wish I&apos;d known.
-      </p>
-
-      {/* Source note */}
-      <p
-        className="home-enter-delay"
-        style={{
-          fontFamily: "var(--font-mono), monospace",
-          fontSize: "0.75rem",
-          color: "var(--muted)",
-          marginBottom: "2.5rem",
-        }}
-      >
-        originally a google doc:{" "}
-        <a
-          href="https://docs.google.com/document/d/1Yv_rJcpkVpOfpRSluLj3vYUa9_RiVFql5RZREyUksSY/edit?usp=sharing"
-          target="_blank"
-          rel="noreferrer"
-          style={{ color: "var(--link)" }}
-        >
-          read it there if you prefer
-        </a>
-        . content reformatted for the web. some links here may be broken, but they all work in the doc.
       </p>
 
       {/* Chapter list */}
@@ -101,31 +85,44 @@ export default async function PostOverviewPage({
             style={{ textDecoration: "none", display: "block" }}
           >
             <div className="chapter-card">
-              <span className="ch-num">ch.{ch.number}</span>
               <p
                 style={{
                   fontWeight: "500",
                   fontSize: "1.05rem",
                   color: "var(--link)",
-                  marginBottom: "0.2rem",
+                  marginBottom: "0.25rem",
                 }}
               >
                 {ch.title}
               </p>
-              <p
-                style={{
-                  fontSize: "0.95rem",
-                  color: "var(--ink)",
-                  marginBottom: "0.3rem",
-                }}
-              >
-                {ch.description}
-              </p>
-              <span className="ch-time">{ch.readTime}</span>
+              <span className="ch-time">ch.{ch.number} · {ch.readTime}</span>
             </div>
           </Link>
         ))}
       </div>
+
+      {/* Source note — after the ToC, not before */}
+      <p
+        className="home-enter-delay"
+        style={{
+          fontFamily: "var(--font-mono), monospace",
+          fontSize: "0.72rem",
+          color: "var(--muted)",
+          marginTop: "2rem",
+          opacity: 0.7,
+        }}
+      >
+        originally a google doc:{" "}
+        <a
+          href="https://docs.google.com/document/d/1Yv_rJcpkVpOfpRSluLj3vYUa9_RiVFql5RZREyUksSY/edit?usp=sharing"
+          target="_blank"
+          rel="noreferrer"
+          style={{ color: "var(--muted)" }}
+        >
+          read it there if you prefer
+        </a>
+        . some links here may be broken, but they all work in the doc.
+      </p>
     </>
   );
 }

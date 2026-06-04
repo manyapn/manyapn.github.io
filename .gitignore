@@ -42,8 +42,13 @@ next-env.d.ts
 
 # tools
 .impeccable/
+.agents/
+.claude/
+.github/skills/
+skills-lock.json
 
 # local docs
 CLAUDE.md
 AGENTS.md
 PRODUCT.md
+SKILL.md
