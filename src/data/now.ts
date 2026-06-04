@@ -8,7 +8,7 @@ export type NowData = {
 
 export const nowData: NowData = {
   lastUpdated: "june 2026",
-  reading: "the alignment problem — brian christian",
+  reading: "the alignment problem, brian christian",
   beliCount: 131,
   beliUrl: "https://beliapp.co/app/manyapn",
   fallbackMovie: "Obsession",

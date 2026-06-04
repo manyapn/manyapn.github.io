@@ -23,6 +23,84 @@
   --heading-accent: #2d5a73;
 }
 
+/* ── Dark mode token overrides ──────────────────── */
+[data-theme="dark"] {
+  --bg: #181d1f;
+  --surface: #1e2527;
+  --ink: #dce8ea;
+  --muted: #7a8e91;
+  --line: #2c3a3d;
+
+  --link: #8bb6c7;
+  --link-hover: #a8d4de;
+
+  --highlight-blue: rgba(139, 182, 199, 0.22);
+  --highlight-green: rgba(144, 177, 154, 0.22);
+  --highlight-lavender: rgba(168, 175, 211, 0.22);
+  --highlight-gold: rgba(201, 176, 109, 0.26);
+
+  --research: #a8afd3;
+  --internship: #8bb6c7;
+  --club: #c9b06d;
+  --current: #6b9e7e;
+  --cat: #7ab0c5;
+  --heading-accent: #7ab0c5;
+}
+
+/* Dark mode surface overrides for hardcoded rgba values */
+[data-theme="dark"] .project-row:hover,
+[data-theme="dark"] .project-row:focus-within,
+[data-theme="dark"] .post-entry:hover,
+[data-theme="dark"] .post-entry:focus-within,
+[data-theme="dark"] .chapter-card:hover {
+  background: rgba(139, 182, 199, 0.15);
+}
+
+[data-theme="dark"] .project-row:hover .arrow-icon {
+  transform: translate(2px, -2px);
+}
+
+[data-theme="dark"] .fun-stuff-box {
+  background: rgba(201, 176, 109, 0.12);
+}
+
+[data-theme="dark"] .callout {
+  background: rgba(139, 182, 199, 0.12);
+  border-color: rgba(139, 182, 199, 0.22);
+}
+
+[data-theme="dark"] .tag-chip {
+  background: rgba(139, 182, 199, 0.18);
+}
+
+[data-theme="dark"] .criteria-chip {
+  background: rgba(139, 182, 199, 0.14);
+}
+
+[data-theme="dark"] .stat-pair {
+  background: var(--bg);
+}
+
+[data-theme="dark"] .post-quote {
+  border-top-color: rgba(168, 175, 211, 0.6);
+}
+
+/* Smooth theme transition */
+html {
+  color-scheme: light dark;
+}
+
+body,
+body * {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body, body * {
+    transition: none !important;
+  }
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -349,6 +427,432 @@ a:hover .arrow-icon {
 
 .home-enter-delay-2 {
   animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* ─── Post content prose ─────────────────────── */
+
+/* Section headings: override global mono-muted label style */
+.post-content h2 {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0;
+  margin-top: 3.5rem;
+  margin-bottom: 0.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  text-wrap: balance;
+}
+
+/* Lede: first paragraph of a chapter reads slightly larger */
+.post-content > p:first-child {
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+/* Subsection headings: visibly above body, below h2 */
+.post-content h3 {
+  font-family: var(--font-body), sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-top: 1.75rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0;
+}
+
+.post-content p {
+  margin-bottom: 1rem;
+}
+
+/* Bold uses the loaded 700 weight so it actually reads as emphasis */
+.post-content strong {
+  font-weight: 700;
+}
+
+/* Restore list markers — Tailwind Preflight removes them globally.
+   Avoid display:flex on ul/ol so ::marker pseudo-elements render. */
+.post-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content li {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.post-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* Nested lists: different marker, indented naturally by padding inheritance */
+.post-content li > ul {
+  list-style: circle;
+  margin-top: 0.45rem;
+  margin-bottom: 0;
+}
+
+.post-content li > ol {
+  margin-top: 0.45rem;
+  margin-bottom: 0;
+}
+
+/* Callout box */
+.callout {
+  background: rgba(139, 182, 199, 0.1);
+  border: 1px solid rgba(139, 182, 199, 0.28);
+  border-radius: 6px;
+  padding: 1.25rem 1.25rem 1rem;
+  margin: 2rem 0;
+  font-size: 0.9rem;
+}
+
+.callout p {
+  max-width: none;
+}
+
+/* Post table */
+.post-table-wrap {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.post-table-wrap .post-table {
+  margin: 0;
+}
+
+.post-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.875rem;
+}
+
+.post-table th {
+  text-align: left;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  padding: 0.4rem 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+.post-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  line-height: 1.65;
+  font-size: 0.875rem;
+}
+
+.post-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* ─── Post layout utilities ──────────────────────── */
+
+/* Tag chips (e.g. major categories) */
+.tag-chip {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 4px;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  background: rgba(139, 182, 199, 0.15);
+  color: var(--ink);
+  margin: 0.2rem 0.25rem 0.2rem 0;
+}
+
+.tag-chips {
+  margin: 0.75rem 0 1.25rem;
+  line-height: 2.2;
+}
+
+/* Big stat grid (acceptance rates etc.) */
+.stat-pair-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+}
+
+.stat-pair {
+  background: var(--bg);
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.stat-pair-value {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.55rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.stat-pair-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+}
+
+.stat-pair-sub {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+/* Supplemental essay type grid */
+.essay-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem;
+  margin: 1.25rem 0;
+}
+
+.essay-type-cell {
+  background: var(--surface);
+  border-radius: 5px;
+  padding: 0.65rem 0.85rem;
+}
+
+.essay-type-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.essay-type-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  display: block;
+  line-height: 1.45;
+}
+
+/* Criteria chips ("what I want in a school") */
+.criteria-section {
+  margin-bottom: 1.5rem;
+}
+
+.criteria-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.criteria-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.criteria-chip {
+  background: rgba(139, 182, 199, 0.1);
+  border-radius: 4px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.875rem;
+  color: var(--ink);
+}
+
+/* Checklist (ch.6 final list) */
+.checklist {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 1rem 0;
+}
+
+.checklist li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.checklist li::before {
+  content: "○";
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+/* Inline key-point: lighter than .callout, for critical advice */
+.post-key {
+  background: rgba(168, 175, 211, 0.12);
+  border-radius: 5px;
+  padding: 0.85rem 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.post-key p {
+  max-width: none;
+  margin-bottom: 0.5rem;
+}
+
+.post-key p:last-child {
+  margin-bottom: 0;
+}
+
+/* Pull quote: for a single strong line from the writing */
+.post-quote {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--heading-accent);
+  line-height: 1.55;
+  padding: 1.25rem 0;
+  border-top: 2px solid var(--research);
+  border-bottom: 1px solid var(--line);
+  margin: 2.25rem 0;
+  text-wrap: pretty;
+}
+
+/* Table of contents */
+.post-toc {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.post-toc summary {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.post-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.post-toc[open] summary {
+  margin-bottom: 0.75rem;
+}
+
+.post-toc ol {
+  margin-bottom: 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.post-toc li {
+  font-size: 0.85rem;
+}
+
+.post-toc a {
+  color: var(--muted);
+}
+
+.post-toc a::after {
+  display: none;
+}
+
+/* ─── Post archive ────────────────────────────── */
+.post-entry {
+  padding: 0.9rem 0.5rem;
+  border-radius: 4px;
+  transition: background 0.12s ease;
+}
+
+.post-entry:hover,
+.post-entry:focus-within {
+  background: rgba(139, 182, 199, 0.12);
+}
+
+/* ─── Chapter cards (post overview) ─────────────── */
+.chapter-card {
+  padding: 1.25rem 0.5rem 1.5rem;
+  border-top: 1px solid var(--line);
+  transition: background 0.12s ease;
+}
+
+.chapter-card:hover {
+  background: rgba(139, 182, 199, 0.12);
+}
+
+.ch-num {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  color: var(--ink);
+  opacity: 0.55;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.ch-time {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ─── Chapter prev/next nav ──────────────────── */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  gap: 1rem;
+}
+
+.chapter-nav > * {
+  flex: 1;
+}
+
+.chapter-nav > *:last-child {
+  text-align: right;
+}
+
+.chapter-nav a {
+  color: var(--muted);
+}
+
+.chapter-nav a::after {
+  display: none;
 }
 
 /* Reduced motion */

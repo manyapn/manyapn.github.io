@@ -5,7 +5,7 @@ import { nowData } from "@/data/now";
 import { getLatestFilm } from "@/lib/letterboxd";
 
 export const metadata = {
-  title: "now — manya pradeep narayan",
+  title: "now | manya pradeep narayan",
   description: "what manya is up to right now: researching agentic browser security at uw, engineering at finmd, and spending the summer in seattle.",
 };
 

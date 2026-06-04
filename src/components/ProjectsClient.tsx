@@ -150,7 +150,7 @@ export default function ProjectsClient() {
                     style={{ borderTop: "1px solid var(--line)" }}
                   >
                     {/* Title */}
-                    <p style={{ fontWeight: "500", fontSize: "0.95rem", marginBottom: "0.25rem" }}>
+                    <p style={{ fontWeight: "500", fontSize: "1rem", marginBottom: "0.25rem" }}>
                       {primaryLink ? (
                         <a
                           href={primaryLink.url}
@@ -176,7 +176,7 @@ export default function ProjectsClient() {
                     <p
                       style={{
                         color: "var(--ink)",
-                        fontSize: "0.875rem",
+                        fontSize: "0.95rem",
                         marginBottom: "0.4rem",
                         maxWidth: "55ch",
                       }}

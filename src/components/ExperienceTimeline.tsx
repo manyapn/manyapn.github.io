@@ -75,7 +75,7 @@ function TimelineEntry({ entry, isFirst, index }: { entry: Experience; isFirst: 
                 display: "block",
                 fontWeight: entry.current ? "500" : "400",
                 color: entry.current ? "var(--ink)" : "var(--muted)",
-                fontSize: "0.9rem",
+                fontSize: "1rem",
               }}
             >
               {entry.role}{" "}
@@ -145,7 +145,7 @@ function TimelineEntry({ entry, isFirst, index }: { entry: Experience; isFirst: 
                   paddingTop: "0.75rem",
                   paddingLeft: "1.5rem",
                   paddingBottom: "0.25rem",
-                  fontSize: "0.875rem",
+                  fontSize: "0.95rem",
                   color: "var(--muted)",
                   lineHeight: "1.65",
                 }}

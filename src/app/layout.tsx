@@ -13,7 +13,7 @@ const display = Dela_Gothic_One({
 });
 
 const body = M_PLUS_Rounded_1c({
-  weight: ["400", "500"],
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -53,6 +53,8 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
       <body>
+        {/* Anti-flash: apply saved theme before first paint */}
+        <script dangerouslySetInnerHTML={{ __html: `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark')}}catch(e){}})();` }} />
         <ScrollProgress />
         <Nav />
         <main>{children}</main>

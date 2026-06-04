@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { href: "/", label: "/" },
@@ -93,6 +94,12 @@ export default function Nav() {
             </span>
           );
         })}
+
+        {/* Theme toggle — right side */}
+        <span style={{ marginLeft: "auto", display: "flex", alignItems: "center" }}>
+          <span style={{ padding: "0 0.4rem", color: "var(--line)" }} aria-hidden="true">·</span>
+          <ThemeToggle />
+        </span>
       </div>
     </nav>
   );

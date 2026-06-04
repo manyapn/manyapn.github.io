@@ -2,7 +2,7 @@ import ExperienceTimeline from "@/components/ExperienceTimeline";
 import { experiences } from "@/data/experiences";
 
 export const metadata = {
-  title: "experiences — manya pradeep narayan",
+  title: "experiences | manya pradeep narayan",
   description: "manya's experience timeline: reu research at uw security lab, engineering at finmd, cornell research, ewb, and more.",
 };
 
