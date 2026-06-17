@@ -11,6 +11,16 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "claude-voice-skill",
+    title: "I Built a Claude Skill Trained on My Own Voice",
+    subtitle: "writing · jun 16, 2026",
+    date: "2026-06-16",
+    year: 2026,
+    tags: ["writing", "ai"],
+    description: "I kept asking Claude to write things in my voice, and it kept getting close but not quite there. Here's how I built a skill to fix that.",
+    readTime: "1 chapter",
+  },
+  {
     slug: "redesigning-my-portfolio",
     title: "Redesigning My Portfolio: Process + Tips",
     subtitle: "how i built this site",
@@ -32,5 +42,5 @@ export const posts: Post[] = [
   },
 ];
 
-export const allTags = ["all", "college", "advice", "design"] as const;
+export const allTags = ["all", "college", "advice", "design", "writing", "ai"] as const;
 export type TagFilter = (typeof allTags)[number];
