@@ -1,3 +1,5 @@
+import Highlight from "@/components/Highlight";
+
 export default function ClaudeVoiceSkillFull() {
   return (
     <>
@@ -7,18 +9,20 @@ export default function ClaudeVoiceSkillFull() {
         what &ldquo;sounds like me&rdquo; actually means, once, and turn it into a Claude skill.
       </p>
 
-      <p>
-        For those of you who don&apos;t know, a skill is just a folder of instructions Claude reads
-        before it starts a task (I love the Impeccable skills for this, they have anti-slop checks
-        built in so the output doesn&apos;t read like a chatbot). A voice skill is the same idea,
-        just pointed at how one specific person writes.
-      </p>
+      <div className="callout">
+        <p>
+          For those of you who don&apos;t know, a skill is just a folder of instructions Claude
+          reads before it starts a task (I love the Impeccable skills for this, they have anti-slop
+          checks built in so the output doesn&apos;t read like a chatbot). A voice skill is the same
+          idea, just pointed at how one specific person writes.
+        </p>
+      </div>
 
       <h2>How I built it</h2>
 
       <p>The process was pretty straightforward:</p>
 
-      <ol>
+      <ol className="build-steps">
         <li>
           I collected a big pile of my writing, the polished stuff but also old school papers, a
           speech, my college supplements, project writeups, even DMs. The wider the range, the
@@ -29,9 +33,10 @@ export default function ClaudeVoiceSkillFull() {
           can&apos;t see your own voice.
         </li>
         <li>
-          I wrote the rules down as plainly as I could, stuff like &ldquo;never use an
-          em-dash,&rdquo; &ldquo;open on a little scene and circle back to it at the end,&rdquo;
-          and &ldquo;write what you did, not what the thing is.&rdquo;
+          I wrote the rules down as plainly as I could, stuff like{" "}
+          <code>never use an em-dash</code>,{" "}
+          <code>open on a little scene and circle back to it at the end</code>, and{" "}
+          <code>write what you did, not what the thing is</code>.
         </li>
         <li>
           I tested it constantly, drafting something and then looking for the exact spot where it
@@ -51,10 +56,12 @@ export default function ClaudeVoiceSkillFull() {
       <h2>What surprised me</h2>
 
       <p>
-        Mostly, how many tics I have that I never noticed. I open paragraphs with &ldquo;So&rdquo;
-        and &ldquo;Through this experience.&rdquo; I end on an exclamation mark instead of a
-        period, because a period feels too cold to me. I bookend almost everything. I stretch
-        letters out when I&apos;m excited (tonsssss). I prefer a direct simple sentence over a
+        Mostly, how many tics I have that I never noticed. I open paragraphs with{" "}
+        <Highlight variant="lavender">&ldquo;So&rdquo;</Highlight> and{" "}
+        <Highlight variant="lavender">&ldquo;Through this experience.&rdquo;</Highlight> I end on
+        an exclamation mark instead of a period, because a period feels too cold to me. I bookend
+        almost everything. I stretch letters out when I&apos;m excited (
+        <Highlight variant="gold">tonsssss</Highlight>). I prefer a direct simple sentence over a
         flowery one, and I write directly to the audience.
       </p>
 

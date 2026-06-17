@@ -10,6 +10,8 @@ const tagColor: Record<string, string> = {
   college: "var(--research)",
   advice: "var(--internship)",
   design: "var(--club)",
+  writing: "var(--current)",
+  ai: "var(--heading-accent)",
 };
 
 export default function PostsArchive() {
